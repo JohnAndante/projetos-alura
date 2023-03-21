@@ -62,8 +62,6 @@ function draw() {
   showPoints();
   scorePoint();
   
-  fixStuckBall();
-  
 }
 
 function drawCircle(){
