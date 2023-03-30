@@ -5,9 +5,11 @@ function setup() {
 function draw() {
   background(bgFreeway);
   
-  showPlayer();
+  showPlayer01();
   showCars();
   
   movePlayer();
+  moveCars();
+  returnToStart();
 }
 

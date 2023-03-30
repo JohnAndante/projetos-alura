@@ -4,6 +4,7 @@ let xPlayer = 100;
 let yPlayer = 366;
 let wPlayer = 30;
 let hPlayer = 30;
+let collision = false;
 
 function movePlayer(){
   if (keyIsDown(UP_ARROW) && yPlayer > 0){
@@ -20,6 +21,10 @@ function movePlayer(){
   }
 }
 
-function showPlayer(){
+function showPlayer01(){
   image(imgPlayer, xPlayer, yPlayer, wPlayer, hPlayer);
+}
+
+function checkCollision() {
+  
 }
