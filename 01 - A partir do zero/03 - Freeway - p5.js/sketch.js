@@ -11,5 +11,9 @@ function draw() {
   movePlayer();
   moveCars();
   returnToStart();
+  
+  checkCollision();
+  showPoints();
+  scorePoint();
 }
 

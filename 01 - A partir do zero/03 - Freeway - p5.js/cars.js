@@ -1,7 +1,9 @@
 // Variáveis carros
-let xCars = [600, 600, 600];
-let yCars = [40, 96, 150];
-let velCars = [2, 3, 2.5];
+let xCars = [600, 700, 650, 710, 600, 630];
+let yCars = [40, 96, 150, 210, 262, 320];
+let velCars = [2, 2.5, 3.2, 5, 3.3, 2.3];
+let wCars = 50;
+let hCars = 40;
 
 function showCars() {
   for (let i = 0; i < imgCars.length; i++) {
