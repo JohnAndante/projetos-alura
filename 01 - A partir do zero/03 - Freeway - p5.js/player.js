@@ -40,6 +40,7 @@ function checkCollision() {
 function hasCollided(){
   if (playerPoints > 0) 
     playerPoints -= 1;
+  fxCollision.play();
   backToInitialPosition();
 }
 
@@ -54,6 +55,7 @@ function scorePoint(){
   if (yPlayer < hPlayer) {
     playerPoints += 1;
     backToInitialPosition();
+    fxPoints.play();
   }
 }
 
