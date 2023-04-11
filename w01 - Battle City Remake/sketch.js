@@ -7,4 +7,5 @@ function draw() {
 
   showPlayer(56, 80);
   movePlayer();
+
 }
