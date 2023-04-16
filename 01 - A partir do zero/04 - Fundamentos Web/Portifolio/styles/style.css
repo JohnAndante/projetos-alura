@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:wght@400;600&display=swap');
 
 :root {
-  /*
   --cor-principal:  #000;
   --cor-secundaria: #f6f6f6;
   --cor-terciaria:  #22D4FD;
   --cor-quartenaria:#272727;
-  */
 
+  /*
   --cor-principal:  #000000;
   --cor-secundaria: #E3CCAE;
   --cor-terciaria:  #B8621B;
   --cor-quartenaria:#262A56;
+  */
 
   --fonte-primaria: 'Montserrat', sans-serif;
   --fonte-secundaria: 'Krona One', sans-serif;
@@ -39,7 +39,7 @@ body {
 
 .cabecalho__menu__link {
   font-family: var(--fonte-primaria);
-  font-size: 24px;
+  font-size: 1.5rem;
   text-decoration: none;
   font-weight: 600;
   color: var(--cor-terciaria);
@@ -53,7 +53,7 @@ body {
 }
 
 .apresentacao__conteudo {
-  width: 615px;
+  width: 50%;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -61,7 +61,8 @@ body {
 
 .apresentacao__conteudo__titulo {
   font-family: var(--fonte-secundaria);
-  font-size: 36px;
+  font-size: 2.25rem;
+  /* font-size: 36px; */
 }
 
 .titulo-destaque {
@@ -70,13 +71,13 @@ body {
 
 .apresentacao__conteudo__texto {
   font-family: var(--fonte-primaria);
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .apresentacao__links__subtitulo {
   font-family: var(--fonte-secundaria);
   font-weight: 400;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .apresentacao__links {
@@ -87,17 +88,17 @@ body {
   gap: 32px;
 }
 
-.apresentacao__links__link {
+.apresentacao__links__navegacao {
   display: flex;
   justify-content: center;
   gap: 16px;
   font-family: var(--fonte-primaria);
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 600;
   text-decoration: none;
   text-align: center;
   color: #F6F6F6;
-  width: 378px;
+  width: 50%;
   padding: 21.5px 0px;
   border-radius: 8px;
   border: 1px solid var(--cor-terciaria);
@@ -109,11 +110,15 @@ body {
   padding: 21.5px 20px;
 }
 
+.apresentacao__imagem {
+  width: 50%;
+}
+
 .rodape {
   background-color: var(--cor-terciaria);
   color: var(--cor-principal);
   font-family: var(--fonte-primaria);
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
   padding: 24px;
