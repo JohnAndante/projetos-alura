@@ -17,6 +17,22 @@
   --fonte-secundaria: 'Krona One', sans-serif;
 }
 
+@media (max-width: 1200px) {
+
+  .cabecalho {
+    padding: 10%;
+  }
+
+  .cabecalho__menu {
+    justify-content: center;
+  }
+
+  .apresentacao {
+    flex-direction: column-reverse;
+  }
+
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -48,6 +64,7 @@ body {
 .apresentacao {
   padding: 5% 15%;
   display: flex;
+  gap: 82px;
   align-items: center;
   justify-content: space-around;
 }
