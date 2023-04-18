@@ -17,22 +17,6 @@
   --fonte-secundaria: 'Krona One', sans-serif;
 }
 
-@media (max-width: 1200px) {
-
-  .cabecalho {
-    padding: 10%;
-  }
-
-  .cabecalho__menu {
-    justify-content: center;
-  }
-
-  .apresentacao {
-    flex-direction: column-reverse;
-  }
-
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -139,4 +123,29 @@ body {
   font-weight: 600;
   text-align: center;
   padding: 24px;
+}
+
+@media (max-width: 1200px) {
+
+  .cabecalho {
+    padding: 10%;
+  }
+
+  .cabecalho__menu {
+    justify-content: center;
+  }
+
+  .apresentacao {
+    flex-direction: column-reverse;
+    padding: 5%;
+  }
+
+  .apresentacao__conteudo {
+    width: auto;
+  }
+
+  .apresentacao__imagem {
+    width: auto;
+  }
+
 }
