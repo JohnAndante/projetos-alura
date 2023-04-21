@@ -15,4 +15,14 @@ for (let i = 0; i < padsList.length; i++) {
     playSound(idAudio);
   }
 
+  pad.onkeydown = function (event) {
+    if (event.key === "Enter" || event.key === "Space") {
+      pad.classList.add('ativa');
+    }
+  }
+
+  pad.onkeyup = function () {
+    pad.classList.remove('ativa');
+  }
+
 }
