@@ -1,12 +1,18 @@
-function tocaSomPom () {
-  document.querySelector('#som_tecla_pom').play();
+function playSound (idAudioElement) {
+  document.querySelector(idAudioElement).play();
 }
 
 const padsList = document.querySelectorAll('.tecla');
 
-let contador = 0;
 
-while (contador < padsList.length) {
-  padsList.onClick = tocaSomPom;
-  contador++;
+for (let i = 0; i < padsList.length; i++) {
+
+  const pad = padsList[i];
+  const inst = pad.classList[1];
+  const idAudio = `#som_${inst}`;
+
+  padsList[i].onclick = function () {
+    playSound(idAudio);
+  }
+
 }
