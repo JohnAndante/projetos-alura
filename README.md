@@ -7,7 +7,7 @@ A estrutura está distribuída da seguinte forma:
 Pasta Principal / Formação / Cursos incluídos na formação.
 
 ## Formações
----
+
 Trilhas de estudo oferecidas e organizadas pela própria instituição de ensino
 
 ### ✅ [01 - A Partir do Zero: Iniciante em Programação](https://cursos.alura.com.br/formacao-programacao) ###
@@ -33,7 +33,7 @@ Trilhas de estudo oferecidas e organizadas pela própria instituição de ensino
 ---
 
 ## Planos de Estudo
----
+
 Trilhas de estudo organizadas pelos próprios estudantes
 
 ### ⏹ [Ruby on Rails](https://cursos.alura.com.br/meu-plano-de-estudos-lucas-deoliveira-1596648548138-p60309)
