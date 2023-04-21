@@ -1,5 +1,11 @@
 function playSound (idAudioElement) {
-  document.querySelector(idAudioElement).play();
+  const element = document.querySelector(idAudioElement);
+  if (element != null && element.localName === 'audio') {
+    element.play();
+  } else {
+    console.log("Element not found");
+  }
+
 }
 
 const padsList = document.querySelectorAll('.tecla');
