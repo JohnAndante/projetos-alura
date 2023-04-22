@@ -1,14 +1,28 @@
-puts "Bem vindo ao jogo da adivinhação!!! \n"
-puts "Qual é o seu nome?"
+# Trecho de boas vindas
+def da_boas_vindas
+  puts "Bem vindo ao jogo da adivinhação!!! \n"
+  puts "Qual é o seu nome?"
+  nome = gets
+  puts "\nComeçaremos o nome para você, " + nome + "\n"
+end
 
-nome = gets
-puts "\nComeçaremos o nome para você, " + nome + "\n"
+# Sorteia numero secreto
+def sorteia_numero_secreto
+  puts "Escolhendo um número secreto entre 0 e 200.."
+  numero_secreto = 170
+  puts "\nNúmero escolhido, que tal adivinhar nosso número secreto??"
+  numero_secreto
+end
 
-puts "Escolhendo um número secreto entre 0 e 200.."
-numero_secreto = 170
-puts "\nNúmero escolhido, que tal adivinhar nosso número secreto??"
+#######################################################################
+
+da_boas_vindas
+
+numero_secreto = sorteia_numero_secreto
+
 qtd_tentativas = 5
 
+# Início do for de adivinhação
 for tentativa in 1..qtd_tentativas
   puts "\n\n\n\n"
   puts "Tentativa " + tentativa.to_s + " de " + qtd_tentativas.to_s
@@ -20,7 +34,7 @@ for tentativa in 1..qtd_tentativas
 
   if acertou
     puts "Acertou!!!"
-    exit 0
+    break
   else
     maior = numero_secreto > chute.to_i
     if maior
