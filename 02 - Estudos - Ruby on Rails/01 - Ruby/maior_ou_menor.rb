@@ -2,8 +2,8 @@
 def da_boas_vindas
   puts "Bem vindo ao jogo da adivinhação!!! \n"
   puts "Qual é o seu nome?"
-  nome = gets
-  puts "\nComeçaremos o nome para você, " + nome + "\n"
+  nome = gets.strip
+  puts "\nComeçaremos o nome para você, #{nome} \n"
 end
 
 # Sorteia numero secreto
@@ -15,12 +15,18 @@ def sorteia_numero_secreto
 end
 
 # Pede um numero para o usuario
-def pede_um_numero(tentativa, qtd_tentativas)
+def pede_um_numero(tentativa, qtd_tentativas, chutes)
   puts "\n\n\n\n"
-  puts "Tentativa " + tentativa.to_s + " de " + qtd_tentativas.to_s
+  puts "Tentativa #{tentativa} de #{qtd_tentativas}"
+  if chutes.size > 0
+    puts "Chutes até agora: "
+    for chute in chutes
+      puts "#{chute}"
+    end
+  end
   puts "Entre com o número"
-  chute = gets
-  puts "Você chutou " + chute.to_s
+  chute = gets.strip
+  puts "Você chutou #{chute.to_s}"
   chute.to_i
 end
 
@@ -51,9 +57,12 @@ da_boas_vindas
 numero_secreto = sorteia_numero_secreto
 
 qtd_tentativas = 5
+chutes = []
+
 
 # Início do for de adivinhação
 for tentativa in 1..qtd_tentativas
-  chute = pede_um_numero tentativa, qtd_tentativas
+  chute = pede_um_numero tentativa, qtd_tentativas, chutes
+  chutes << chute
   break if verifica_se_acertou numero_secreto, chute
 end
