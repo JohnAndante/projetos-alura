@@ -31,9 +31,11 @@ def da_boas_vindas
   nome
 end
 
-def escolhe_palavra_secreta
+def avisa_escolhendo_palavra
   puts "Escolhendo uma palavra secreta..."
-  palavra_secreta = "programador"
+end
+
+def avisa_palavra_escolhida(palavra_secreta)
   puts "Palavra secreta com #{palavra_secreta.size} letras..."
   puts ">> Boa Sorte! <<"
   palavra_secreta
@@ -45,12 +47,24 @@ def nao_quer_jogar?
   nao_quero_jogar = quero_jogar.upcase == "N"
 end
 
-def pede_um_chute(chutes, erros)
+def cabecalho_da_tentativa (chutes, erros, mascara)
   puts "\n\n\n\n"
+  puts "Palavra secreta: #{mascara}"
   puts "Erros até agora: #{erros}"
   puts "Chutes até agora: #{chutes}"
+end
+
+def pede_um_chute(chutes, erros)
   puts "Entre com uma letra ou uma palavra"
-  chute = gets.strip
+  chute = gets.strip.downcase
   puts "Será que acertou? Você chutou #{chute}"
   chute
+end
+
+def avisa_pontos_totais(pontos_totais)
+  puts "Você possui #{pontos_totais}"
+end
+
+def avisa_campeao_atual(dados)
+  puts "Nosso campeão atual é #{dados[0]} com #{dados[1]} pontos."
 end
