@@ -6,7 +6,7 @@ def escolhe_palavra_secreta
   texto = File.read("palavras.txt")
   todas_as_palavras = texto.split "\n"
   numero_escolhido = rand(todas_as_palavras.size)
-  palavra_secreta = todas_as_palavras[numero_escolhido]
+  palavra_secreta = todas_as_palavras[numero_escolhido].downcase
   avisa_palavra_escolhida palavra_secreta
 end
 
@@ -38,7 +38,7 @@ end
 def pede_um_chute_valido (chutes, erros, mascara)
   cabecalho_da_tentativa chutes, erros, mascara
   loop do
-    chute = pede_um_chute
+    chute = pede_um_chute chutes, erros
     if chutes.include? chute
       avisa_chute_efetuado chute
     else
@@ -84,6 +84,7 @@ def joga nome
   end
 
   avisa_pontos pontos_ate_agora
+  pontos_ate_agora
 end
 
 def jogo_da_forca

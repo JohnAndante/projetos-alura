@@ -1,9 +1,9 @@
-def salva_rank(nome, pontos_totais)
-  conteudo = "#{nome}\n#{pontos_totais}"
-  File.write "rank.txt", conteudo
+def le_rank
+  conteudo_atual = File.read("rank.txt")
+  dados = conteudo_atual.split("\n")
 end
 
-def le_rank
-  conteudo = File.read = "rank.txt"
-  conteudo.split("\n")
+def salva_rank(nome, pontos)
+  conteudo = "#{nome}\n#{pontos}"
+  File.write("rank.txt", conteudo)
 end
