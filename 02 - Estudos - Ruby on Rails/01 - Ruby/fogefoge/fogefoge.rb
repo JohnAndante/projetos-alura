@@ -26,7 +26,6 @@ def calcula_nova_posicao(heroi, direcao)
     "D" => [0, +1]
   }
   movimento = movimentos[direcao]
-
   novo_heroi[0] += movimento[0]
   novo_heroi[1] += movimento[1]
   novo_heroi
@@ -48,8 +47,27 @@ def posicao_valida?(mapa, posicao)
   true
 end
 
+def move_fantasma(mapa)
+  mapa[linha][coluna] = " "
+  linha += 0
+  coluna += 1
+  mapa[linha][coluna] = "F"
+end
+
+def move_fantasmas(mapa)
+  caractere_do_fantasma = "F"
+  mapa.each_with_index do |linha_atual, linha|
+    linha_atual.each_with_index do |caractere_atual, coluna|
+      eh_fantasma = caractere_atual == caractere_do_fantasma
+      if eh_fantasma
+        move_fantasma mapa, linha, coluna
+      end
+    end
+  end
+end
+
 def joga(nome)
-  mapa = le_mapa 1
+  mapa = le_mapa 9
 
   while true
     desenha mapa
@@ -63,6 +81,8 @@ def joga(nome)
 
     mapa[heroi[0]][heroi[1]] = " "
     mapa[nova_posicao[0]][nova_posicao[1]] = "H"
+
+    move_fantasmas mapa
   end
 end
 
