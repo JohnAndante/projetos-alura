@@ -84,6 +84,11 @@ def move_fantasma(mapa, linha, coluna)
   mapa[posicao[0]][posicao[1]] = "F"
 end
 
+def copia_mapa(mapa)
+  mapa.join("\n").tr("F", " ").split "\n"
+  novo_mapa
+end
+
 def move_fantasmas(mapa)
   caractere_do_fantasma = "F"
   mapa.each_with_index do |linha_atual, linha|
