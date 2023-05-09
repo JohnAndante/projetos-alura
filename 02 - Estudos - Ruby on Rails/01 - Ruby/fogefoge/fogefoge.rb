@@ -38,9 +38,12 @@ def posicao_valida?(mapa, posicao)
   estourou_linhas = posicao[0] < 0 || posicao[0] >= linhas
   estourou_colunas = posicao[1] < 0 || posicao[1] >= colunas
 
-  bateu_na_parede = mapa[posicao[0]][posicao[1]] == "X"
+  posicao_atual = mapa[posicao[0]][posicao[1]]
 
-  if  estourou_linhas || estourou_colunas || bateu_na_parede
+  colidiu_parede = posicao_atual == "X"
+  colidiu_fantasma = posicao_atual == "F"
+
+  if  estourou_linhas || estourou_colunas || colidiu_parede || colidiu_fantasma
     return false
   end
 
