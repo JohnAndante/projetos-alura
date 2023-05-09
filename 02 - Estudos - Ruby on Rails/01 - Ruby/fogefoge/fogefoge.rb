@@ -17,18 +17,18 @@ def encontra_jogador mapa
   # não achei
 end
 
-def calcula_nova_posicao(heroi, posicao)
+def calcula_nova_posicao(heroi, direcao)
   novo_heroi = heroi.dup
-  case posicao
-    when "W"
-      novo_heroi[0] -= 1
-    when "S"
-      novo_heroi[0] += 1
-    when "A"
-      novo_heroi[1] -= 1
-    when "D"
-      novo_heroi[1] += 1
-  end
+  movimentos = {
+    "W" => [-1, 0],
+    "S" => [+1, 0],
+    "A" => [0, -1],
+    "D" => [0, +1]
+  }
+  movimento = movimentos[direcao]
+
+  novo_heroi[0] += movimento[0]
+  novo_heroi[1] += movimento[1]
   novo_heroi
 end
 
