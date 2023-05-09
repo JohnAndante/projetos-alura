@@ -18,17 +18,18 @@ def encontra_jogador mapa
 end
 
 def calcula_nova_posicao(heroi, posicao)
+  novo_heroi = heroi.dup
   case posicao
     when "W"
-      heroi[0] -= 1
+      novo_heroi[0] -= 1
     when "S"
-      heroi[0] += 1
+      novo_heroi[0] += 1
     when "A"
-      heroi[1] -= 1
+      novo_heroi[1] -= 1
     when "D"
-      heroi[1] += 1
+      novo_heroi[1] += 1
   end
-  heroi
+  novo_heroi
 end
 
 def joga(nome)
