@@ -103,10 +103,15 @@ def joga(nome)
     end
 
     heroi.remove_do mapa
-    heroi.coloca_no mapa
+    if mapa[nova_posicao.linha][nova_posicao.coluna] == "*"
+      for direita in 1..4
+        mapa[nova_posicao.linha][nova_posicao.coluna + direita] = " "
+      end
+    end
+    nova_posicao.coloca_no mapa
 
     mapa = move_fantasmas mapa
-    if jogador_perdeu?
+    if jogador_perdeu? mapa
       game_over
       break
     end
