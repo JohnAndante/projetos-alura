@@ -89,11 +89,15 @@ def jogador_perdeu?(mapa)
   perdeu = !encontra_jogador(mapa)
 end
 
-def remove(mapa, posicao, quantidade)
-  return if quantidade == 0
-  posicao = posicao.direita
+def executa_remocao(mapa, posicao, quantidade)
+  return if mapa[posicao.linha][posicao.coluna] == "X"
   posicao.remove_do mapa
   remove mapa, posicao, quantidade - 1
+end
+
+def remove(mapa, posicao, quantidade)
+  return if quantidade == 0
+  executa_remocao mapa, posicao.direita, quantidade
 end
 
 def joga(nome)
