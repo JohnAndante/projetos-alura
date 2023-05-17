@@ -90,6 +90,7 @@ def jogador_perdeu?(mapa)
 end
 
 def remove(mapa, posicao, quantidade)
+  return if quantidade == 0
   posicao = posicao.direita
   posicao.remove_do mapa
   remove mapa, posicao, quantidade - 1
@@ -110,7 +111,7 @@ def joga(nome)
 
     heroi.remove_do mapa
     if mapa[nova_posicao.linha][nova_posicao.coluna] == "*"
-      remove mapa, nova_posicao 4
+      remove mapa, nova_posicao, 4
     end
     nova_posicao.coloca_no mapa
 
