@@ -104,7 +104,7 @@ def remove(mapa, posicao, quantidade)
 end
 
 def joga(nome)
-  mapa = le_mapa 4
+  mapa = le_mapa 3
 
   while true
     desenha mapa
