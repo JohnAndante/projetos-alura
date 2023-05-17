@@ -33,7 +33,7 @@ def posicao_valida?(mapa, posicao)
   colidiu_parede = posicao_atual == "X"
   colidiu_fantasma = posicao_atual == "F"
 
-  if  estourou_linhas || estourou_colunas || colidiu_parede || colidiu_fantasma
+  if estourou_linhas || estourou_colunas || colidiu_parede || colidiu_fantasma
     return false
   end
 
@@ -49,7 +49,7 @@ def posicoes_validas_a_partir_de(mapa, novo_mapa, posicao)
   movimentos = [[1, 0], [0, 1], [-1, 0], [0, -1]]
   movimentos.each do |movimento|
     nova_posicao = soma_vetor(movimento, posicao)
-    if posicao_valida?(mapa, nova_posicao) && posicao_valida?(novo_mapa, nova_posicao)
+    if posicao_valida?(mapa, nova_posicao) && posicao_valida?(novo_mapa, nova_posicao) && mapa[nova_posicao[0]]
       posicoes << nova_posicao
     end
   end
@@ -90,7 +90,9 @@ def jogador_perdeu?(mapa)
 end
 
 def executa_remocao(mapa, posicao, quantidade)
-  return if mapa[posicao.linha][posicao.coluna] == "X"
+  if mapa[posicao.linha][posicao.coluna] == "X"
+    return
+  end
   posicao.remove_do mapa
   remove mapa, posicao, quantidade - 1
 end
