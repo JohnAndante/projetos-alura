@@ -33,9 +33,24 @@ class Livro
   end
 end
 
+module Contador
+  def <<(livro)
+    push(livro)
+    if @maximo_necessario.nil? || @maximo_necessario < size
+      @maximo_necessario = size
+    end
+    self
+  end
+
+  attr_reader :maximo_necessario
+end
+
 class Estoque
+  attr_reader :livros
+
   def initialize
     @livros = []
+    @livros.extend Contador
   end
 
   def exporta_csv
@@ -54,31 +69,36 @@ class Estoque
     @livros.size
   end
 
-  def adiciona(livro)
+  def <<(livro)
     @livros << livro if livro
+    self
+  end
+
+  def remove(livro)
+    @livros.delete livro
+  end
+
+  def maximo_necessario
+    @livros.maximo_necessario
   end
 end
 
 livro_algoritmos = Livro.new("Algoritmos", 100, 1998, true)
 livro_arquitetura = Livro.new("Introdução a Arquitetura e Design de Software", 70, 2011, true)
+livro_programmer = Livro.new("The Pragmatic Programmer", 100, 1999, true)
+livro_ruby = Livro.new("Programmin Ruby", 100, 2004, true)
 
 estoque = Estoque.new
-estoque.adiciona livro_algoritmos
-estoque.adiciona livro_arquitetura
-estoque.adiciona Livro.new("The Pragmatic Programmer", 100, 1999, true)
-estoque.adiciona Livro.new("Programmin Ruby", 100, 2004, true)
-estoque.adiciona nil
+estoque << livro_algoritmos
 
-puts "\n\n"
+puts estoque.maximo_necessario
 
-estoque.exporta_csv()
+estoque << livro_arquitetura << livro_programmer
+estoque << livro_ruby
 
-puts "\n\n"
+puts estoque.maximo_necessario
 
-baratos = estoque.mais_baratos_que(80)
-baratos.each do |livro|
-  puts livro.titulo
-end
+estoque.remove livro_algoritmos
 
-puts "\n\n"
+puts estoque.maximo_necessario
 
