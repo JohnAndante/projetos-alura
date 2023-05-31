@@ -9,6 +9,7 @@ class Estoque
     @vendas = []
     @livros.extend Contador
   end
+
   def exporta_csv
     @livros.each do |livro|
       puts livro.to_csv
@@ -39,32 +40,29 @@ class Estoque
     @livros.maximo_necessario
   end
 
+  def method_missing(name)
+    matcher = name.to_s.match "(.+)_que_mais_vendeu_por(.+)"
+    if matcher
+      tipo = matcher[1]
+      campo = matcher[2].to_sym
+      que_mais_vendeu_por(tipo, &campo)
+    else
+      super
+    end
+  end
+
+  def respond_to?(name)
+    name.to_s.match "(.+)_que_mais_vendeu_por(.+)" || super
+  end
+
+  private
+
+  def quantidade_de_vendas_por(produto, &campo)
+    @vendas.count {|venda| campo.call(venda) == campo.venda(produto)}
+  end
+
   def que_mais_vendeu_por(tipo, &campo)
-    @vendas.select { | l | l.tipo == tipo}.sort {|v1,v2| quantidade_de_vendas_por(v1, &campo) <=> quantidade_de_vendas_por(v2, &campo)}.last
-  end
-
-  def livro_que_mais_vendeu_por_titulo
-    que_mais_vendeu_por("livro", &:titulo)
-  end
-
-  def livro_que_mais_vendeu_por_ano
-    que_mais_vendeu_por("livro", &:ano_lancamento)
-  end
-
-  def livro_que_mais_vendeu_por_editora
-    que_mais_vendeu_por("livro", &:editora)
-  end
-
-  def revista_que_mais_vendeu_por_titulo
-    que_mais_vendeu_por("revista", &:titulo)
-  end
-
-  def revista_que_mais_vendeu_por_ano
-    que_mais_vendeu_por("revista", &:ano_lancamento)
-  end
-
-  def revista_que_mais_vendeu_por_editora
-    que_mais_vendeu_por("revista", &:editora)
+    @vendas.select { | l | l.tipo == tipo}.sort {|v1,v2| quantidade_de_vendas_por(v1, &campo) <=>quantidade_de_vendas_por(v2, &campo)}.last
   end
 
 end
