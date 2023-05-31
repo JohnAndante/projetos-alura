@@ -28,3 +28,5 @@ estoque.vende online_arquitetura
 puts estoque.livro_que_mais_vendeu_por(&:titulo).titulo
 puts estoque.revista_que_mais_vendeu_por(&:titulo).titulo
 puts estoque.ebook_que_mais_vendeu_por(&:titulo).titulo
+
+# ! Curso Concluído
