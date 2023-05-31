@@ -1,4 +1,6 @@
 require_relative "livro"
+require_relative "revista"
+require_relative "ebook"
 require_relative "estoque"
 
 def livro_para_newsletter(livro)
