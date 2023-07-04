@@ -23,6 +23,7 @@ const Subtitulo = styled.h3`
   margin-bottom: 40px;
 `
 const Resultado = styled.div`
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
