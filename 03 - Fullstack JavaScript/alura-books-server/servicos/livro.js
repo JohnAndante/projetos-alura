@@ -36,6 +36,7 @@ function deletaLivro(id) {
   const livrosFiltrados = livros.filter((livro) => livro.id !== id);
   fs.writeFileSync("livros.json", JSON.stringify(livrosFiltrados));
 }
+
 module.exports = {
   getTodosLivros,
   getLivroId,

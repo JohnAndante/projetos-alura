@@ -8,4 +8,10 @@ async function getLivros() {
   return response.data;
 }
 
+async function getLivrosFavoritos() {
+  const response = await livrosAPI.get("/favoritos");
+
+  return response.data;
+}
+
 export { getLivros };
