@@ -22,7 +22,7 @@ const LivrosContainer = styled.div`
 function UltimosLancamentos() {
   return (
     <UltimosLancamentosContainer>
-      <Titulo cor="#EB9B00" tamanhoFonte="36px">
+      <Titulo cor="#EB9B00" tamanhofonte="36px">
         ÚLTIMOS LANÇAMENTOS
       </Titulo>
       <LivrosContainer>
