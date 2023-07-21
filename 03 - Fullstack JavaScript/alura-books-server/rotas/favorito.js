@@ -9,7 +9,7 @@ const router = Router();
 
 router.get("/", getFavoritos);
 
-router.post("/", postFavorito);
+router.post("/:id", postFavorito);
 
 router.delete("/:id", deleteFavorito);
 
