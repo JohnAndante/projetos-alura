@@ -10,7 +10,7 @@ Pasta Principal / Formação / Cursos incluídos na formação.
 
 Trilhas de estudo oferecidas e organizadas pela própria instituição de ensino
 
-### ✅ [ <strong>01 - A Partir do Zero: Iniciante em Programação </strong>](https://cursos.alura.com.br/formacao-programacao) ###
+### ✅ [<strong>01 - A Partir do Zero: Iniciante em Programação </strong>](https://cursos.alura.com.br/formacao-programacao) ###
 
 
 ➡️ <strong>Iniciado em 18 de Março de 2023 </strong><br>
@@ -22,6 +22,16 @@ Trilhas de estudo oferecidas e organizadas pela própria instituição de ensino
 ➡️ <strong>Iniciado em 27 de Junho de 2023 </strong><br>
 ✅ <strong>Concluído em 18 de Julho de 2023 </strong><br>
 📜 <strong>Link para o certificado [aqui </strong>](https://cursos.alura.com.br/degree/certificate/b32ca9b7-f6a7-4a6a-89b7-5272513b5e07?lang=pt_BR)
+
+### ✅ [<strong>04 - Explore React com JavaScript</strong> ](https://cursos.alura.com.br/formacao-react-javascript)
+
+➡️ <strong>Iniciado em 09 de Agosto de 2023 </strong><br>
+⌛ <strong>Em Andamento </strong><br>
+
+### ✅ [<strong>05 - Desenvolvimento de Jogos com Unity</strong> ](https://cursos.alura.com.br/formacao-react-javascript)
+
+➡️ <strong>Iniciado em 09 de Agosto de 2023 </strong><br>
+⌛ <strong>Em Andamento </strong><br>
 
 ---
 
