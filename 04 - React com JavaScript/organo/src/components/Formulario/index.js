@@ -1,6 +1,9 @@
+import { useState } from "react";
+
 import Botao from "../Botao";
 import CampoTexto from "../CampoTexto/";
 import ListaSuspensa from "../ListaSuspensa";
+
 import "./Formulario.css";
 
 const Formulario = () => {
@@ -14,6 +17,11 @@ const Formulario = () => {
     "Inovação e Gestão",
   ];
 
+  const [nome, setNome] = useState("");
+  const [cargo, setCargo] = useState("");
+  const [imagem, setImagem] = useState("");
+  const [time, setTime] = useState("");
+
   const aoSalvar = (evento) => {
     evento.preventDefault();
   };
@@ -26,18 +34,30 @@ const Formulario = () => {
           required={true}
           label="Nome"
           placeholder="Digite seu nome"
+          valor={nome}
+          aoAlterado={(valor) => setNome(valor)}
         />
         <CampoTexto
           required={true}
           label="Cargo"
           placeholder="Digite seu cargo"
+          valor={cargo}
+          aoAlterado={(valor) => setCargo(valor)}
         />
         <CampoTexto
           required={true}
           label="Imagem"
           placeholder="Insira uma imagem"
+          valor={imagem}
+          aoAlterado={(valor) => setImagem(valor)}
         />
-        <ListaSuspensa required={true} itens={times} label="Times" />
+        <ListaSuspensa
+          required={true}
+          itens={times}
+          label="Times"
+          valor={time}
+          aoAlterado={(valor) => setTime(valor)}
+        />
         <Botao texto="Criar Card" />
       </form>
     </section>
