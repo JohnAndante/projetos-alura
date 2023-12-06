@@ -1,11 +1,11 @@
-import "./Banner.css";
+import './Banner.css';
 
 function Banner() {
   return (
-    <header className="banner">
+    <header className='banner'>
       <img
-        src="/images/banner.png"
-        alt="O banner principal da página do Organo"
+        src={require('../../images/banner.png')}
+        alt='O banner principal da página do Organo'
       />
     </header>
   );

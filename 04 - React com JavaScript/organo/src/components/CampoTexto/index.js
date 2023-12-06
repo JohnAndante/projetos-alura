@@ -1,5 +1,5 @@
-import { useState } from "react";
-import "./CampoTexto.css";
+import { useState } from 'react';
+import './CampoTexto.css';
 
 const CampoTexto = (props) => {
   const aoDigitado = (evento) => {
@@ -7,7 +7,7 @@ const CampoTexto = (props) => {
   };
 
   return (
-    <div className="campo-texto">
+    <div className='campo-texto'>
       <label>{props.label}</label>
       <input
         onChange={aoDigitado}
