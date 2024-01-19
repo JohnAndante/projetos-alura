@@ -52,8 +52,6 @@ function App() {
    * ])
    */
 
-
-
   /* // ? Exemplo de como os dados de colaboradores estavam sendo passados antes da API
   * const colaboradores = [
   *   {
