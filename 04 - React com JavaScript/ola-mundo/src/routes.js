@@ -1,11 +1,9 @@
-import {
-  BrowserRouter, Route, Routes
-} from "react-router-dom";
-import Inicio from "./paginas/Inicio"
-import SobreMim from "./paginas/SobreMim";
-import Menu from "./paginas/componentes/menu";
+import Menu from "componentes/Menu";
+import Inicio from "paginas/Inicio";
+import SobreMim from "paginas/SobreMim";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-function App() {
+function AppRoutes() {
   return (
     <BrowserRouter>
       <Menu />
@@ -19,4 +17,4 @@ function App() {
   )
 }
 
-export default App;
+export default AppRoutes;

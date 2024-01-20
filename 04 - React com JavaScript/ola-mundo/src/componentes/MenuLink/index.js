@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 import styles from './MenuLink.module.css';
 
@@ -7,13 +7,13 @@ const MenuLink = ({ children, to }) => {
 
 
   return (
-    <Link
+    <NavLink
       className={`
         ${styles.link}
         ${localizacao === to ? styles['link-destacado'] : ""}
         `} to={to}>
       {children}
-    </Link>
+    </NavLink>
 
   );
 };
