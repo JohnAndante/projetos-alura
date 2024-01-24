@@ -1,42 +1,40 @@
 import styled from "styled-components";
 
-const StylizedTextField = styled.div`
-  border: 2px;
-  min-width: 400px;
+const StylizedContainer = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+const StylizedTextField = styled.input`
+  height: 56px;
+  padding: 12px 16px;
   border-radius: 10px;
-  padding: 1px;
-  background: linear-gradient(90deg, #C98CF1 0%, #7B78E5 100%);
-;
+  border: 2px solid;
+  border-color: #C98CF1;
+  background: transparent;
+  box-sizing: border-box;
+  width: 566px;
+  color: #D9D9D9;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 20px;
+`;
 
-  label {
-    background: linear-gradient(
-                  174.61deg,
-                  #041833 10%,
-                  #04244F 70%);
-  }
+const SearchIcon = styled.img`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 38px;
+  height: 38px;
+`;
 
-  input {
-    color: #D9D9D9;
-    background-color: transparent;
-    border: none;
-    border-radius: 10px;
-    width: 400px;
-    height: 56px;
-    padding: 12px, 26px;
-  }
-
-  `;
-
-const TextField = () => {
+const TextField = (props) => {
 
   return (
-    <StylizedTextField>
-      <div>
-        <label>
-          <input type='text' placeholder='O que você procura?' />
-        </label>
-      </div>
-    </StylizedTextField>
+    <StylizedContainer>
+      <StylizedTextField placeholder="O que você procura?" {...props} />
+      <SearchIcon src='/public/icons/search.png' alt='search' />
+    </StylizedContainer>
   )
 }
 
