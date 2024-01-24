@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import GlobalStyles from "./components/GlobalStyles"
+import Sidebar from "./components/Sidebar"
 import Header from "./components/Header"
+import Banner from "./components/Banner"
 
 const FundoGradiente = styled.div`
     background: linear-gradient(
@@ -19,7 +21,11 @@ function App() {
     <FundoGradiente>
       <GlobalStyles />
       <Header />
-
+      <Sidebar />
+      <Banner
+        backgroundImage={'/src/assets/banner.png'}
+        texto={'Aprenda programação direto ao ponto'}
+      />
     </FundoGradiente>
   )
 }
