@@ -14,33 +14,33 @@ const Sidebar = () => {
       <nav>
         <StyledList>
           <NavItem
-            activeIcon='/public/icons/home-ativo.png'
-            inactiveIcon='/public/icons/home-inativo.png'
+            activeIcon='/icons/home-ativo.png'
+            inactiveIcon='/icons/home-inativo.png'
             active={true}
           >
             Início
           </NavItem>
           <NavItem
-            activeIcon='/public/icons/mais-vistas-ativo.png'
-            inactiveIcon='/public/icons/mais-vistas-inativo.png'
+            activeIcon='/icons/mais-vistas-ativo.png'
+            inactiveIcon='/icons/mais-vistas-inativo.png'
           >
             Mais vistas
           </NavItem>
           <NavItem
-            activeIcon='/public/icons/mais-curtidas-ativo.png'
-            inactiveIcon='/public/icons/mais-curtidas-inativo.png'
+            activeIcon='/icons/mais-curtidas-ativo.png'
+            inactiveIcon='/icons/mais-curtidas-inativo.png'
           >
             Mais curtidas
           </NavItem>
           <NavItem
-            activeIcon='/public/icons/novas-ativo.png'
-            inactiveIcon='/public/icons/novas-inativo.png'
+            activeIcon='/icons/novas-ativo.png'
+            inactiveIcon='/icons/novas-inativo.png'
           >
             Novas
           </NavItem>
           <NavItem
-            activeIcon='/public/icons/surpreenda-me-ativo.png'
-            inactiveIcon='/public/icons/surpreenda-me-inativo.png'
+            activeIcon='/icons/surpreenda-me-ativo.png'
+            inactiveIcon='/icons/surpreenda-me-inativo.png'
           >
             Surpreenda-me
           </NavItem>

@@ -33,7 +33,7 @@ const TextField = (props) => {
   return (
     <StylizedContainer>
       <StylizedTextField placeholder="O que você procura?" {...props} />
-      <SearchIcon src='/public/icons/search.png' alt='search' />
+      <SearchIcon src='/icons/search.png' alt='search' />
     </StylizedContainer>
   )
 }

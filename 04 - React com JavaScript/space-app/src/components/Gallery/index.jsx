@@ -6,7 +6,7 @@ import Tags from "./Tags";
 
 const GalleryContainer = styled.div`
   display: flex;
-  gap: 24px;
+  gap: 20px;
 `;
 
 const FluidSection = styled.section`
@@ -15,12 +15,13 @@ const FluidSection = styled.section`
 
 const ImagesContainer = styled.section`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 20px;
 `;
 
-const Gallery = ({ photos = [] }) => {
+const Gallery = ({ photos = [], onSelectedPhoto }) => {
   return (
     <>
       <Tags />
@@ -29,7 +30,10 @@ const Gallery = ({ photos = [] }) => {
           <Title>Navegue pela galeria</Title>
           <ImagesContainer>
             {photos.map(photo =>
-              <Image photo={photo} key={photo.id} />
+              <Image
+                onZoomRequest={onSelectedPhoto}
+                photo={photo}
+                key={photo.id} />
             )}
           </ImagesContainer>
         </FluidSection>

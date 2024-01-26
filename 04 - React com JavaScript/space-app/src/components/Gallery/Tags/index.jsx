@@ -7,6 +7,13 @@ const TagTitle = styled.h3`
   margin: 0;
 `;
 
+const TagsGroup = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+`;
+
 const ButtonTag = styled.button`
    font-size: 24px;
     color: #FFFFFF;
@@ -23,12 +30,14 @@ const ButtonTag = styled.button`
 `;
 
 const Tags = () => {
-  return <div>
+  return <div style={{ marginTop: '10px' }}>
     <TagTitle>Busque por tags:</TagTitle>
 
-    {tags.map((tag) =>
-      <ButtonTag key={tag.id}>{tag.titulo}</ButtonTag>
-    )}
+    <TagsGroup>
+      {tags.map((tag) =>
+        <ButtonTag key={tag.id}>{tag.titulo}</ButtonTag>
+      )}
+    </TagsGroup>
   </div>
 
 }

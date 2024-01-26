@@ -16,7 +16,7 @@ const StylizedHeader = styled.header`
 const Header = () => {
   return (
     <StylizedHeader>
-      <img src='/public/images/logo.png' alt='logo' />
+      <img src='/images/logo.png' alt='logo' />
       <TextField />
     </StylizedHeader>
   )

@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar"
 import Header from "./components/Header"
 import Banner from "./components/Banner"
 import Gallery from "./components/Gallery"
+import ZoomModal from "./components/ZoomModal"
 
 import photos from './fotos.json';
 
@@ -29,7 +30,7 @@ const AppContainer = styled.div`
 
 const MainContainer = styled.main`
   display: flex;
-  gap: 24px;
+  gap: 16px;
 `;
 
 const GalleryContent = styled.section`
@@ -41,6 +42,7 @@ const GalleryContent = styled.section`
 
 const App = () => {
   const [galleryPhotos, setGallerPhotos] = useState(photos);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   return (
     <FundoGradiente>
@@ -55,10 +57,13 @@ const App = () => {
               texto={'A galeria mais completa de fotos do espaço!'}
 
             />
-            <Gallery photos={galleryPhotos} />
+            <Gallery
+              onSelectedPhoto={photo => setSelectedPhoto(photo)}
+              photos={galleryPhotos} />
           </GalleryContent>
         </MainContainer>
       </AppContainer>
+      <ZoomModal photo={selectedPhoto} onClose={() => setSelectedPhoto(null)} />
     </FundoGradiente>
   )
 }
