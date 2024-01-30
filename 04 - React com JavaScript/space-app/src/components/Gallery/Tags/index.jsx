@@ -29,13 +29,18 @@ const ButtonTag = styled.button`
     }
 `;
 
-const Tags = () => {
+const Tags = ({ setTag }) => {
   return <div style={{ marginTop: '10px' }}>
     <TagTitle>Busque por tags:</TagTitle>
 
     <TagsGroup>
       {tags.map((tag) =>
-        <ButtonTag key={tag.id}>{tag.titulo}</ButtonTag>
+        <ButtonTag
+          key={tag.id}
+          onClick={() => setTag(tag.tag)}
+        >
+          {tag.titulo}
+        </ButtonTag>
       )}
     </TagsGroup>
   </div>

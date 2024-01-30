@@ -28,11 +28,15 @@ const SearchIcon = styled.img`
   height: 38px;
 `;
 
-const TextField = (props) => {
+const TextField = ({ filter, setFilter }) => {
 
   return (
     <StylizedContainer>
-      <StylizedTextField placeholder="O que você procura?" {...props} />
+      <StylizedTextField
+        placeholder="O que você procura?"
+        onChange={(e) => { setFilter(e.target.value) }}
+        type="text"
+        {...filter} />
       <SearchIcon src='/icons/search.png' alt='search' />
     </StylizedContainer>
   )

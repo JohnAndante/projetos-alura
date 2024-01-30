@@ -21,10 +21,10 @@ const ImagesContainer = styled.section`
   gap: 20px;
 `;
 
-const Gallery = ({ photos = [], onSelectedPhoto }) => {
+const Gallery = ({ photos = [], setTag, onSelectedPhoto, onToggleFavourite }) => {
   return (
     <>
-      <Tags />
+      <Tags setTag={setTag} />
       <GalleryContainer>
         <FluidSection>
           <Title>Navegue pela galeria</Title>
@@ -32,6 +32,7 @@ const Gallery = ({ photos = [], onSelectedPhoto }) => {
             {photos.map(photo =>
               <Image
                 onZoomRequest={onSelectedPhoto}
+                onToggleFavourite={onToggleFavourite}
                 photo={photo}
                 key={photo.id} />
             )}

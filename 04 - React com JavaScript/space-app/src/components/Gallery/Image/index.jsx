@@ -37,7 +37,9 @@ const Footer = styled.footer`
   justify-content: space-between;
 `;
 
-const Image = ({ photo, expanded = false, onZoomRequest }) => {
+const Image = ({ photo, expanded = false, onZoomRequest, onToggleFavourite }) => {
+
+  const favouriteIcon = photo.favorito ? "/icons/favorito-ativo.png" : "/icons/favorito.png";
   return (
     <Figure $expandida={expanded} id={`photo-${photo.id}`}>
       <img src={photo.path} alt={photo.titulo} />
@@ -45,8 +47,8 @@ const Image = ({ photo, expanded = false, onZoomRequest }) => {
         <h3>{photo.titulo}</h3>
         <Footer>
           <h4>{photo.fonte}</h4>
-          <IconButton>
-            <img src="/icons/favorito.png" alt="Favorito" />
+          <IconButton onClick={() => onToggleFavourite(photo)}>
+            <img src={favouriteIcon} alt="Favoritar" />
           </IconButton>
           {!expanded && <IconButton aria-hidden={expanded} onClick={() => onZoomRequest(photo)}>
             <img src="/icons/expandir.png" alt="Expandir" />
