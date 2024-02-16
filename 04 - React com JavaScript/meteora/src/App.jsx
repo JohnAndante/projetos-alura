@@ -4,8 +4,9 @@ import Home from "./pages/Home";
 import Carrinho from "./pages/Carrinho";
 import PaginaErro from "./pages/PaginaErro";
 
-import "./App.css";
 import { CarrinhoProvider } from "./context/CarrinhoContext";
+
+import "./App.css";
 
 function App() {
 
