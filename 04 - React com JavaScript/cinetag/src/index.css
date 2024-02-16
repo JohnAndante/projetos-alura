@@ -1,36 +1,15 @@
-/* FILEPATH: /E:/Projetos/projetos-alura/04 - React com JavaScript/cinetag/src/index.css */
-
-/* Reset default styles */
-body, h1, p {
-  margin: 0;
-  padding: 0;
+:root {
+  --fonte: 'Montserrat', sans-serif;
+  --branco: #FFF;
+  --preto: #000;
+  --cinza-claro: #e2e2e2;
 }
 
-/* Set font and background color */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-}
-
-/* Center content */
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-/* Style headings */
-h1 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 16px;
-}
-
-/* Style paragraphs */
-p {
-  font-size: 16px;
-  color: #666;
-  margin-bottom: 8px;
+  margin: 0;
+  background-color: var(--branco);
+  font-family: var(--fonte);
+  color: var(--preto);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
