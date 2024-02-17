@@ -1,18 +1,17 @@
-import Card from "../../components/Card";
-import Titulo from "../../components/Titulo";
+import Titulo from '../../components/Titulo';
 import Banner from '../../components/Banner';
+import Card from "../../components/Card";
 
 import videos from '../../json/db.json';
+import styles from './Favoritos.module.css';
 
-import styles from './Inicio.module.css';
-
-const Inicio = () => {
+const Favoritos = () => {
   return (
     <>
-      <Banner imagem={"home"} />
+      <Banner imagem={"favoritos"} />
 
       <Titulo>
-        <h1>Um lugar para guardar seus vídeos e filmes!</h1>
+        <h1>Seus vídeos favoritos estão aqui!</h1>
       </Titulo>
 
       <section className={styles.container}>
@@ -24,4 +23,4 @@ const Inicio = () => {
   );
 }
 
-export default Inicio;
+export default Favoritos;

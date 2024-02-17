@@ -9,17 +9,19 @@ import logo from '/images/logo.png';
 const Cabecalho = () => {
   return (
     <header className={styles.cabecalho}>
-      <Link to="/">
-        <img src={logo} alt="Logo do Cinetag" />
-      </Link>
-      <nav>
-        <CabecalhoLink url="/">
-          Home
-        </CabecalhoLink>
-        <CabecalhoLink url="/Favoritos">
-          Favoritos
-        </CabecalhoLink>
-      </nav>
+      <div className={styles.content}>
+        <Link to="/">
+          <img src={logo} alt="Logo do Cinetag" />
+        </Link>
+        <nav>
+          <CabecalhoLink url="/">
+            Home
+          </CabecalhoLink>
+          <CabecalhoLink url="/Favoritos">
+            Favoritos
+          </CabecalhoLink>
+        </nav>
+      </div>
     </header>
   )
 }
