@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Card from "../../components/Card";
 import Titulo from "../../components/Titulo";
 import Banner from '../../components/Banner';
 
-import videos from '../../json/db.json';
 import styles from './Inicio.module.css';
 
 const Inicio = () => {
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/videos')
+      .then(resposta => resposta.json())
+      .then(dados => setVideos(dados))
+  }, [])
+
   return (
     <>
       <Banner imagem={"home"} />

@@ -3,9 +3,9 @@ import React from 'react';
 import Titulo from '../../components/Titulo';
 import Banner from '../../components/Banner';
 import Card from "../../components/Card";
+import { useFavoritoContext } from '../../contexts/Favoritos';
 
 import styles from './Favoritos.module.css';
-import { useFavoritoContext } from '../../contexts/Favoritos';
 
 const Favoritos = () => {
   const { favorito } = useFavoritoContext();
