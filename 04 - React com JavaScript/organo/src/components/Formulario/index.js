@@ -1,67 +1,82 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react'
+import Botao from '../Botao'
+import Campo from '../Campo'
+import ListaSuspensa from '../ListaSuspensa'
+import './Formulario.css'
 
-import Botao from '../Botao';
-import CampoTexto from '../CampoTexto/';
-import ListaSuspensa from '../ListaSuspensa';
+const Formulario = ({ aoCadastrar, times, cadastrarTime }) => {
 
-import './Formulario.css';
+  const [nome, setNome] = useState('')
+  const [cargo, setCargo] = useState('')
+  const [imagem, setImagem] = useState('')
+  const [time, setTime] = useState('')
+  const [nomeTime, setNomeTime] = useState('')
+  const [corTime, setCorTime] = useState('')
 
-const Formulario = (props) => {
-  const [nome, setNome] = useState('');
-  const [cargo, setCargo] = useState('');
-  const [imagem, setImagem] = useState('');
-  const [time, setTime] = useState('');
 
-  const formRef = useRef(null);
-  const aoSalvar = (evento) => {
-    evento.preventDefault();
-    props.aoColaboradorCadastrado({
+
+  const aoSubmeter = (evento) => {
+    evento.preventDefault()
+    console.log('form enviado', nome, cargo, imagem, time)
+    aoCadastrar({
       nome,
       cargo,
       imagem,
-      time,
-    });
-
-    formRef.current.reset();
-    setTime('0');
-  };
+      time
+    })
+  }
 
   return (
-    <section className='formulario'>
-      <form onSubmit={aoSalvar} ref={formRef}>
-        <h2>Preencha os dados para criar o card do colaborador</h2>
-        <CampoTexto
-          required={true}
+    <section className="formulario-section">
+      <form className="" onSubmit={aoSubmeter}>
+        <h2>Preencha os dados para criar o card do colaborador.</h2>
+        <Campo
+          obrigatorio={true}
           label='Nome'
-          placeholder='Digite seu nome'
+          placeholder='Digite seu nome '
           valor={nome}
-          aoAlterado={(valor) => setNome(valor)}
-        />
-        <CampoTexto
-          required={true}
+          aoAlterado={valor => setNome(valor)} />
+        <Campo
+          obrigatorio={true}
           label='Cargo'
-          placeholder='Digite seu cargo'
+          placeholder='Digite seu cargo '
           valor={cargo}
-          aoAlterado={(valor) => setCargo(valor)}
-        />
-        <CampoTexto
-          required={true}
+          aoAlterado={valor => setCargo(valor)} />
+        <Campo
           label='Imagem'
-          placeholder='Insira uma imagem'
-          valor={imagem}
-          aoAlterado={(valor) => setImagem(valor)}
-        />
+          placeholder='Informe o endereço da imagem '
+          aoAlterado={valor => setImagem(valor)} />
         <ListaSuspensa
-          required={true}
-          itens={props.times}
+          obrigatorio={true}
           label='Times'
+          items={times}
           valor={time}
-          aoAlterado={(valor) => setTime(valor)}
-        />
-        <Botao texto='Criar Card' />
+          aoAlterado={valor => setTime(valor)} />
+        <Botao>
+          Criar Card
+        </Botao>
+      </form>
+      <form className="" onSubmit={(e) => { e.preventDefault(); cadastrarTime({ nome: nomeTime, cor: corTime }) }}>
+        <h2>Preencha os campos para criar um time.</h2>
+        <Campo
+          obrigatorio
+          label='Nome'
+          placeholder='Digite o nome do time '
+          valor={nomeTime}
+          aoAlterado={valor => setNomeTime(valor)} />
+        <Campo
+          obrigatorio
+          label='Cor'
+          type='color'
+          placeholder='Digite a cor do time'
+          valor={corTime}
+          aoAlterado={valor => setCorTime(valor)} />
+        <Botao>
+          Criar Time
+        </Botao>
       </form>
     </section>
-  );
-};
+  )
+}
 
-export default Formulario;
+export default Formulario

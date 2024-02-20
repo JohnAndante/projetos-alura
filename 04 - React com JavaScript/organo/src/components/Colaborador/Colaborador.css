@@ -1,9 +1,11 @@
 .colaborador {
-  width: 280px;
+  position: relative;
+  width: 200px;
+  -webkit-user-select: none;
 }
 
 .colaborador .cabecalho {
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
   border-radius: 10px 10px 0px 0px;
 }
 
@@ -11,21 +13,47 @@
   width: 100px;
   border-radius: 50%;
   position: relative;
-  bottom: -50px
+  bottom: -50px;
 }
 
 .colaborador .rodape {
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.08);
   border-radius: 0px 0px 10px 10px;
   padding-top: 90px;
   padding-bottom: 40px;
+  min-height: 100px;
 }
 
 .colaborador .rodape h4 {
-  color: #6278F7;
-  font-size: 18px;
+  color: #000;
+  font-size: 16px;
   line-height: 22px;
   font-weight: bold;
+  font-family: 'Chiller', sans-serif;
   margin-bottom: 8px;
+}
+
+.colaborador .rodape h5 {
+  font-size: 16px;
+  line-height: 22px;
+  color: #555;
+  padding: 0 16px;
+}
+
+.deletar {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+}
+
+.deletar:hover {
+  cursor: pointer;
+}
+
+.favoritar {
+  position: absolute;
+  right: calc(50% - 10px);
+  bottom: 25px;
+  cursor: pointer;
 }

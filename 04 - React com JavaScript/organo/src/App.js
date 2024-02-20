@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { v4 as uuid } from 'uuid';
 
-import Banner from "./componentes/Banner";
-import Formulario from "./componentes/Formulario";
-import Rodape from "./componentes/Rodape";
-import Time from "./componentes/Time";
+import Banner from './components/Banner';
+import Formulario from './components/Formulario';
+import Rodape from './components/Rodape';
+import Time from './components/Time';
 
 
 function App() {
@@ -282,40 +282,44 @@ function App() {
     fetch('http://localhost:8080/times')
       .then(resposta => resposta.json())
       .then(setTimes)
-      .then(console.log("times2", times))
 
     fetch('http://localhost:8080/colaboradores')
       .then(resposta => resposta.json())
       .then(setColaboradores)
-      .then(console.log("colaboradores2", colaboradores))
 
   }, [])
 
   return (
-    <div>
-      <Banner />
-      <Formulario
-        cadastrarTime={cadastrarTime}
-        times={times.map(time => time.nome)}
-        aoCadastrar={colaborador =>
-          setColaboradores([...colaboradores, colaborador])}
-      />
-      <section className="times">
-        <h1>Minha organização</h1>
-        {times.map((time, indice) =>
-          <Time
-            aoFavoritar={resolverFavorito}
-            key={indice}
-            time={time}
-            colaboradores={colaboradores.filter(
-              colaborador => colaborador.time === time.nome
-            )}
-            aoDeletar={deletarColaborador}
-            mudarCor={mudarCorDoTime}
-          />)}
-      </section>
+    <>
+      <Banner src={'/imagens/banner.png'} alt={'Logo do Organo'} />
+
+      <main>
+        <Formulario
+          cadastrarTime={cadastrarTime}
+          times={times.map(time => time.nome)}
+          aoCadastrar={colaborador =>
+            setColaboradores([...colaboradores, colaborador])}
+        />
+
+        <section className="times">
+          <h1>Minha organização</h1>
+
+          {times.map((time, indice) =>
+            <Time
+              aoFavoritar={resolverFavorito}
+              key={indice}
+              time={time}
+              colaboradores={colaboradores.filter(
+                colaborador => colaborador.time === time.nome
+              )}
+              aoDeletar={deletarColaborador}
+              mudarCor={mudarCorDoTime}
+            />)}
+        </section>
+      </main>
+
       <Rodape />
-    </div>
+    </>
   );
 }
 

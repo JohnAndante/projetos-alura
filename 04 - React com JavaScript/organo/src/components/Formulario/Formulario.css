@@ -1,13 +1,16 @@
-.formulario {
+.formulario-section {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   margin: 80px 0;
+  width: 100%;
 }
 
-.formulario form {
+.formulario-section form {
   max-width: 80%;
   background-color: #f2f2f2;
   border-radius: 20px;
   padding: 36px 64px;
   box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  margin: 0 16px;
 }

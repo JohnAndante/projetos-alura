@@ -22,3 +22,8 @@ h1 {
 h1, h2 {
   font-family: 'Prata', serif;
 }
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+}
