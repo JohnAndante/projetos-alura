@@ -1,9 +1,10 @@
+import React from "react";
+
 import Card from "../../components/Card";
 import Titulo from "../../components/Titulo";
 import Banner from '../../components/Banner';
 
 import videos from '../../json/db.json';
-
 import styles from './Inicio.module.css';
 
 const Inicio = () => {

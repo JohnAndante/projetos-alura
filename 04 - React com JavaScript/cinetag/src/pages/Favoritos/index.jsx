@@ -1,11 +1,15 @@
+import React from 'react';
+
 import Titulo from '../../components/Titulo';
 import Banner from '../../components/Banner';
 import Card from "../../components/Card";
 
-import videos from '../../json/db.json';
 import styles from './Favoritos.module.css';
+import { useFavoritoContext } from '../../contexts/Favoritos';
 
 const Favoritos = () => {
+  const { favorito } = useFavoritoContext();
+
   return (
     <>
       <Banner imagem={"favoritos"} />
@@ -15,7 +19,8 @@ const Favoritos = () => {
       </Titulo>
 
       <section className={styles.container}>
-        {videos.map((video) => {
+        {favorito.length === 0 && <p>Você ainda não tem favoritos.</p>}
+        {favorito.length > 0 && favorito.map((video) => {
           return <Card {...video} key={video.id} />
         })}
       </section>
