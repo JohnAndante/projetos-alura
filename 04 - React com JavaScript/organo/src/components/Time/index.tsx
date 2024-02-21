@@ -1,8 +1,22 @@
 import Colaborador from '../Colaborador';
-import './Time.css';
+import { IColaborador } from '../shared/interfaces/IColaborador';
 import hexToRgba from 'hex-to-rgba';
+import './Time.css';
 
-const Time = ({ time, colaboradores, aoDeletar, mudarCor, aoFavoritar }) => {
+interface TimeProps {
+  time: {
+    id: number;
+    nome: string;
+    cor: string;
+  };
+  colaboradores: IColaborador[];
+  aoDeletar: (id: number) => void;
+  mudarCor: (cor: string, id: number) => void;
+  aoFavoritar: (id: number) => void;
+
+}
+
+const Time = ({ time, colaboradores, aoDeletar, mudarCor, aoFavoritar }: TimeProps) => {
   return (
     colaboradores.length > 0
     && <section
@@ -40,4 +54,4 @@ const Time = ({ time, colaboradores, aoDeletar, mudarCor, aoFavoritar }) => {
   )
 }
 
-export default Time
+export default Time;
