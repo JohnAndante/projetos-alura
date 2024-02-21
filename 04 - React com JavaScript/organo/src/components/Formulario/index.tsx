@@ -20,8 +20,6 @@ const Formulario = ({ aoCadastrar, times, cadastrarTime }: FormularioProps) => {
   const [nomeTime, setNomeTime] = useState('')
   const [corTime, setCorTime] = useState('')
 
-
-
   const aoSubmeter = (evento: React.FormEvent<HTMLFormElement>) => {
     evento.preventDefault()
     console.log('form enviado', nome, cargo, imagem, time)

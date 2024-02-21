@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { v4 as uuid } from 'uuid';
 
 import Banner from './components/Banner';
 import Formulario from './components/Formulario';
 import Rodape from './components/Rodape';
 import Time from './components/Time';
+import { ITime } from "./components/shared/interfaces/ITime";
+import { IColaborador } from "./components/shared/interfaces/IColaborador";
 
 
 function App() {
 
-  const [times, setTimes] = useState([]);
-  const [colaboradores, setColaboradores] = useState([]);
+  const [times, setTimes] = useState([] as ITime[]);
+  const [colaboradores, setColaboradores] = useState([] as IColaborador[]);
 
   /* // ? Exemplo de como os dados de times estavam sendo passados antes da API
    * const [times, setTimes] = useState([
@@ -251,11 +252,11 @@ function App() {
 
   // const [colaboradores, setColaboradores] = useState(colaboradores)
 
-  function deletarColaborador(id) {
+  function deletarColaborador(id: number) {
     setColaboradores(colaboradores.filter(colaborador => colaborador.id !== id));
   }
 
-  function mudarCorDoTime(cor, id) {
+  function mudarCorDoTime(cor: string, id: number) {
     setTimes(times.map(time => {
       if (time.id === id) {
         time.cor = cor
@@ -264,12 +265,12 @@ function App() {
     }));
   }
 
-  function cadastrarTime(novoTime) {
-    setTimes([...times, { ...novoTime, id: uuid() }])
+  const cadastrarTime = (novoTime: any) => {
+    setTimes([...times, { ...novoTime, id: novoTime.nome }])
   }
 
-  function resolverFavorito(id) {
-    setColaboradores(colaboradores.map(colaborador => {
+  const resolverFavorito = (id: number) => {
+    setColaboradores(colaboradores.map((colaborador) => {
       if (colaborador.id === id) {
         colaborador.favorito = !colaborador.favorito
       }
