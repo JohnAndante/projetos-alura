@@ -34,6 +34,7 @@ const Colaborador = ({ colaborador, corDeFundo, aoDeletar, aoFavoritar }: Colabo
     <div className="rodape">
       <h4>{colaborador.nome}</h4>
       <h5>{colaborador.cargo}</h5>
+      <h5>{new Date(colaborador.data).toLocaleDateString()}</h5>
 
       <div className='favoritar'>
         {colaborador.favorito

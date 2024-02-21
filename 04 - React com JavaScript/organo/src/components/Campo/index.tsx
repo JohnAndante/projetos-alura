@@ -6,7 +6,7 @@ interface CampoProps {
   valor: string;
   required?: boolean;
   placeholder?: string;
-  type?: string;
+  type?: 'text' | 'date' | 'number' | 'email' | 'password' | 'tel' | 'url' | 'search' | 'time' | 'color' | 'file' | 'datetime-local' | 'month' | 'week' | 'range' | 'hidden' | 'image' | 'reset' | 'submit' | 'button' | 'checkbox' | 'radio' | 'file' | 'image' | 'reset' | 'submit' | 'button';
 }
 
 const Campo = ({ label, aoAlterado, valor, placeholder, type, required = false }: CampoProps) => {
