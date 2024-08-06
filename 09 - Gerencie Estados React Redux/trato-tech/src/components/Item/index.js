@@ -1,12 +1,17 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { mudarCarrinho, mudarQuantidade } from 'store/reducers/carrinho';
-import { mudarFavorito } from 'store/reducers/itens';
 import classNames from 'classnames';
+import Input from 'components/Input';
+import { mudarCarrinho, mudarQuantidade } from 'store/reducers/carrinho';
+import { deletarItem, mudarFavorito, mudarItem } from 'store/reducers/itens';
 import {
     AiOutlineHeart,
     AiFillHeart,
     AiFillMinusCircle,
+    AiFillCloseCircle,
     AiFillPlusCircle,
+    AiOutlineCheck,
+    AiFillEdit,
 } from 'react-icons/ai';
 import {
     FaCartPlus
@@ -15,7 +20,7 @@ import styles from './Item.module.scss';
 
 const iconeProps = {
     size: 24,
-    color: '#041833',
+    color: '#041833'
 };
 
 const quantidadeProps = {
@@ -34,21 +39,45 @@ export default function Item(props) {
         carrinho,
         quantidade,
     } = props;
+    const [modoDeEdicao, setModoDeEdicao] = useState(false);
+    const [novoTitulo, setNovoTitulo] = useState(titulo);
     const dispatch = useDispatch();
     const estaNoCarrinho = useSelector(state => state.carrinho.some(itemNoCarrinho => itemNoCarrinho.id === id));
 
-    function resolverFavorito() {
+    const resolverFavorito = () => {
         dispatch(mudarFavorito(id));
     }
 
-    function resolverCarrinho() {
+    const resolverCarrinho = () => {
         dispatch(mudarCarrinho(id));
     }
+
+    const componenteModoDeEdicao = <>
+        {modoDeEdicao
+            ? <AiOutlineCheck
+                {...iconeProps}
+                className={styles['item-acao']}
+                onClick={() => {
+                    setModoDeEdicao(false);
+                    dispatch(mudarItem({ id, item: { titulo: novoTitulo } }));
+                }}
+            />
+            : <AiFillEdit
+                {...iconeProps}
+                className={styles['item-acao']}
+                onClick={() => setModoDeEdicao(true)}
+            />
+        }
+    </>
 
     return (
         <div className={classNames(styles.item, {
             [styles.itemNoCarrinho]: carrinho,
         })}>
+            <AiFillCloseCircle
+                {...iconeProps}
+                className={`${styles['item-acao']} ${styles['item-deletar']}`}
+                onClick={() => dispatch(deletarItem({ id }))} />
 
             <div className={styles['item-imagem']}>
                 <img src={foto} alt={titulo} />
@@ -57,7 +86,13 @@ export default function Item(props) {
             <div className={styles['item-descricao']}>
 
                 <div className={styles['item-titulo']}>
-                    <h2>{titulo}</h2>
+                    {modoDeEdicao
+                        ? <Input
+                            type='text'
+                            value={novoTitulo}
+                            onChange={e => setNovoTitulo(e.target.value)} />
+                        : <h1>{titulo}</h1>
+                    }
                     <p>{descricao}</p>
                 </div>
 
@@ -93,12 +128,17 @@ export default function Item(props) {
                                     />
                                 </div>
                             )
-                            : (<FaCartPlus
-                                {...iconeProps}
-                                color={estaNoCarrinho ? '#1875E8' : iconeProps.color}
-                                className={styles['item-acao']}
-                                onClick={resolverCarrinho}
-                            />)
+                            : (
+                                <>
+                                    <FaCartPlus
+                                        {...iconeProps}
+                                        color={estaNoCarrinho ? '#1875E8' : iconeProps.color}
+                                        className={styles['item-acao']}
+                                        onClick={resolverCarrinho}
+                                    />
+                                    {componenteModoDeEdicao}
+                                </>
+                            )
                         }
                     </div>
                 </div>
