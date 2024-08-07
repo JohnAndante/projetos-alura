@@ -1,4 +1,4 @@
-import instance from 'common/config/api';
+import instance from 'assets/common/config/api';
 
 const categoriasService = {
   buscar: async () => {

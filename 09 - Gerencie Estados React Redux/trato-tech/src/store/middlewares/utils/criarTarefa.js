@@ -15,8 +15,9 @@ export default async function criarTarefa({
     title: 'Carregando',
     description: textoCarregando,
     status: 'loading',
-    duration: 2000,
-    isClosable: true
+    duration: 1000,
+    isClosable: true,
+    position: 'top-right'
   });
   const tarefa = fork(async api => {
     await api.delay(1000);
@@ -31,7 +32,8 @@ export default async function criarTarefa({
       description: textoSucesso,
       status: 'success',
       duration: 2000,
-      isClosable: true
+      isClosable: true,
+      position: 'top-right'
     });
     dispatch(action(resposta.value));
   }
@@ -42,7 +44,8 @@ export default async function criarTarefa({
       description: textoErro,
       status: 'error',
       duration: 2000,
-      isClosable: true
+      isClosable: true,
+      position: 'top-right'
     });
   }
 
