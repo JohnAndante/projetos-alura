@@ -5,7 +5,11 @@
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.08));
   flex-direction: column;
   width: 335px;
-
+  &-deletar {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+  }
   &-descricao {
     background-color: #EFF9FF;
     display: flex;
@@ -13,27 +17,22 @@
     justify-content: space-between;
     flex: 1;
   }
-
   &-titulo {
     padding: 16px 16px 0 16px;
-
     h2 {
       color: #1875E8;
       font-size: 20px;
     }
-
     p {
       color: #444;
     }
-
   }
 
   &-imagem {
     height: 160px;
-    width: 335px;
     margin: 0 auto;
     overflow: hidden;
-
+    width: 335px;
     img {
       width: 100%;
     }
@@ -54,7 +53,6 @@
     justify-content: center;
     width: 170px;
   }
-
   &-acoes {
     align-items: center;
     display: flex;
@@ -71,16 +69,6 @@
     flex-direction: column;
     gap: 5px;
   }
-
-  &-deletar {
-    position: absolute;
-    right: -10px;
-    top: -10px;
-
-    &:hover {
-        color: #e81818;
-    }
-  }
 }
 
 .itemNoCarrinho {
@@ -88,18 +76,15 @@
   width: 100%;
   flex-direction: row;
   flex-wrap: wrap;
-
   .quantidade {
     align-items: center;
     display: flex;
     gap: 10px;
     justify-content: center;
-
     svg {
       cursor: pointer;
     }
   }
-
   .item-acoes {
     gap: 50px;
     justify-content: flex-end;

@@ -1,14 +1,11 @@
-import { useEffect } from 'react';
+import Header from 'components/Header';
+import styles from './Home.module.scss';
+import relogio from 'assets/inicial.png';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { buscarCategorias } from 'store/reducers/categorias';
-import { buscarItens } from 'store/reducers/itens';
-
-import Header from 'components/Header';
 import Button from 'components/Button';
-
-import relogio from 'assets/inicial.png';
-import styles from './Home.module.scss';
+import { useEffect } from 'react';
+import { carregarCategorias } from 'store/reducers/categorias';
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -16,9 +13,8 @@ export default function Home() {
     const categorias = useSelector(state => state.categorias);
 
     useEffect(() => {
-        dispatch(buscarCategorias());
-        dispatch(buscarItens())
-    }, [dispatch])
+        dispatch(carregarCategorias());
+    }, [dispatch]);
 
     return (
         <div>
@@ -28,8 +24,8 @@ export default function Home() {
                 imagem={relogio}
                 className={styles.header}
             >
-                <Button onClick={() => navigate('/anuncie')} className={styles['anuncie-button']}>
-                    Quero Anunciar!
+                <Button onClick={() => navigate('/anuncie')}>
+                    Quero anunciar
                 </Button>
             </Header>
             <div className={styles.categorias}>

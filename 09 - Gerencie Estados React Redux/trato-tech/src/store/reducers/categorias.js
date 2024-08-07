@@ -1,61 +1,48 @@
 import { createStandaloneToast } from '@chakra-ui/toast';
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import categoriasService from 'services/categorias';
+import { resetarCarrinho } from './carrinho';
 
 const { toast } = createStandaloneToast();
+
+const initialState = [];
+
+export const carregarCategorias = createAction('categorias/carregarCategorias');
+export const carregarUmaCategoria = createAction('categorias/carregarUmaCategoria');
 
 export const buscarCategorias = createAsyncThunk(
     'categorias/buscar',
     categoriasService.buscar
-)
+);
 
 const categoriasSlice = createSlice({
     name: 'categorias',
-    initialState: [],
+    initialState,
+    reducers: {
+        adicionarTodasAsCategorias: (state, { payload }) => {
+            return payload;
+        },
+        adicionarUmaCategoria: (state, { payload }) => {
+            state.push(payload);
+        }
+    },
     extraReducers: builder => {
         builder
-            .addCase(buscarCategorias.pending,
-                (state, { payload }) => {
+            .addCase(
+                resetarCarrinho.type,
+                () => {
                     toast({
-                        title: "Buscando categorias",
-                        description: "Estamos buscando as categorias para você",
-                        status: "info",
-                        duration: 5000,
-                        isClosable: true,
-                        position: "top-right"
+                        title: 'Sucesso!',
+                        description: 'Compra completada com sucesso!',
+                        status: 'success',
+                        duration: 2000,
+                        isClosable: true
                     })
-                    return [];
-                }
-            )
-            .addCase(buscarCategorias.fulfilled,
-                (state, { payload }) => {
-                    // toast.closeAll();
-                    toast({
-                        title: "Categorias carregadas",
-                        description: "As categorias foram carregadas com sucesso",
-                        status: "success",
-                        duration: 3000,
-                        isClosable: true,
-                        position: "top-right"
-                    })
-                    return payload;
-                }
-            )
-            .addCase(buscarCategorias.rejected,
-                (state, { payload }) => {
-                    // toast.closeAll();
-                    toast({
-                        title: "Erro ao buscar categorias",
-                        description: "Não foi possível buscar as categorias",
-                        status: "error",
-                        duration: 3000,
-                        isClosable: true,
-                        position: "top-right"
-                    })
-                    return [];
                 }
             )
     }
 });
+
+export const { adicionarTodasAsCategorias, adicionarUmaCategoria } = categoriasSlice.actions;
 
 export default categoriasSlice.reducer;

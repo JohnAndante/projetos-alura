@@ -1,9 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createStandaloneToast } from '@chakra-ui/toast';
 import itensService from 'services/itens';
 import { v4 as uuid } from 'uuid';
-
-const { toast } = createStandaloneToast();
 
 export const buscarItens = createAsyncThunk(
     'itens/buscar',
@@ -15,8 +12,10 @@ const itensSlice = createSlice({
     initialState: [],
     reducers: {
         mudarFavorito: (state, { payload }) => {
-            const index = state.findIndex(item => item.id === payload);
-            Object.assign(state[index], { favorito: !state[index].favorito });
+            state.map(item => {
+                if (item.id === payload) item.favorito = !item.favorito;
+                return item;
+            })
         },
         cadastrarItem: (state, { payload }) => {
             state.push({ ...payload, id: uuid() });
@@ -28,54 +27,35 @@ const itensSlice = createSlice({
         deletarItem: (state, { payload }) => {
             const index = state.findIndex(item => item.id === payload);
             state.splice(index, 1);
+        },
+        adicionarItens: (state, { payload }) => {
+            state.push(...payload);
         }
     },
     extraReducers: builder => {
         builder
-            .addCase(buscarItens.fulfilled,
+            .addCase(
+                buscarItens.fulfilled,
                 (state, { payload }) => {
-                    // toast.closeAll();
-                    toast({
-                        title: "Itens carregados",
-                        description: "Os itens foram carregados com sucesso",
-                        status: "success",
-                        duration: 3000,
-                        isClosable: true,
-                        position: "top-right"
-                    })
-                    state.push(...payload);
+                    console.log('itens carregados!');
+                    return payload;
                 }
             )
-            .addCase(buscarItens.pending,
+            .addCase(
+                buscarItens.pending,
                 (state, { payload }) => {
-                    toast({
-                        title: "Buscando itens",
-                        description: "Estamos buscando os itens para você",
-                        status: "info",
-                        duration: 5000,
-                        isClosable: true,
-                        position: "top-right"
-                    })
-                    return []
+                    console.log('carregando itens');
                 }
             )
-            .addCase(buscarItens.rejected,
+            .addCase(
+                buscarItens.rejected,
                 (state, { payload }) => {
-                    // toast.closeAll();
-                    toast({
-                        title: "Erro ao buscar itens",
-                        description: "Não foi possível buscar os itens",
-                        status: "error",
-                        duration: 3000,
-                        isClosable: true,
-                        position: "top-right"
-                    })
-                    return [];
+                    console.log('busca de itens rejeitada!');
                 }
             )
     }
 });
 
-export const { mudarFavorito, cadastrarItem, mudarItem, deletarItem } = itensSlice.actions;
+export const { mudarFavorito, cadastrarItem, mudarItem, deletarItem, adicionarItens } = itensSlice.actions;
 
 export default itensSlice.reducer;
