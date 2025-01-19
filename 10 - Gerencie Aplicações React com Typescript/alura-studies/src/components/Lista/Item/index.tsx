@@ -19,12 +19,9 @@ function Item({
             className={`${style.item} ${selecionado ? style.itemSelecionado : ''} ${completado ? style.itemCompletado : ''}`}
             onClick={() => selecionaTarefa({ id, tarefa, tempo, selecionado, completado })}
         >
-            <h3>
-                {tarefa}
-            </h3>
-            <span>
-                {tempo}
-            </span>
+            <h3>{tarefa}</h3>
+            <span>{tempo}</span>
+            {completado && <span className={style.concluido} aria-label="Tarefa Completada" />}
         </li>
     )
 }

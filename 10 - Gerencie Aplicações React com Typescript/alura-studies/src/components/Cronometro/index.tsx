@@ -3,30 +3,51 @@ import Relogio from "./Relogio";
 import styles from "./Cronometro.module.scss";
 import { ITarefa } from "../../types/tarefa";
 import { tempoParaSegundos } from "../../common/utils/date";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ICronometroProps {
     selecionado: ITarefa | undefined;
+    finalizarTarefa: () => void;
 }
 
-function Cronometro({ selecionado }: ICronometroProps) {
+function Cronometro({ selecionado, finalizarTarefa }: ICronometroProps) {
     const [tempo, setTempo] = useState<number>();
+    const [counting, setCounting] = useState<boolean>(false);
 
-    if (selecionado && selecionado.tempo) {
-        const segundos = tempoParaSegundos(selecionado.tempo);
-        setTempo(segundos);
+    useEffect(() => {
+        if (selecionado?.tempo) setTempo(tempoParaSegundos(selecionado.tempo));
+    }, [selecionado]);
+
+    const handleStart = () => {
+        if (!tempo) return;
+        setCounting(!counting);
     }
 
+    useEffect(() => {
+        if (!counting) return;
+
+        setTimeout(() => {
+            if (tempo && tempo > 0) {
+                setTempo(tempo - 1);
+            } else {
+                setCounting(false);
+                finalizarTarefa();
+            }
+        }, 1000);
+    }, [counting, tempo, finalizarTarefa]);
 
     return (
         <div className={styles.cronometro}>
             <p className={styles.titulo}>Escolha um card e inicie o cronômetro</p>
 
             <div className={styles.relogioWrapper}>
-                <Relogio />
+                <Relogio tempo={tempo} counting={counting} />
             </div>
 
-            <Botao>Começar</Botao>
+            <Botao onClick={handleStart}>
+                {counting ? 'Pausar' : 'Iniciar'}
+            </Botao>
+
         </div>
     )
 }

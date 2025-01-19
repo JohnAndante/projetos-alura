@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Botao from '../Botao';
 import style from './Formulario.module.scss';
 import { ITarefa } from '../../types/tarefa';
@@ -8,78 +8,74 @@ interface FormularioProps {
     setTarefas: React.Dispatch<React.SetStateAction<ITarefa[]>>
 }
 
-class Formulario extends React.Component<FormularioProps> {
-    state = {
-        tarefa: "",
-        tempo: "00:00:00",
+function Formulario({ setTarefas }: FormularioProps) {
+    const [tarefa, setTarefa] = useState("");
+    const [tempo, setTempo] = useState("00:00:00");
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.name === "tarefa") setTarefa(e.target.value);
+        if (e.target.name === "tempo") setTempo(e.target.value);
     };
 
-    handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ ...this.state, [e.target.name]: e.target.value });
+    const resetState = () => {
+        setTarefa("");
+        setTempo("00:00:00");
     };
 
-    resetState = () => {
-        this.setState({
-            tarefa: "",
-            tempo: "00:00:00",
-        });
-    };
-
-    handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        this.props.setTarefas((prevState: ITarefa[]) =>
+        setTarefas((prevState: ITarefa[]) =>
             [
                 ...prevState,
                 {
                     id: uuidv4(),
                     selecionado: false,
                     completado: false,
-                    ...this.state,
+                    tarefa,
+                    tempo,
                 }
             ]);
-        this.resetState();
+        resetState();
     };
 
-    render() {
-        return (
-            <form className={style.novaTarefa} onSubmit={this.handleSubmit}>
-                <div className={style.inputContainer}>
-                    <label htmlFor="tarefa">
-                        Tarefa
-                    </label>
-                    <input
-                        type="text"
-                        name="tarefa"
-                        value={this.state.tarefa}
-                        onChange={this.handleChange}
-                        id="tarefa"
-                        placeholder="O quê você quer estudar?"
-                        autoComplete='off'
-                        required
-                    />
-                </div>
-                <div className={style.inputContainer}>
-                    <label htmlFor="tempo">
-                        Tempo
-                    </label>
-                    <input
-                        type="time"
-                        step="1"
-                        name="tempo"
-                        value={this.state.tempo}
-                        onChange={this.handleChange}
-                        id="tempo"
-                        min="00:00:00"
-                        max="01:30:00"
-                    />
-                </div>
+    return (
+        <form className={style.novaTarefa} onSubmit={handleSubmit}>
+            <div className={style.inputContainer}>
+                <label htmlFor="tarefa">
+                    Tarefa
+                </label>
+                <input
+                    type="text"
+                    name="tarefa"
+                    value={tarefa}
+                    onChange={handleChange}
+                    id="tarefa"
+                    placeholder="Qual será sua próxima tarefa?"
+                    autoComplete='off'
+                    required
+                />
+            </div>
+            <div className={style.inputContainer}>
+                <label htmlFor="tempo">
+                    Tempo
+                </label>
+                <input
+                    type="time"
+                    step="1"
+                    name="tempo"
+                    value={tempo}
+                    onChange={handleChange}
+                    id="tempo"
+                    min="00:00:00"
+                    max="01:30:00"
+                />
+            </div>
 
-                <Botao type="submit">
-                    Adicionar
-                </Botao>
-            </form>
-        )
-    }
+            <Botao type="submit">
+                Adicionar
+            </Botao>
+        </form>
+    )
 }
 
 export default Formulario;
