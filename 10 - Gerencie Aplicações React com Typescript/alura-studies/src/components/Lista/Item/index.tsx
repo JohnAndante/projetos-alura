@@ -1,6 +1,17 @@
+import { ITarefa } from '../../../types/tarefa';
 import style from '../Lista.module.scss';
 
-function Item({ tarefa, tempo }: { tarefa: string, tempo: string }) {
+interface ItemProps extends ITarefa {
+
+}
+
+function Item({
+    id,
+    tarefa,
+    tempo,
+    seleionado,
+    completado,
+}: ItemProps) {
 
     return (
         <li className={style.item}>
