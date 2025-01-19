@@ -15,7 +15,6 @@ class Formulario extends React.Component<FormularioProps> {
     };
 
     handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value);
         this.setState({ ...this.state, [e.target.name]: e.target.value });
     };
 
@@ -32,10 +31,10 @@ class Formulario extends React.Component<FormularioProps> {
             [
                 ...prevState,
                 {
-                    ...this.state,
+                    id: uuidv4(),
                     selecionado: false,
                     completado: false,
-                    id: uuidv4(),
+                    ...this.state,
                 }
             ]);
         this.resetState();
