@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Cardapio from 'pages/Cardapio';
-import Inicio from 'pages/Inicio';
+
+import Menu from 'components/Menu';
 import PaginaPadrao from 'components/PaginaPadrao';
+import Inicio from 'pages/Inicio';
+import Cardapio from 'pages/Cardapio';
 import Sobre from 'pages/Sobre';
 import Rodape from 'components/Rodape';
-import NaoEncontrado from 'components/NaoEncontrado';
-import Menu from 'components/Menu';
 import Prato from 'pages/Prato';
+import NaoEncontrado from 'components/NaoEncontrado';
 
 export default function AppRouter() {
     return (
@@ -19,8 +20,9 @@ export default function AppRouter() {
                         <Route index element={<Inicio />} />
                         <Route path='cardapio' element={<Cardapio />} />
                         <Route path='sobre' element={<Sobre />} />
-                        <Route path='prato/:prato_id' element={<Prato />} />
                     </Route>
+
+                    <Route path='prato/:prato_id' element={<Prato />} />
 
                     <Route path='*' element={<NaoEncontrado />} />
                 </Routes>

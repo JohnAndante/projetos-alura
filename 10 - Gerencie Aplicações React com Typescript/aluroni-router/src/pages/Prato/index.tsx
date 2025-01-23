@@ -1,20 +1,22 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 
 import cardapio from 'data/cardapio.json';
-import NaoEncontrado from 'components/NaoEncontrado';
 import styles from './Prato.module.scss';
 import TagsPrato from 'components/TagsPrato';
+import PaginaPadrao from 'components/PaginaPadrao';
 
 export default function Prato() {
-    const { prato_id: pratoId } = useParams<{ prato_id: string }>();
     const navigate = useNavigate();
+    const { prato_id: pratoId } = useParams<{ prato_id: string }>();
 
     const prato = cardapio.find(p => p.id === Number(pratoId));
 
-    if (!prato) return <NaoEncontrado />;
+    if (!prato) {
+        return <Navigate to="/nao-encontrado" replace />;
+    }
 
     return (
-        <>
+        <PaginaPadrao>
             <button
                 className={styles.voltar}
                 onClick={() => navigate(-1)}
@@ -41,6 +43,7 @@ export default function Prato() {
                     <TagsPrato {...prato} />
                 </div>
             </section>
-        </>
+
+        </PaginaPadrao>
     );
 }
