@@ -9,7 +9,9 @@ export default function Inicio() {
 
     return (
         <section>
-            <h3 className={styles.titulo}>Recomendações da cozinha</h3>
+            <h3 className={styles.titulo}>
+                Recomendações da cozinha
+            </h3>
             <div className={styles.recomendados}>
                 {pratosRecomendados.map(prato => (
                     <div key={prato.id} className={styles.recomendado}>
