@@ -15,7 +15,7 @@ export default [
             ...pluginReact.configs.flat.recommended.rules,
             'react/react-in-jsx-scope': 'off',
             quotes: ['error', 'single'],
-            'linebreak-style': ['error', 'unix'],
+            'linebreak-style': ['error', 'windows'],
             semi: ['error', 'always']
         }
     }
