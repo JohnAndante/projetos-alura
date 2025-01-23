@@ -1,13 +1,17 @@
-import Cabecalho from 'components/Cabecalho';
-import Menu from 'components/Menu';
 import { Outlet } from 'react-router-dom';
+
+import Cabecalho from 'components/Cabecalho';
+
+import temaStyles from '../../styles/Tema.module.scss';
 
 export default function PaginaPadrao() {
     return (
         <>
-            <Menu />
             <Cabecalho />
-            <Outlet />
+
+            <div className={temaStyles.container}>
+                <Outlet />
+            </div>
         </>
     );
 }

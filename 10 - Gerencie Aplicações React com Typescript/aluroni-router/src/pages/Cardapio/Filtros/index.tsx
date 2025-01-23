@@ -1,7 +1,8 @@
 import React from 'react';
+import classNames from 'classnames';
+
 import filtros from './filtros.json';
 import styles from './Filtros.module.scss';
-import classNames from 'classnames';
 
 type IOpcao = typeof filtros[0];
 
