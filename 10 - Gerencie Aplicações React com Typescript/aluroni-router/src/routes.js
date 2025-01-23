@@ -6,6 +6,7 @@ import Sobre from 'pages/Sobre';
 import Rodape from 'components/Rodape';
 import NaoEncontrado from 'components/NaoEncontrado';
 import Menu from 'components/Menu';
+import Prato from 'pages/Prato';
 
 export default function AppRouter() {
     return (
@@ -18,6 +19,7 @@ export default function AppRouter() {
                         <Route index element={<Inicio />} />
                         <Route path='cardapio' element={<Cardapio />} />
                         <Route path='sobre' element={<Sobre />} />
+                        <Route path='prato/:prato_id' element={<Prato />} />
                     </Route>
 
                     <Route path='*' element={<NaoEncontrado />} />
