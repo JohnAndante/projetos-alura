@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Button, TextField } from "@mui/material";
-import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { httpV2 } from "../../http";
+
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 const FormRestaurante = () => {
 
@@ -11,7 +12,7 @@ const FormRestaurante = () => {
 
     useEffect(() => {
         if (parametros.id) {
-            axios.get(`http://localhost:8000/api/v2/restaurantes/${parametros.id}/`)
+            httpV2.get(`restaurantes/${parametros.id}/`)
                 .then(response => {
                     const { data } = response;
                     setNomeRestaurante(data.nome);
@@ -28,8 +29,8 @@ const FormRestaurante = () => {
         const body = { nome: nomeRestaurante };
 
         if (parametros.id) {
-            axios.put(`http://localhost:8000/api/v2/restaurantes/${parametros.id}/`, body)
-                .then(response => {
+            httpV2.put(`restaurantes/${parametros.id}/`, body)
+                .then(() => {
                     alert('Restaurante atualizado com sucesso!');
                     navigate('/admin/restaurantes');
                 })
@@ -39,11 +40,10 @@ const FormRestaurante = () => {
             return;
         }
 
-        axios.post('http://localhost:8000/api/v2/restaurantes/', body)
-            .then(response => {
+        httpV2.post('restaurantes/', body)
+            .then(() => {
                 alert('Restaurante cadastrado com sucesso!');
                 navigate('/admin/restaurantes');
-
             })
             .catch(error => {
                 console.error(error);
@@ -51,28 +51,45 @@ const FormRestaurante = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <TextField
-                variant="standard"
-                label="Nome do restaurante"
-                margin="normal"
-                value={nomeRestaurante}
-                onChange={(e) => setNomeRestaurante(e.target.value)}
-                required
-            />
+        <Box
+            sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}
+        >
+            <Typography component="h1" variant="h4">
+                Formulário de Restaurantes
+            </Typography>
 
-            <br />
-
-            <div
-                style={{
+            <Box
+                component="form"
+                onSubmit={handleSubmit}
+                sx={{
                     display: 'flex',
-                    gap: '8px',
+                    flexDirection: 'column',
+                    gap: '16px',
+                    width: '100%',
+                    maxWidth: '400px',
                 }}
             >
-                <Button variant="outlined" onClick={() => navigate('/admin/restaurantes')}>Cancelar</Button>
-                <Button variant="contained" type="submit">Salvar</Button>
-            </div>
-        </form>
+                <TextField
+                    variant="standard"
+                    label="Nome do restaurante"
+                    fullWidth
+                    value={nomeRestaurante}
+                    onChange={(e) => setNomeRestaurante(e.target.value)}
+                    required
+                />
+
+                <div
+                    style={{
+                        display: 'flex',
+                        gap: '8px',
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    <Button variant="outlined" onClick={() => navigate('/admin/restaurantes')}>Cancelar</Button>
+                    <Button variant="contained" type="submit">Salvar</Button>
+                </div>
+            </Box >
+        </Box>
     );
 }
 
