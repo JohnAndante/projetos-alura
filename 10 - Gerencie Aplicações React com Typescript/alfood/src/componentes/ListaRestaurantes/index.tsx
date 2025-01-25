@@ -5,7 +5,7 @@ import IPaginacao from '../../interfaces/IPaginacao';
 import style from './ListaRestaurantes.module.scss';
 import Restaurante from './Restaurante';
 import IParametrosBusca from '../../interfaces/IParametrosBusca';
-import { Box, Button, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Box, Button, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { httpV1 } from '../../http';
 
 const ListaRestaurantes = () => {
@@ -49,9 +49,11 @@ const ListaRestaurantes = () => {
 
     return (
         <section className={style.ListaRestaurantes}>
-            <h1>Os restaurantes mais <em>bacanas</em>!</h1>
+            <Typography component="h1" variant="h4">
+                Os restaurantes mais <strong>bacanas</strong> {' '} !
+            </Typography>
 
-            <Box component="form" onSubmit={handleFiltro} style={{ display: 'flex', gap: '16px' }}>
+            <Box component="form" onSubmit={handleFiltro} style={{ display: 'flex', gap: '16px', marginTop: '16px' }}>
                 <TextField
                     label="Buscar"
                     name="busca"
