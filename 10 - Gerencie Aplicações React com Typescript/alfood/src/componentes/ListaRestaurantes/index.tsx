@@ -1,22 +1,21 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import IRestaurante from '../../interfaces/IRestaurante';
-import { IPaginacao } from '../../interfaces/IPaginacao';
+import IPaginacao from '../../interfaces/IPaginacao';
 import style from './ListaRestaurantes.module.scss';
 import Restaurante from './Restaurante';
+import IParametrosBusca from '../../interfaces/IParametrosBusca';
+import { Button, TextField } from '@mui/material';
 
 const ListaRestaurantes = () => {
 
     const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([])
     const [proximaPagina, setProximaPagina] = useState('')
     const [paginaAnterior, setPaginaAnterior] = useState('')
+    const [busca, setBusca] = useState('')
 
-    const [pratos, setPratos] = useState<IRestaurante[]>([]);
-    const baseUrlRestaurantes = 'http://localhost:8000/api/v1/restaurantes/';
-    const baseUrlPratos = 'http://localhost:8000/api/v1/pratos/';
-
-    const carregarDados = (url: string) => {
-        axios.get<IPaginacao<IRestaurante>>(url)
+    const fetchDados = (url: string, filtro: AxiosRequestConfig = {}) => {
+        axios.get<IPaginacao<IRestaurante>>(url, filtro)
             .then(resposta => {
                 setRestaurantes(resposta.data.results)
                 setProximaPagina(resposta.data.next)
@@ -27,36 +26,54 @@ const ListaRestaurantes = () => {
             })
     }
 
-    useEffect(() => {
-        carregarDados('http://localhost:8000/api/v1/restaurantes/')
-    }, [])
+    const handleFiltro = (e: React.ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
-    const verMais = async () => {
-        if (proximaPagina) {
-            const [promiseRestaurantes, promisePratos] = await Promise.all([
-                axios.get<IPaginacao<IRestaurante>>(proximaPagina),
-                axios.get<IPaginacao<IRestaurante>>(baseUrlPratos)
-            ]);
+        const filtro = {
+            params: {
+                search: busca,
+            } as IParametrosBusca,
+        };
 
-            const { data: { results: restaurantes } } = promiseRestaurantes;
-            const { data: { results: pratos } } = promisePratos;
-
-            setRestaurantes(prevState => [...prevState, ...restaurantes]);
-            setPratos(prevState => [...prevState, ...pratos]);
-            setProximaPagina(promiseRestaurantes.data.next);
+        if (busca) {
+            filtro.params.search = busca;
         }
-    }
+
+        fetchDados('http://localhost:8000/api/v1/restaurantes/', filtro);
+    };
+
+    useEffect(() => {
+        fetchDados('http://localhost:8000/api/v1/restaurantes/')
+    }, [])
 
     return (
         <section className={style.ListaRestaurantes}>
             <h1>Os restaurantes mais <em>bacanas</em>!</h1>
+
+            <form onSubmit={handleFiltro} style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+                <TextField label="Buscar" value={busca} onChange={(e) => setBusca(e.target.value)} />
+                <Button type="submit" variant="contained">Buscar</Button>
+            </form>
+
             {restaurantes?.map(item => <Restaurante restaurante={item} key={item.id} />)}
-            {<button onClick={() => carregarDados(paginaAnterior)} disabled={!paginaAnterior}>
-                Página Anterior
-            </button>}
-            {<button onClick={() => carregarDados(proximaPagina)} disabled={!proximaPagina}>
-                Próxima página
-            </button>}
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '16px' }}>
+                {<Button
+                    variant="contained"
+                    onClick={() => fetchDados(paginaAnterior)}
+                    disabled={!paginaAnterior}
+                >
+                    Página Anterior
+                </Button>}
+
+                {<Button
+                    variant="contained"
+                    onClick={() => fetchDados(proximaPagina)}
+                    disabled={!proximaPagina}
+                >
+                    Próxima página
+                </Button>}
+            </div>
         </section>
     )
 }
