@@ -31,6 +31,15 @@ const LayoutAdmin = () => {
                                     Restaurantes
                                 </Button>
                             </Link>
+                            <Link>
+                                <Button
+                                    sx={{ my: 2, color: 'white' }}
+                                    color="inherit"
+                                    onClick={() => navigate('/admin/pratos')}
+                                >
+                                    Pratos
+                                </Button>
+                            </Link>
                         </Box>
                     </Toolbar>
                 </Container>

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { httpV2 } from "../../http";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { httpV2 } from "../../../../http";
 
-import { AppBar, Box, Button, Container, Link, Paper, TextField, Toolbar, Typography } from "@mui/material";
-
-const FormRestaurante = () => {
+const FormularioRestaurantes = () => {
 
     const parametros = useParams<{ id: string }>();
     const navigate = useNavigate();
@@ -52,7 +51,6 @@ const FormRestaurante = () => {
 
     return (
         <>
-
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -100,4 +98,4 @@ const FormRestaurante = () => {
     );
 }
 
-export default FormRestaurante;
+export default FormularioRestaurantes;

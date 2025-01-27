@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { httpV2 } from "../../http";
-import IRestaurante from "../../interfaces/IRestaurante";
+import { httpV2 } from "../../../../http";
 
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import IRestaurante from "../../../../interfaces/IRestaurante";
 
-export default function AdminRestaurantes() {
+export default function ListagemRestaurantes() {
 
     const navigate = useNavigate();
     const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([]);
