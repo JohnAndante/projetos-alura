@@ -1,17 +1,13 @@
 import React from 'react';
 import { IEvento } from '../../interfaces/IEvento'
-import style from './Evento.module.scss';
+import useRemoverEvento from '../../state/hooks/useRemoverEvento';
+
 import EventoCheckbox from './EventoCheckbox';
-import { useSetRecoilState } from 'recoil';
-import { listaDeEventosState } from '../../state/atom';
+import style from './Evento.module.scss';
 
 const Evento: React.FC<{ evento: IEvento }> = ({ evento }) => {
 
-    const setListaDeEventos = useSetRecoilState<IEvento[]>(listaDeEventosState);
-
-    const excluirEvento = () => {
-        setListaDeEventos(eventos => eventos.filter(e => e.id !== evento.id));
-    }
+    const removerEvento = useRemoverEvento();
 
     const estilos = [
         style.Evento
@@ -35,7 +31,7 @@ const Evento: React.FC<{ evento: IEvento }> = ({ evento }) => {
                 </h3>
             </div>
 
-            <i className="far fa-times-circle fa-2x" onClick={excluirEvento}></i>
+            <i className="far fa-times-circle fa-2x" onClick={() => removerEvento(evento)}></i>
         </div>
     )
 }
