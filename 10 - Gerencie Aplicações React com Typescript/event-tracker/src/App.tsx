@@ -1,31 +1,11 @@
-import { useState } from 'react';
-import style from './App.module.scss';
+import { RecoilRoot } from 'recoil';
 import Card from './components/Card';
 import Formulario from './components/Formulario';
-import { IEvento } from './interfaces/IEvento';
 import Calendario from './components/Calendario';
 import ListaDeEventos from './components/ListaDeEventos';
-import { RecoilRoot } from 'recoil';
+import style from './App.module.scss';
 
 function App() {
-
-    const [filtro, setFiltro] = useState<Date | null>()
-
-    const adicionarEvento = (evento: IEvento) => {
-        evento.id = Math.round((new Date()).getTime() / 1000)
-        // eventos.push(evento)
-        // setEventos([...eventos])
-    }
-
-    const aplicarFiltro = (data: Date | null) => {
-        setFiltro(data)
-    }
-
-    // const filtrados = !filtro
-    //     ? eventos
-    //     : eventos.filter((evento) =>
-    //         filtro!.toISOString().slice(0, 10) === evento.inicio.toISOString().slice(0, 10)
-    //     );
 
     return (
         <RecoilRoot>
@@ -36,9 +16,7 @@ function App() {
                     </Card>
                     <hr />
                     <Card>
-                        <ListaDeEventos
-                            aoFiltroAplicado={aplicarFiltro}
-                        />
+                        <ListaDeEventos />
                     </Card>
                 </div>
                 <div className={style.Coluna}>
