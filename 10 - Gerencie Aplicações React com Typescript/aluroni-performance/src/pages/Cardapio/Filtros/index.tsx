@@ -16,6 +16,7 @@ function Filtros({ filtro, setFiltro }: Props) {
     if (filtro === opcao.id) return setFiltro(null);
     return setFiltro(opcao.id);
   }
+
   return (
     <div className={styles.filtros}>
       {filtros.map(opcao => (
