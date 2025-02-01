@@ -2,20 +2,6 @@
 
 exports[`Testes do componente PaginaBase A página deve ser renderizada corretamente 1`] = `
 <div>
-  <header
-    class="cabecalho"
-  >
-    <div
-      aria-label="Logo do Sorteador"
-      class="imagem-logo"
-      role="img"
-    />
-    <img
-      alt="Participante com um presente na mão"
-      class="participante"
-      src="/imagens/participante.png"
-    />
-  </header>
   <div
     class="card"
   >

@@ -1,4 +1,3 @@
-import Cabecalho from "../../componentes/Cabecalho";
 import Card from "../../componentes/Card";
 import Formulario from "../../componentes/Formulario/Formulario";
 import ListaParticipantes from "../../componentes/ListaParticipantes/ListaParticipantes";
@@ -8,7 +7,6 @@ const PaginaBase = () => {
 
     return (
         <>
-            <Cabecalho />
             <Card>
                 <section>
                     <h2>Vamos começar!</h2>

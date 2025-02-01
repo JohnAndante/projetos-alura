@@ -16,6 +16,10 @@ const Sorteio = () => {
 
         const amigoSecretoSorteado = resultado.get(participanteSelecionado);
         if (amigoSecretoSorteado) setAmigoSecreto(amigoSecretoSorteado);
+
+        setTimeout(() => {
+            setAmigoSecreto('');
+        }, 5000);
     };
 
     return (
@@ -31,6 +35,7 @@ const Sorteio = () => {
                         onChange={(evento) => setParticipanteSelecionado(evento.target.value)}
                         required
                     >
+                        <option value="">Selecione o seu nome</option>
                         {participantes.map((participante, index) => (
                             <option key={index} value={participante}>{participante}</option>
                         ))}

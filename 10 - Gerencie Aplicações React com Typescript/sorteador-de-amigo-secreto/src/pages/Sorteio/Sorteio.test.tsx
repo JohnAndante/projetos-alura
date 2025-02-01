@@ -49,7 +49,7 @@ describe('Teste do componente Sorteio', () => {
 
         const opcoes = screen.queryAllByRole('option');
 
-        expect(opcoes).toHaveLength(participantes.length);
+        expect(opcoes).toHaveLength(participantes.length + 1);
     })
 
     test('O amigo secreto é exibido quando solicitado', () => {

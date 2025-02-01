@@ -5,12 +5,14 @@ import { RecoilRoot } from 'recoil';
 import PaginaBase from './pages/PaginaBase/PaginaBase';
 import './index.css';
 import Sorteio from './pages/Sorteio/Sorteio';
+import Cabecalho from './componentes/Cabecalho';
 
 ReactDOM.render(
 
     <React.StrictMode>
         <BrowserRouter>
             <RecoilRoot>
+                <Cabecalho />
                 <Routes>
                     <Route path="/" element={<PaginaBase />} />
                     <Route path="/sorteio" element={<Sorteio />} />
