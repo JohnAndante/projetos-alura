@@ -1,8 +1,8 @@
 import React from 'react';
+import Router from './routes';
 import ReactDOM from 'react-dom';
 import 'normalize.css';
 import './index.css';
-import Router from './routes';
 
 ReactDOM.render(
   <React.StrictMode>

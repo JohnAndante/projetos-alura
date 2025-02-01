@@ -3,16 +3,20 @@ import styles from './Menu.module.scss';
 import { Link } from 'react-router-dom';
 
 export default function Menu() {
-  const rotas = [{
-    label: 'Início',
-    to: '/'
-  }, {
-    label: 'Cardápio',
-    to: '/cardapio'
-  }, {
-    label: 'Sobre',
-    to: '/sobre'
-  }];
+
+  const rotas = [
+    {
+      label: 'Início',
+      to: '/'
+    }, {
+      label: 'Cardápio',
+      to: '/cardapio'
+    }, {
+      label: 'Sobre',
+      to: '/sobre'
+    }
+  ];
+
   return (
     <nav className={styles.menu}>
       <Logo />
