@@ -9,6 +9,7 @@ interface Props {
 
 function Buscador({ busca, setBusca }: Props) {
   const elemento = useMemo(() => <CgSearch size={20} color="#4C4D5E" />, []);
+
   return (
     <div className={styles.buscador}>
       <input
