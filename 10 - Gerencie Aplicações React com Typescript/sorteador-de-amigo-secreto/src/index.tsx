@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import Cabecalho from './componentes/Cabecalho';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+import PaginaBase from './pages/PaginaBase/PaginaBase';
+import './index.css';
 
 ReactDOM.render(
 
     <React.StrictMode>
-        <Cabecalho />
-        <App />
+        <BrowserRouter>
+            <RecoilRoot>
+                <Routes>
+                    <Route path="/" element={<PaginaBase />} />
+                </Routes>
+            </RecoilRoot>
+        </BrowserRouter>
     </React.StrictMode>,
 
     document.getElementById('root')
