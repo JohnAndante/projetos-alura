@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useListaParticipantes } from "../../state/hooks/useListaParticipantes";
 import './styles.css';
+import { useSorteador } from "../../state/hooks/useSorteador";
 
 const Rodape = () => {
 
@@ -8,7 +9,10 @@ const Rodape = () => {
 
     const navigate = useNavigate();
 
+    const sortear = useSorteador();
+
     const iniciar = () => {
+        sortear();
         navigate('/sorteio');
     }
 

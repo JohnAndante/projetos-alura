@@ -19,29 +19,43 @@ exports[`Testes do componente PaginaBase A página deve ser renderizada corretam
   <div
     class="card"
   >
-    <form>
-      <div>
-        <input
-          placeholder="Insira os nomes dos participantes"
-          type="text"
-          value=""
-        />
+    <section>
+      <h2>
+        Vamos começar!
+      </h2>
+      <form>
+        <div
+          class="grupo-input-btn"
+        >
+          <input
+            placeholder="Insira os nomes dos participantes"
+            type="text"
+            value=""
+          />
+          <button
+            disabled=""
+          >
+            Adicionar
+          </button>
+        </div>
+        
+      </form>
+      <ul />
+      <footer
+        class="rodape-configuracoes"
+      >
         <button
+          class="botao"
           disabled=""
         >
-          Adicionar
+          Iniciar brincadeira
         </button>
-      </div>
-      
-    </form>
-    <ul />
+        <img
+          alt="Sacolas de compras"
+          src="/imagens/sacolas.png"
+        />
+      </footer>
+    </section>
   </div>
-  <footer>
-    <button
-      disabled=""
-    >
-      Iniciar brincadeira
-    </button>
-  </footer>
 </div>
 `;

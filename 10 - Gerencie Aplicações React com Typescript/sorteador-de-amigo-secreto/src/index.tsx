@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import PaginaBase from './pages/PaginaBase/PaginaBase';
 import './index.css';
+import Sorteio from './pages/Sorteio/Sorteio';
 
 ReactDOM.render(
 
@@ -12,6 +13,7 @@ ReactDOM.render(
             <RecoilRoot>
                 <Routes>
                     <Route path="/" element={<PaginaBase />} />
+                    <Route path="/sorteio" element={<Sorteio />} />
                 </Routes>
             </RecoilRoot>
         </BrowserRouter>
