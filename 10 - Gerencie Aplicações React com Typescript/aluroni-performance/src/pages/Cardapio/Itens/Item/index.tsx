@@ -1,8 +1,8 @@
-import styles from './Item.module.scss';
-import { Prato } from 'types/Prato';
-import TagsPrato from 'components/TagsPrato';
-import { useNavigate } from 'react-router-dom';
 import { memo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import TagsPrato from 'components/TagsPrato';
+import { Prato } from 'types/Prato';
+import styles from './Item.module.scss';
 
 function Item(props: Prato) {
   const { id, title, description, photo } = props;

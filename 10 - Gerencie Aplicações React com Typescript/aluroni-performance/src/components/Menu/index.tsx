@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 import styles from './Menu.module.scss';
-import { Link } from 'react-router-dom';
 
 export default function Menu() {
 

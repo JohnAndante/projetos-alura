@@ -1,9 +1,9 @@
 /* eslint-disable indent */
 import { useState, useEffect } from 'react';
+import { Cardapio } from 'types/Prato';
 import cardapio from 'data/cardapio.json';
 import Item from './Item';
 import styles from './Itens.module.scss';
-import { Cardapio } from 'types/Prato';
 
 interface Props {
   busca: string,

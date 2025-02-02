@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from 'react';
-import styles from './Buscador.module.scss';
 import { CgSearch } from 'react-icons/cg';
+import styles from './Buscador.module.scss';
 
 interface Props {
   busca: string;
