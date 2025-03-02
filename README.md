@@ -38,12 +38,30 @@ Trilhas de estudo oferecidas e organizadas pela própria instituição de ensino
 ### ✅ [<strong>05 - Desenvolvimento de Jogos com Unity</strong>](https://cursos.alura.com.br/formacao-react-javascript)
 
 ➡️ <strong>Iniciado em 09 de Agosto de 2023 </strong><br>
-⌛ <strong>Em Andamento </strong><br>
+⏸️ Pausado
 
-### ✅ [<strong>06 - Explore o Framework Angular</strong>](https://cursos.alura.com.br/formacao-angular-14)
+### ⛔ ~~[<strong>06 - Explore o Framework Angular</strong>](https://cursos.alura.com.br/formacao-angular-14)~~
 
 ➡️ <strong>Iniciado em 21 de Março de 2024 </strong><br>
-⌛ <strong>Em Andamento </strong><br>
+❌ <strong>Cancelado</strong><br>
+
+### ⛔ ~~[<strong>07 - Certificação Java</strong>](https://cursos.alura.com.br/formacao-certificacao-java)~~
+
+➡️ <strong>Iniciado em 27 de Março de 2024 </strong><br>
+❌ <strong>Cancelado</strong><br>
+
+### ⌛ [<strong>08 - Dart - A partir do zero</strong>](https://cursos.alura.com.br/formacao-dart)
+➡️ <strong>Iniciado em 27 de Março de 2024 </strong><br>
+⏸️ Pausado
+
+### ⌛ [<strong>09 - Gerencie estados com React Redux</strong>](https://cursos.alura.com.br/formacao-react-gestao-estados)
+➡️ <strong>Iniciado em 6 de Agosto de 2024 </strong><br>
+⏸️ Pausado
+
+### ✅ [<strong>10 - Gerencie aplicações React com Typescript</strong>](https://cursos.alura.com.br/formacao-react-ts)
+➡️ <strong>Iniciado em 19 de Janeiro de 2025 </strong><br>
+✅ <strong>Concluído em 01 de Fevereiro de 2025 </strong><br>
+📜 <strong>Link para o certificado [aqui </strong>](https://cursos.alura.com.br/degree/certificate/9a688012-5856-4dde-b8c5-4fe752fda940?lang=pt_BR)
 
 ---
 
@@ -124,90 +142,6 @@ Trilhas de estudo organizadas pelos próprios estudantes
       <a href='https://cursos.alura.com.br/certificate/a67c1010-c278-47c2-9c03-991d6ecde205'>
         📜 Link
       </a>
-    </td>
-  </tr>
-  <tr>
-    <td>⏳</td>
-    <td>
-      <a href='https://cursos.alura.com.br/course/ruby-on-rails'>
-        Ruby on Rails 3 parte I
-      </a>
-    </td>
-    <td>
-      <pre>📂 02 - Estudos - Ruby on Rails<br/> 📂 03 - Ruby on Rails 3</pre>
-    </td>
-    <td>
-      Em andamento
-    </td>
-  </tr>
-  <tr>
-    <td>❌</td>
-    <td>
-      <a href='https://cursos.alura.com.br/course/ruby-on-rails2'>
-        Ruby on Rails 3 parte II
-      </a>
-    </td>
-    <td>
-      -
-    </td>
-    <td>
-      -
-    </td>
-  </tr>
-  <tr>
-    <td>❌</td>
-    <td>
-      <a href='https://cursos.alura.com.br/course/ruby-on-rails3'>
-        Ruby on Rails 3 parte III
-      </a>
-    </td>
-    <td>
-      -
-    </td>
-    <td>
-      -
-    </td>
-  </tr>
-  <tr>
-    <td>❌</td>
-    <td>
-      <a href='https://cursos.alura.com.br/course/ruby-on-rails-4-do-zero'>
-        Ruby on Rails 4: do zero à web
-      </a>
-    </td>
-    <td>
-      -
-    </td>
-    <td>
-      -
-    </td>
-  </tr>
-  <tr>
-    <td>❌</td>
-    <td>
-      <a href='https://cursos.alura.com.br/course/ruby-on-rails-5'>
-        Ruby on Rails 5 parte 1: Fundamentos
-      </a>
-    </td>
-    <td>
-      -
-    </td>
-    <td>
-      -
-    </td>
-  </tr>
-  <tr>
-    <td>❌</td>
-    <td>
-      <a href='https://cursos.alura.com.br/course/ruby-on-rails-5-validacao-atualizacao-partials-deploy'>
-        Ruby on Rails 5 parte 2: Validação, atualização, partials e deploy
-      </a>
-    </td>
-    <td>
-      -
-    </td>
-    <td>
-      -
     </td>
   </tr>
 </table>

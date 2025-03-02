@@ -1,0 +1,6 @@
+{
+    "scss.lint.unknownAtRules": "ignore",
+    "scss.validate": true,
+    "scss.completion.triggerPropertyValueCompletion": true,
+    "typescript.tsdk": "node_modules\\typescript\\lib"
+}
