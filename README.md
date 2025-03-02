@@ -66,7 +66,7 @@ Trilhas de estudo oferecidas e organizadas pela própria instituição de ensino
 - ✅ Concluído em 01 de Fevereiro de 2025
 - 📜 Link para o certificado [aqui ](https://cursos.alura.com.br/degree/certificate/9a688012-5856-4dde-b8c5-4fe752fda940?lang=pt_BR)
 
-### ⏳ [11 - Design Thinking](https://cursos.alura.com.br/formacao-design-thinking)
+### ✅ [11 - Design Thinking](https://cursos.alura.com.br/formacao-design-thinking)
 
 - ➡️ Iniciado em 24 de Fevereiro de 2025
 - ✅ Concluído em 25 de Fevereiro de 2025
