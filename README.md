@@ -6,62 +6,71 @@ A estrutura está distribuída da seguinte forma:
 
 'Pasta Principal' / 'Formação' / 'Cursos incluídos na formação', por exemplo:
 
-```
+```pre
 📂 01 - A partir do zero
   📂 01 - Lógica de Programação
     📂 01 - Scratch
       📜 Pong - Alura#01.sb3
 ```
 
-## Formações
+## Formações e Cursos
 
-Trilhas de estudo oferecidas e organizadas pela própria instituição de ensino
+Trilhas de estudo oferecidas e organizadas pela própria instituição de ensino, além de cursos avulsos.
 
-### ✅ [<strong>01 - A Partir do Zero: Iniciante em Programação </strong>](https://cursos.alura.com.br/formacao-programacao) ###
+### ✅ [01 - A Partir do Zero: Iniciante em Programação](https://cursos.alura.com.br/formacao-programacao)
 
-➡️ <strong>Iniciado em 18 de Março de 2023 </strong><br>
-✅ <strong>Concluído em 21 de Abril de 2023 </strong><br>
-📜 <strong>Link para o certificado [aqui </strong>](https://cursos.alura.com.br/degree/certificate/8b3d7b26-719e-4f0b-884d-3e5efbd03a06)
+- ➡️ Iniciado em 18 de Março de 2023
+- ✅ Concluído em 21 de Abril de 2023
+- 📜 Link para o certificado [aqui](https://cursos.alura.com.br/degree/certificate/8b3d7b26-719e-4f0b-884d-3e5efbd03a06)
 
-### ✅ [<strong>03 - Fullstack JavaScript: Crie um Projeto com React e Node.js</strong>](https://cursos.alura.com.br/formacao-full-stack-react-node-js)
+### ✅ [03 - Fullstack JavaScript: Crie um Projeto com React e Node.js](https://cursos.alura.com.br/formacao-full-stack-react-node-js)
 
-➡️ <strong>Iniciado em 27 de Junho de 2023 </strong><br>
-✅ <strong>Concluído em 18 de Julho de 2023 </strong><br>
-📜 <strong>Link para o certificado [aqui </strong>](https://cursos.alura.com.br/degree/certificate/b32ca9b7-f6a7-4a6a-89b7-5272513b5e07?lang=pt_BR)
+- ➡️ Iniciado em 27 de Junho de 2023
+- ✅ Concluído em 18 de Julho de 2023
+- 📜 Link para o certificado [aqui](https://cursos.alura.com.br/degree/certificate/b32ca9b7-f6a7-4a6a-89b7-5272513b5e07?lang=pt_BR)
 
-### ✅ [<strong>04 - Explore React com JavaScript</strong>](https://cursos.alura.com.br/formacao-react-javascript)
+### ✅ [04 - Explore React com JavaScript](https://cursos.alura.com.br/formacao-react-javascript)
 
-➡️ <strong>Iniciado em 09 de Agosto de 2023 </strong><br>
-✅ <strong>Concluído em 21 de Fevereiro de 2024 </strong><br>
-📜 <strong>Link para o certificado [aqui </strong>](https://cursos.alura.com.br/degree/certificate/6012f31f-43b5-446e-9406-9230d35d104d?lang=pt_BR)
+- ➡️ Iniciado em 09 de Agosto de 2023
+- ✅ Concluído em 21 de Fevereiro de 2024
+- 📜 Link para o certificado [aqui](https://cursos.alura.com.br/degree/certificate/6012f31f-43b5-446e-9406-9230d35d104d?lang=pt_BR)
 
-### ✅ [<strong>05 - Desenvolvimento de Jogos com Unity</strong>](https://cursos.alura.com.br/formacao-react-javascript)
+### ✅ [05 - Desenvolvimento de Jogos com Unity](https://cursos.alura.com.br/formacao-react-javascript)
 
-➡️ <strong>Iniciado em 09 de Agosto de 2023 </strong><br>
-⏸️ Pausado
+- ➡️ Iniciado em 09 de Agosto de 2023
+- ⏸️ Pausado
 
-### ⛔ ~~[<strong>06 - Explore o Framework Angular</strong>](https://cursos.alura.com.br/formacao-angular-14)~~
+### ⛔ ~~[06 - Explore o Framework Angular](https://cursos.alura.com.br/formacao-angular-14)~~
 
-➡️ <strong>Iniciado em 21 de Março de 2024 </strong><br>
-❌ <strong>Cancelado</strong><br>
+- ➡️ Iniciado em 21 de Março de 2024
+- ❌ Cancelado
 
-### ⛔ ~~[<strong>07 - Certificação Java</strong>](https://cursos.alura.com.br/formacao-certificacao-java)~~
+### ⛔ ~~[07 - Certificação Java](https://cursos.alura.com.br/formacao-certificacao-java)~~
 
-➡️ <strong>Iniciado em 27 de Março de 2024 </strong><br>
-❌ <strong>Cancelado</strong><br>
+- ➡️ Iniciado em 27 de Março de 2024
+- ❌ Cancelado
 
-### ⌛ [<strong>08 - Dart - A partir do zero</strong>](https://cursos.alura.com.br/formacao-dart)
-➡️ <strong>Iniciado em 27 de Março de 2024 </strong><br>
-⏸️ Pausado
+### ⌛ [08 - Dart - A partir do zero](https://cursos.alura.com.br/formacao-dart)
 
-### ⌛ [<strong>09 - Gerencie estados com React Redux</strong>](https://cursos.alura.com.br/formacao-react-gestao-estados)
-➡️ <strong>Iniciado em 6 de Agosto de 2024 </strong><br>
-⏸️ Pausado
+- ➡️ Iniciado em 27 de Março de 2024
+- ⏸️ Pausado
 
-### ✅ [<strong>10 - Gerencie aplicações React com Typescript</strong>](https://cursos.alura.com.br/formacao-react-ts)
-➡️ <strong>Iniciado em 19 de Janeiro de 2025 </strong><br>
-✅ <strong>Concluído em 01 de Fevereiro de 2025 </strong><br>
-📜 <strong>Link para o certificado [aqui </strong>](https://cursos.alura.com.br/degree/certificate/9a688012-5856-4dde-b8c5-4fe752fda940?lang=pt_BR)
+### ⌛ [09 - Gerencie estados com React Redux](https://cursos.alura.com.br/formacao-react-gestao-estados)
+
+- ➡️ Iniciado em 6 de Agosto de 2024
+- ⏸️ Pausado
+
+### ✅ [10 - Gerencie aplicações React com Typescript](https://cursos.alura.com.br/formacao-react-ts)
+
+- ➡️ Iniciado em 19 de Janeiro de 2025
+- ✅ Concluído em 01 de Fevereiro de 2025
+- 📜 Link para o certificado [aqui ](https://cursos.alura.com.br/degree/certificate/9a688012-5856-4dde-b8c5-4fe752fda940?lang=pt_BR)
+
+### ⏳ [11 - Design Thinking](https://cursos.alura.com.br/formacao-design-thinking)
+
+- ➡️ Iniciado em 24 de Fevereiro de 2025
+- ✅ Concluído em 25 de Fevereiro de 2025
+- 📜 Link para o certificado [aqui](https://cursos.alura.com.br/certificate/30e7a22a-856b-443f-a91b-f02e6fe46077?lang=pt_BR)
 
 ---
 
@@ -69,10 +78,10 @@ Trilhas de estudo oferecidas e organizadas pela própria instituição de ensino
 
 Trilhas de estudo organizadas pelos próprios estudantes
 
-### ⏹ [<strong>Ruby on Rails</strong>](https://cursos.alura.com.br/meu-plano-de-estudos-lucas-deoliveira-1596648548138-p60309)
+### ⏹ [Ruby on Rails](https://cursos.alura.com.br/meu-plano-de-estudos-lucas-deoliveira-1596648548138-p60309)
 
-➡️ <strong>Iniciado em 21 de Abril de 2023</strong><br>
-⏳ <strong>Em Andamento</strong><br>
+- ➡️ Iniciado em 21 de Abril de 2023
+- ⏳ Pausado
 
 <table>
   <th>
@@ -88,7 +97,10 @@ Trilhas de estudo organizadas pelos próprios estudantes
       </a>
     </td>
     <td>
-      <pre>📂 02 - Estudos - Ruby on Rails<br/> 📂 01 - Ruby<br/>   📜 maior_ou_menor.rb</pre>
+      <pre>
+📂 02 - Estudos - Ruby on Rails
+  📂 01 - Ruby
+    📜 maior_ou_menor.rb</pre>
     </td>
     <td>
       <a href='https://cursos.alura.com.br/certificate/1ddedcc7-dc83-4d6c-98c0-95772c5b2423'>
@@ -104,7 +116,11 @@ Trilhas de estudo organizadas pelos próprios estudantes
       </a>
     </td>
     <td>
-      <pre>📂 02 - Estudos - Ruby on Rails<br/> 📂 01 - Ruby<br/>   📜 forca</pre>
+      <pre>
+📂 02 - Estudos - Ruby on Rails
+  📂 01 - Ruby
+    📜 forca
+      </pre>
     </td>
     <td>
       <a href='https://cursos.alura.com.br/certificate/d713c5c9-3fae-49f1-916e-6a888a4c341f'>
@@ -120,7 +136,11 @@ Trilhas de estudo organizadas pelos próprios estudantes
       </a>
     </td>
     <td>
-      <pre>📂 02 - Estudos - Ruby on Rails<br/> 📂 01 - Ruby<br/>   📜 fogefoge</pre>
+      <pre>
+📂 02 - Estudos - Ruby on Rails
+  📂 01 - Ruby
+    📜 fogefoge
+      </pre>
     </td>
     <td>
       <a href='https://cursos.alura.com.br/certificate/63ffc3f6-b94f-4dfc-971e-be2aaf99a684'>
@@ -136,7 +156,10 @@ Trilhas de estudo organizadas pelos próprios estudantes
       </a>
     </td>
     <td>
-      <pre>📂 02 - Estudos - Ruby on Rails<br/> 📂 02 - Orientação a Objetos - Ruby</pre>
+      <pre>
+📂 02 - Estudos - Ruby on Rails
+  📂 02 - Orientação a Objetos - Ruby
+    </pre>
     </td>
     <td>
       <a href='https://cursos.alura.com.br/certificate/a67c1010-c278-47c2-9c03-991d6ecde205'>
