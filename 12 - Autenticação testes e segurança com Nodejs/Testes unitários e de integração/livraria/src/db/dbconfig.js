@@ -6,11 +6,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const db = knex({
-  client: 'sqlite3',
-  connection: {
-    filename: path.join(__dirname, './livraria.sqlite'),
-  },
-  useNullAsDefault: true,
+    client: 'sqlite3',
+    connection: {
+        filename: path.join(__dirname, './livraria.sqlite'),
+    },
+    useNullAsDefault: true,
 });
 
 export default db;
