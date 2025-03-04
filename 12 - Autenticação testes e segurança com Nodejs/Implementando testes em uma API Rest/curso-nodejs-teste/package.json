@@ -4,13 +4,10 @@
   "description": "Api de livraria com nodejs",
   "author": "Raphael Lucas Girao de Lima",
   "main": "index.js",
-  "engines": {
-    "node": "16.14.2"
-  },
   "scripts": {
     "dev": "nodemon server.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll --verbose",
     "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll --coverage"
   },
   "keywords": [],
@@ -33,7 +30,15 @@
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.26.0",
     "jest": "28.1.2",
+    "jest-worker": "^29.7.0",
     "nodemon": "2.0.16",
     "supertest": "6.2.4"
+  },
+  "jest": {
+    "transform": {},
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    }
   }
 }
