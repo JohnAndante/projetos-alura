@@ -7,23 +7,23 @@ class AuthService {
     static async login(data) {
         try {
             if (!data.email) {
-                throw new Error('O email do usuario é obrigatório.');
+                throw new Error('O campo email do usuário é obrigatório.');
             }
 
             if (!data.senha) {
-                throw new Error('A senha de usuario é obrigatório.');
+                throw new Error('O campo senha do usuário é obrigatório.');
             }
 
             const usuario = await Usuario.pegarPeloEmail(data.email);
 
             if (!usuario) {
-                throw new Error('Usuario não cadastrado.');
+                throw new Error('Usuário não cadastrado.');
             }
 
             const senhaIguais = await bcryptjs.compare(data.senha, usuario.senha);
 
             if (!senhaIguais) {
-                throw new Error('Usuario ou senha invalido.');
+                throw new Error('Usuário ou senha invalido.');
             }
 
             const accessToken = jsonwebtoken.sign({
@@ -33,7 +33,7 @@ class AuthService {
                 expiresIn: 86400,
             });
 
-            return { message: 'Usuario conectado', accessToken };
+            return { message: 'Usuário conectado', accessToken };
         } catch (err) {
             throw new Error(err.message);
         }
