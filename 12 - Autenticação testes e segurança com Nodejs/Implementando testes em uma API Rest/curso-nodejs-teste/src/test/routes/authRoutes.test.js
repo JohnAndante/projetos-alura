@@ -1,9 +1,3 @@
-/**
- * - O login deve possuir um email e senha para se autenticar
- * - O login deve validar se o usuario está cadastrado
- * - O login deve validar se o email e a senha estão corretos
- * - O login deve validar se está sendo retornado um accessToken
- */
 import request from 'supertest';
 import {
     afterEach, beforeEach, describe, it,
