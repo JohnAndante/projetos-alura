@@ -1,5 +1,6 @@
 import { describe, it } from '@jest/globals';
 import AuthService from '../../services/authService';
+import dbConfig from '../../db/dbconfig';
 
 describe('Testando a authService.cadastrarUsuario', () => {
     it.each([
@@ -22,6 +23,8 @@ describe('Testando a authService.cadastrarUsuario', () => {
         const usuario = await AuthService.cadastrarUsuario(dadosUsuario);
 
         expect(usuario.senha).not.toEqual(dadosUsuario.senha);
+
+        dbConfig('usuarios').where('id', usuario.id).del();
     });
 
     it('Deve impedir o cadastro de um usuário com email duplicado', async () => {
@@ -48,6 +51,8 @@ describe('Testando a authService.cadastrarUsuario', () => {
         const resposta = await AuthService.cadastrarUsuario(dadosUsuario);
 
         expect(resposta).toHaveProperty('message', 'usuario criado');
+
+        dbConfig('usuarios').where('id', resposta.content.id).del();
     });
 
     it('Deve retornar as informações corretamente ao cadastrar um usuário', async () => {
@@ -62,5 +67,7 @@ describe('Testando a authService.cadastrarUsuario', () => {
         expect(resposta).toHaveProperty('content');
         expect(resposta.content).toHaveProperty('nome', dadosUsuario.nome);
         expect(resposta.content).toHaveProperty('email', dadosUsuario.email);
+
+        dbConfig('usuarios').where('id', resposta.content.id).del();
     });
 });
