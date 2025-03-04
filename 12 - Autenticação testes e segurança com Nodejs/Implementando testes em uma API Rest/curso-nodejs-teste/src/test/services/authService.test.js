@@ -15,7 +15,6 @@ describe('Testando a authService.cadastrarUsuario', () => {
     it('Deve criptografar a senha do usuário', async () => {
         const dadosUsuario = {
             nome: 'Test User',
-            // Generate a random email to avoid conflicts
             email: `test${Math.random()}@email.com`,
             senha: '123456',
         };

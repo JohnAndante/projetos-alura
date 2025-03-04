@@ -1,12 +1,11 @@
 import AuthService from '../services/authService.js';
 
-const authService = new AuthService();
 class AuthController {
     static login = async (req, res) => {
         const { body } = req;
 
         try {
-            const login = await authService.login(body);
+            const login = await AuthService.login(body);
 
             return res.status(201).json(login);
         } catch (err) {
@@ -18,7 +17,7 @@ class AuthController {
         const { body } = req;
 
         try {
-            const usuario = await authService.cadastrarUsuario(body);
+            const usuario = await AuthService.cadastrarUsuario(body);
 
             return res.status(201).json(usuario);
         } catch (err) {
