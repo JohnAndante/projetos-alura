@@ -102,13 +102,16 @@ npx prettier --write .
 | --- | --- |
 | `describe` | Agrupa testes |
 | `it` | Testa uma funcionalidade |
+| `it.skip` | Pula um teste |
+| `it.only` | Executa apenas um teste |
+| `it.each` | Testa um conjunto de dados |
 | `expect` | Verifica se o teste passou |
 | `beforeEach` | Executa uma função antes de cada teste |
 | `afterEach` | Executa uma função após cada teste |
 | `beforeAll` | Executa uma função antes de todos os testes |
 | `afterAll` | Executa uma função após todos os testes |
 
-## Matchers
+### Matchers
 
 | Matcher | Funcionalidade |
 | --- | --- |
@@ -129,7 +132,7 @@ npx prettier --write .
 | `toHaveLength` | Verifica se o valor tem um tamanho específico |
 | `toThrow` | Verifica se a função lança uma exceção |
 
-## Diversos
+### Diversos
 
 | Método | Funcionalidade |
 | --- | --- |
@@ -151,3 +154,33 @@ npx prettier --write .
 | `.not` | Se você sabe como testar algo, .not permite que você teste seu oposto |
 | `.resolves` | Decodifica o valor de uma promessa cumprida, para que qualquer outro matcher possa então ser encadeado |
 | `.rejects` | Decodifica o motivo de uma promessa rejeitada, para que qualquer outro matcher possa ser encadeado |
+
+### Funções internas de teste
+
+| Função | Funcionalidade |
+| --- | --- |
+| `jest.fn` | Cria uma função simulada |
+| `jest.mock` | Substitui um módulo por um mock |
+| `jest.spyOn` | Espiona chamadas de função |
+| `jest.clearAllMocks` | Limpa todos os mocks |
+| `jest.resetAllMocks` | Restaura todas as funções simuladas |
+| `jest.restoreAllMocks` | Restaura todas as funções simuladas |
+| `jest.isolateModules` | Isola um módulo para que ele possa ser testado independentemente |
+| `jest.advanceTimersByTime` | Avança o temporizador para um número específico de milissegundos |
+| `jest.runAllTimers` | Executa todos os temporizadores |
+| `jest.runOnlyPendingTimers` | Executa apenas os temporizadores pendentes |
+| `jest.useFakeTimers` | Controla o temporizador |
+
+## Execução de testes
+
+- No `package.json`, adicione o script:
+
+```json
+"scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --coverage"
+  },
+```
+
+> Para acompanhar a execução de uma forma mais detalhada, adicionar a flag `--verbose` no script
