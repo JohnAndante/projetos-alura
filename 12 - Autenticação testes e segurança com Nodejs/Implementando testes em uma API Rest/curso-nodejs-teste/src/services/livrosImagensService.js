@@ -26,6 +26,12 @@ class LivrosImagensService {
             const buffer = req.file.buffer;
             const base64Image = buffer.toString('base64');
 
+            const { body } = req;
+
+            if (!body.livroId) {
+                throw new Error('O id do livro é obrigatório.');
+            }
+
             const data = {
                 livro_id: req.body.livroId,
                 filename: req.file.originalname,
@@ -33,6 +39,17 @@ class LivrosImagensService {
                 size: req.file.size,
                 base64: base64Image,
             };
+
+            const extensao = data.filename.split('.').pop();
+
+            if (extensao !== 'jpg' && extensao !== 'png') {
+                throw new Error('Formato de imagem inválido. Somente JPG ou PNG são permitidos.');
+            }
+
+            // Validar se o tamanho do arquivo é igual ou menor a 5000
+            if (data.size > 5000) {
+                throw new Error('Tamanho da imagem inválido. Máximo de 5000 bytes.');
+            }
 
             const imagem = new LivroImagem(data);
             const resposta = await imagem.salvar(imagem);

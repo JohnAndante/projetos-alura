@@ -1,11 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 import dbConfig from '../../db/dbconfig';
 
-/**
- * - Teste de conexão com o banco de dados
- * - Deve retornar o autor registrado na tabela autores
- */
-
 describe('Teste de conexão com o banco de dados', () => {
     it('Deve se conectar com o banco de dados', async () => {
         const autorMock = {
