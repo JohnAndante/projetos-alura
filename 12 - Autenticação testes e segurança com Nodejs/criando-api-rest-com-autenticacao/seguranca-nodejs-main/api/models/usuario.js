@@ -5,7 +5,19 @@ module.exports = (sequelize, DataTypes) => {
 
     class usuario extends Model {
         // eslint-disable-next-line no-unused-vars
-        static associate(models) { }
+        static associate(models) {
+            usuario.belongsToMany(models.roles, {
+                through: models.usuarios_roles,
+                as: 'usuarios_roles',
+                foreignKey: 'usuario_id'
+            });
+
+            usuario.belongsToMany(models.permissoes, {
+                through: models.usuarios_permissoes,
+                as: 'usuarios_permissoes',
+                foreignKey: 'usuario_id',
+            });
+        }
     }
 
     usuario.init({
