@@ -1,4 +1,4 @@
-const database = require('../database');
+const database = require('../models');
 const { compare } = require('bcrypt');
 const { sign } = require('jsonwebtoken');
 const { secret } = require('../config/jsonSecret');

@@ -1,6 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
-
-const database = require('../database');
+const database = require('../models');
 
 class RoleService {
     async cadastrarRole(dto) {

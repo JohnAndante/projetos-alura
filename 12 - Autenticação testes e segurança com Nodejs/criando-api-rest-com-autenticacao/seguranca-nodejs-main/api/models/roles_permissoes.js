@@ -1,24 +1,19 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-  class roles_permissoes extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+    class roles_permissoes extends Model {
+        // eslint-disable-next-line no-unused-vars
+        static associate(models) { }
     }
-  }
-  roles_permissoes.init({
-    role_id: DataTypes.UUID,
-    permissao_id: DataTypes.UUID
-  }, {
-    sequelize,
-    modelName: 'roles_permissoes',
-  });
-  return roles_permissoes;
+
+    roles_permissoes.init({
+        role_id: DataTypes.UUID,
+        permissao_id: DataTypes.UUID
+    }, {
+        sequelize,
+        modelName: 'roles_permissoes',
+    });
+
+    return roles_permissoes;
 };
