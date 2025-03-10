@@ -1,6 +1,5 @@
-const { compare } = require("bcrypt");
+const { compare, hash } = require("bcrypt");
 const User = require("../models/user");
-const { hash } = require('bcryptjs');
 
 exports.showIndex = (req, res) => {
     res.render('index');
@@ -18,19 +17,31 @@ exports.get404Page = (req, res) => {
     res.status(404).render('404');
 }
 
+const validateUserCredentials = (credentials = {}, user = null) => {
+    try {
+        const { password } = credentials;
+
+        const isMatch = compare(password, user.password);
+
+        if (isMatch) return true;
+
+        return false;
+    } catch (err) {
+        return false
+    }
+}
+
 exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
         const user = await User.findOne({ email });
 
-        if (user) {
-            const isMatch = await compare(password, user.password);
+        const valid = validateUserCredentials({ email, password }, user);
 
-            if (isMatch) res.redirect('/members');
-        }
+        if (!valid) return res.redirect('/');
 
-        res.redirect('/');
+        req.session.user = user;
     } catch (err) {
         console.log(err)
         res.redirect('/');
@@ -52,11 +63,20 @@ exports.signUp = async (req, res) => {
 }
 
 exports.checkAuth = (req, res, next) => {
-    const auth = true;
+    const { session } = req;
 
-    if (!auth) {
-        res.redirect('/');
+    if (session && session.user) {
+        next();
     }
 
-    next();
+    res.redirect('/');
 }
+
+exports.logout = (req, res) => {
+    req.session.destroy(err => {
+        if (err) console.log(err);
+        res.redirect('/');
+    });
+}
+
+
