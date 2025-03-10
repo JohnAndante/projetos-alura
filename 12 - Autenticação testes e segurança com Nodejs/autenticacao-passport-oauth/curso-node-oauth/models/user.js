@@ -15,6 +15,9 @@ class User {
     static async findOne(credentials) {
         const db = getDb();
         const user = await db.collection('users').findOne(credentials);
+
+        if (!user) return null;
+
         return user;
     }
 }
