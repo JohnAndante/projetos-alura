@@ -65,7 +65,7 @@ exports.signUp = async (req, res) => {
 exports.checkAuth = (req, res, next) => {
     const { session } = req;
 
-    if (session && session.user) {
+    if (session && session.user || req.isAuthenticated()) {
         next();
     }
 
