@@ -3,7 +3,7 @@ exports.showIndex = (req, res, next) => {
 }
 
 exports.showPageSignUp = (req, res, next) => {
-    res.render('signUp')
+    res.render('signup')
 }
 
 exports.showMembersPage = (req, res) => {
