@@ -11,6 +11,12 @@ class User {
         const db = getDb();
         return db.collection('users').insertOne(this);
     }
+
+    static async findOne(credentials) {
+        const db = getDb();
+        const user = await db.collection('users').findOne(credentials);
+        return user;
+    }
 }
 
 module.exports = User;
