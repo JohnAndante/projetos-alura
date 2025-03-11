@@ -5,9 +5,9 @@ import config from './knexfile.js';
 let db = null;
 
 if (process.env.NODE_ENV === 'test') {
-  db = knex(config.test);
+    db = knex(config.test);
 } else {
-  db = knex(config.development);
+    db = knex(config.development);
 }
 
 export default db;
