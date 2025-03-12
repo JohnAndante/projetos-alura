@@ -1,12 +1,17 @@
 import Evento from '../models/evento';
+import unleash from '../services/unleash';
 
 class EventosController {
     static listarEventos = async (_, res) => {
-        try {
-            const resultado = await Evento.pegarEventos();
-            return res.status(200).json(resultado);
-        } catch (err) {
-            return res.status(500).json(err.message);
+        if (this.liberaAcessoEventos()) {
+            try {
+                const resultado = await Evento.pegarEventos();
+                return res.status(200).json(resultado);
+            } catch (err) {
+                return res.status(500).json(err.message);
+            }
+        } else {
+            return res.status(403).json({ message: 'acesso negado' });
         }
     };
 
@@ -69,6 +74,8 @@ class EventosController {
             return res.status(500).json(err.message);
         }
     };
+
+    static liberaAcessoEventos = () => unleash.isEnabled('eventos');
 }
 
 export default EventosController;
