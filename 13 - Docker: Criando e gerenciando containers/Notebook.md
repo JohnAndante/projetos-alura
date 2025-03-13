@@ -51,6 +51,8 @@ sudo pacman -S docker-compose
 - `docker logs <container>`: Mostra os logs de um container.
 - `docker pull <imagem>`: Baixa uma imagem.
 - `docker build -t <nome> .`: Cria uma imagem a partir de um Dockerfile.
+- `docker history <imagem>`: Mostra o histórico de uma imagem.
+- `docker images`: Lista imagens.
 
 ### Anatomia do `docker run`
 
@@ -145,4 +147,93 @@ Executa um comando em um container. Útil para entrar no shell do container, exe
 - `docker exec -it <container> mysql -u root -p`: Entra no MySQL do container.
 - `docker exec -it <container> psql -U postgres`: Entra no PostgreSQL do container.
 
-### Anatomia do
+## Imagem
+
+- Composta por camadas
+- Possível "visualizar" as camadas com `docker history <imagem>`
+- Cada camada é uma diferença da camada anterior
+- Cada camada é somente leitura
+
+### Criando uma imagem - Dockerfile
+
+- `FROM <imagem>`
+  - Imagem base
+  - Deve ser a primeira instrução do Dockerfile
+  - `FROM node:14`
+
+- `RUN <comando>`
+  - Comando a ser executado na criação da imagem
+  - `RUN apt-get update`
+
+- `COPY <origem> <destino>`
+  - Copia arquivos para o container (base do projeto para dentro do container)
+  - `COPY . .`
+  - `COPY package.json .`
+
+- `WORKDIR <diretório>`
+  - Diretório de trabalho, onde os comandos serão executados por padrão
+  - `WORKDIR /app`
+
+- `CMD ["comando", "argumento"]`
+  - Comando de entrada
+  - `CMD ["node", "index.js"]`
+
+- `EXPOSE <porta>`
+  - Expõe uma porta
+  - `EXPOSE 3000`
+
+- `ARG <variável>`
+  - Define uma variável de ambiente - vai ser passada na hora de construir a imagem, não na execução
+  - `ARG PORT=3000`
+
+- `ENV <variável>=<valor>`
+  - Define uma variável de ambiente - vai ser passada na execução, poderá ser sobrescrita e utilizada internamente
+  - `ENV PORT=3000`
+  - `ENV PORT=$PORT`
+  - `ENV NODE_ENV=production`
+
+- `ENTRYPOINT ["comando", "argumento"]`
+  - Comando de entrada (não é sobrescrito)
+  - `ENTRYPOINT ["node", "index.js"]`
+
+- `VOLUME <diretório>`
+  - Cria um volume para persistência de dados
+  - `VOLUME /app`
+
+- `USER <usuario>`
+  - Define um usuário, útil para segurança e permissões
+  - `USER node`
+
+#### Exemplo
+
+Uma imagem simples com Node.js e Express.
+
+```Dockerfile
+FROM node:14
+
+WORKDIR /app-node
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "index.js"]
+```
+
+### Construindo uma imagem
+
+- `docker build -t <nome> .`: Cria uma imagem a partir de um Dockerfile.
+- `docker build -t <nome> -f <Dockerfile> .`: Cria uma imagem a partir de um Dockerfile específico.
+- `docker build -t <nome>/<repositório>:<tag> .`: Cria uma imagem com repositório e tag.
+- `docker build -t <nome> --build-arg <variável>=<valor> .`: Passa uma variável de ambiente para o Dockerfile.
+
+### Publicando uma imagem no Docker Hub
+
+- `docker login`: Loga no Docker Hub.
+- `docker tag <imagem> <nome>/<repositório>:<tag>`: Adiciona um nome e tag à imagem.
+    - Exemplo: `docker tag node-app:latest node-app-tag:1.0`
+- `docker push <nome>/<repositório>:<tag>`: Publica a imagem no Docker Hub.
