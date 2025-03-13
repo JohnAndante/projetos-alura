@@ -72,6 +72,12 @@ Trilhas de estudo oferecidas e organizadas pela própria instituição de ensino
 - ✅ Concluído em 25 de Fevereiro de 2025
 - 📜 Link para o certificado [aqui](https://cursos.alura.com.br/certificate/30e7a22a-856b-443f-a91b-f02e6fe46077?lang=pt_BR)
 
+### ✅ [12 - Autenticação, testes e segurança em Node.js](https://cursos.alura.com.br/formacao-avancando-nodejs)
+
+- ➡️ Iniciado em 3 de Março de 2025
+- ✅ Concluído em 11 de Março de 2025
+- 📜 Link para o certificado [aqui](https://cursos.alura.com.br/degree/certificate/dc23da04-c9a8-4a4d-a4a2-d02165617a1e?lang=pt_BR)
+
 ---
 
 ## Planos de Estudo
