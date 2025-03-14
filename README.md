@@ -78,6 +78,12 @@ Trilhas de estudo oferecidas e organizadas pela própria instituição de ensino
 - ✅ Concluído em 11 de Março de 2025
 - 📜 Link para o certificado [aqui](https://cursos.alura.com.br/degree/certificate/dc23da04-c9a8-4a4d-a4a2-d02165617a1e?lang=pt_BR)
 
+### ✅ [13 - Docker: Criando e gerenciando containers](https://cursos.alura.com.br/course/docker-criando-gerenciando-containers)
+
+- ➡️ Iniciado em 11 de Março de 2025
+- ✅ Concluído em 13 de Março de 2025
+- 📜 Link para o certificado [aqui](https://cursos.alura.com.br/certificate/b859a9b5-8aac-4652-be9a-4afa18d355cb?lang=pt_BR)
+
 ---
 
 ## Planos de Estudo
