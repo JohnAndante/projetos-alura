@@ -363,3 +363,103 @@ Podemos gerenciar os volumes com os seguintes comandos:
 - `docker volume rm <nome>`: Remove um volume.
 
 
+## Comunicação através de redes
+
+Redes criadas pelo docker:
+- **bridge**: Rede padrão do Docker
+- **host**: Compartilha a rede do host
+- **none**: Sem rede
+
+- `docker network ls`: Lista redes.
+- `docker network inspect <rede>`: Mostra informações detalhadas de uma rede.
+- `docker network create <nome>`: Cria uma rede.
+  - `docker network create --driver bridge <nome>`: Cria uma rede do tipo bridge.
+  - `docker network create --driver host <nome>`: Cria uma rede do tipo host.
+  - Usando uma rede criada pelo usuário, é possível controlar a comunicação entre containers.
+    - `docker run -it --network <nome> <imagem>`: Conecta um container a uma rede.
+    - `docker run -it --network <nome> --name <nome> <imagem>`: Dá um nome ao container e o conecta a uma rede.
+- `docker network connect <rede> <container>`: Conecta um container a uma rede.
+- `docker network disconnect <rede> <container>`: Desconecta um container de uma rede.
+
+
+### Bridge
+
+Quando criamos um container, ele é automaticamente conectado à rede **bridge**.
+
+A bridge é uma rede interna do Docker, que permite a comunicação entre containers.
+
+Os containers recebem um IP da bridge, que é acessível apenas internamente.
+
+Para acessar um container da bridge, é necessário mapear uma porta.
+
+- `docker run -p <porta_host>:<porta_container> <imagem>`: Mapeia uma porta do host para uma porta do container.
+
+Exemplo:
+
+```bash
+docker run -p 3000:3000 node-app
+```
+
+### Host
+
+A rede **host** compartilha a rede do host com o container.
+
+O container recebe o mesmo IP do host, e a comunicação é feita diretamente.
+
+- `docker run --network host <imagem>`: Conecta um container à rede host.
+
+Exemplo:
+
+```bash
+docker run --network host node-app
+```
+
+### None
+
+A rede **none** não conecta o container a nenhuma rede.
+
+O container não recebe IP, e a comunicação é feita apenas internamente.
+
+- `docker run --network none <imagem>`: Conecta um container à rede none.
+
+Exemplo:
+
+```bash
+docker run --network none node-app
+```
+
+### Comunicação entre containers
+
+Para a comunicação entre containers, é necessário conectá-los à mesma rede.
+
+- `docker run -it --network <nome> <imagem>`: Conecta um container a uma rede.
+- `docker run -it --network <nome> --name <nome> <imagem>`: Dá um nome ao container e o conecta a uma rede.
+
+Exemplo:
+
+```bash
+docker run -it --network app-network node-app
+docker run -it --network app-network --name node-app node-app
+```
+
+Exemplo de aplicação e banco de dados
+
+```bash
+docker run -d --network app-network --name mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 mysql
+docker run -d --network app-network --name node-app node-app
+```
+
+E então, internamente, podemos acessar o banco de dados pelo nome do container.
+
+```js
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+  host: 'mysql',
+  port: 3306,
+});
+```
+
+
+
+
