@@ -460,6 +460,173 @@ const connection = mysql.createConnection({
 });
 ```
 
+## Docker Compose
+
+O Docker Compose é uma ferramenta para definir e executar aplicações Docker multi-container.
+
+Com ele, é possível definir os serviços, redes, volumes, etc, em um arquivo YAML.
+
+### Instalação
+
+#### Windows
+
+O Docker Desktop já vem com o Docker Compose.
+
+#### Linux
+
+```bash
+sudo apt install docker-compose
+```
+
+#### Arch
+
+```bash
+sudo pacman -S docker-compose
+```
+
+### Estrutura
+
+O Docker Compose é baseado em um arquivo YAML, que define os serviços, redes, volumes, etc.
+
+Por padrão, o arquivo se chama `docker-compose.yml`.
+
+A sua estrutura se divide em:
+
+- `version`: Versão do Docker Compose
+- `services`: Serviços, os containers que serão criados
+- `networks`: As redes, para a comunicação entre containers ou com o host
+- `volumes`: Volumes, para persistência de dados
+
+
+```yaml
+version: '3'
+
+services:
+  node-app:
+    image: node:14
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - 3306:3306
+```
+
+#### Services
+
+Cada serviço é um container, com suas configurações.
+O nome do serviço é o nome do container.
+
+- `image`: Imagem a ser usada
+- `build`: Diretório do Dockerfile, para construir a imagem
+- `volumes`: Volumes a serem mapeados
+- `ports`: Portas a serem mapeadas
+- `environment`: Variáveis de ambiente a serem definidas
+- `networks`: Redes a serem conectadas (pode ser uma rede criada pelo Docker Compose ou uma rede externa)
+- `depends_on`: Dependências entre serviços - o serviço só é iniciado após a inicialização do serviço dependente
+- `args`: Argumentos a serem passados para o Dockerfile
+- `entrypoint`: Comando de entrada
+- `command`: Comando a ser executado
+- `restart`: Política de reinicialização
+- `working_dir`: Diretório de trabalho
+
+Exemplo:
+
+```yaml
+version: '3'
+
+services:
+  node-app:
+    image: node:14
+    volumes:
+      - .:/app
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      NODE_ENV: development
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+    args:
+      PORT: 3000
+    entrypoint: node
+    command: index.js
+    restart: always
+    working_dir: /app
+```
+
+#### Networks
+
+As redes definem a comunicação entre os containers.
+
+- `driver`: Driver da rede
+- `external`: Define se a rede é externa
+- `name`: Nome da rede
+
+Exemplo:
+
+```yaml
+version: '3'
+
+services:
+  node-app:
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+```
+
+#### Volumes
+
+Os volumes definem a persistência de dados.
+
+Aqui no Docker Compose, os volumes são criados automaticamente, mas podem ser nomeados.
+
+- `driver`: Driver do volume
+- `external`: Define se o volume é externo
+- `name`: Nome do volume
+
+Exemplo:
+
+```yaml
+version: '3'
+
+services:
+  node-app:
+    volumes:
+      - /app
+
+volumes:
+  app:
+    driver: local
+```
+
+### Comandos
+
+Podemos "subir" os serviços com o comando `docker-compose up`.
+
+- `docker-compose up`: Sobe os serviços.
+- `docker-compose up -d`: Sobe os serviços em background.
+- `docker-compose up --build`: Sobe os serviços e reconstrói as imagens.
+- `docker-compose up -d --build`: Sobe os serviços em background e reconstrói as imagens.
+- `docker-compose down`: Derruba os serviços.
+- `docker-compose ps`: Lista os serviços.
+- `docker-compose logs`: Mostra os logs dos serviços.
+- `docker-compose exec <serviço> <comando>`: Executa um comando em um serviço.
+- `docker-compose exec node-app bash`: Entra no shell do serviço.
+- `docker-compose exec node-app sh`: Entra no shell do serviço (caso não tenha bash).
+- `docker-compose exec node-app <comando> > <arquivo>`: Salva a saída do comando em um arquivo.
+- `docker-compose exec node-app <comando> < <arquivo>`: Usa um arquivo como entrada para o comando.
+
 
 
 
