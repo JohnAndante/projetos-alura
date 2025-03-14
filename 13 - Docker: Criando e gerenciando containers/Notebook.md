@@ -237,3 +237,129 @@ CMD ["node", "index.js"]
 - `docker tag <imagem> <nome>/<repositório>:<tag>`: Adiciona um nome e tag à imagem.
     - Exemplo: `docker tag node-app:latest node-app-tag:1.0`
 - `docker push <nome>/<repositório>:<tag>`: Publica a imagem no Docker Hub.
+
+## Persistência de dados
+
+- **Volumes**: Persistência de dados
+
+Quando um container é removido, os dados são perdidos. Para persistir os dados, é necessário criar um volume.
+
+```
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+node         14        4d3e5f7e8e3d   2 weeks ago    943MB (virtual 943MB)
+```
+
+A informação exibida no SIZE se divide em duas partes: o tamanho da imagem e o tamanho virtual.
+
+- **Tamanho da imagem**: Tamanho do arquivo que contém a imagem. Inclui dados como o sistema operacional, bibliotecas, etc. Caso seja um banco de dados, por exemplo, o tamanho da imagem será maior de acordo com a população de dados.
+Caso não seja configurado um volume para persistência de dados, ao remover o container, os dados serão perdidos.
+
+- **Tamanho virtual**: Tamanho da imagem em execução (entre parênteses). Inclui o tamanho da imagem e o tamanho dos dados em execução.
+
+### Volumes
+
+Quando queremos persistir dados, podemos mapear uma pasta do host para uma pasta do container, com os **mounts** e **binds**.
+
+#### Mounts e Binds
+
+- `docker run -v <pasta_host>:<pasta_container> <imagem>`: Mapeia uma pasta do host para uma pasta do container.
+  - <pasta_host>: Pasta no host, na máquina local
+  - <pasta_container>: Pasta no container, dentro do container mesmo
+
+Exemplo:
+
+```bash
+docker run -v /home/usuario/app:/app node-app
+docker run -v /mysql:/var/lib/mysql mysql
+```
+
+> Existe um possível macete para compartilhar a mesma pasta entre containers, mas não é recomendado.
+
+- `docker run -it -v --mount type=bind,source=<pasta_host>,target=<pasta_container> <imagem>`: Mapeia uma pasta do host para uma pasta do container.
+  - `--mount`: Define o tipo de montagem
+  - `type=bind`: Tipo de montagem
+  - `source`: Pasta no host, na máquina local
+  - `target`: Pasta no container, dentro do container mesmo
+
+Exemplo:
+
+```bash
+docker run -it --mount type=bind,source=/home/usuario/app,target=/app node-app
+docker run -it --mount type=bind,source=/mysql,target=/var/lib/mysql mysql
+```
+
+Porém, utilizando o método de mapeamento, deixamos em aberto a possibilidade de interferência e exclusão de dados por parte do usuário, possibilitando a alteração, remoção e adição de arquivos.
+
+Para evitar isso, podemos utilizar volumes anônimos e nomeados.
+
+#### Volumes anônimos e nomeados
+
+Quando desejamos persistir dados, podemos utilizar volumes anônimos e nomeados.
+
+Os volumes anônimos são criados automaticamente pelo Docker, enquanto os volumes nomeados são criados manualmente.
+
+- `docker run -v <pasta_container> <imagem>`: Cria um volume anônimo.
+- `docker run -v <nome>:<pasta_container> <imagem>`: Cria um volume nomeado.
+
+Exemplo:
+
+```bash
+docker run -v /app node-app # Volume anônimo
+docker run -v data:/var/lib/mysql mysql # Volume nomeado
+```
+
+Também é possível criar utilizando a flag `--mount`.
+
+- `docker run -it --mount source=<nome>,target=<pasta_container> <imagem>`: Cria um volume nomeado.
+  - `--mount`: Define o tipo de montagem
+  - `type=volume`: Tipo de montagem
+  - `source`: Nome do volume
+  - `target`: Pasta no container, dentro do container mesmo
+
+Exemplo:
+
+```bash
+docker run -it --mount type=volume,source=app,target=/app node-app
+docker run -it --mount type=volume,source=data,target=/var/lib/mysql mysql
+```
+
+Ao executar os comandos acima, o Docker cria um volume anônimo ou nomeado, que pode ser acessado e gerenciado posteriormente.
+
+Caso o volume já exista, ele será reutilizado.
+
+Os volumes são criados dentro de `/var/lib/docker/volumes`.
+Seu conteúdo é acessível como superusuário, mas não para o usuário regular.
+
+#### Mounts tmpfs
+
+O Docker também permite criar volumes temporários, que são armazenados na memória RAM.
+
+Esses volumes são úteis para armazenar dados sensíveis, como senhas, tokens, etc.
+
+- `docker run -it --tmpfs <pasta_container> <imagem>`: Cria um volume temporário.
+  - `--tmpfs`: Define o tipo de montagem
+  - `source`: Pasta no host, na máquina local
+  - `target`: Pasta no container, dentro do container mesmo
+
+- `docker run -it --mount type=tmpfs,destination=<pasta_container> <imagem>`: Cria um volume temporário.
+  - `--mount`: Define o tipo de montagem
+  - `type=tmpfs`: Tipo de montagem
+  - `destination`: Pasta no container, dentro do container mesmo
+
+Exemplo:
+
+```bash
+docker run -it --tmpfs /app node-app
+docker run -it --mount type=tmpfs,destination=/app node-app
+```
+
+### Comandos
+
+Podemos gerenciar os volumes com os seguintes comandos:
+
+- `docker volume ls`: Lista volumes.
+- `docker volume create <nome>`: Cria um volume.
+- `docker volume inspect <nome>`: Mostra informações detalhadas de um volume.
+- `docker volume rm <nome>`: Remove um volume.
+
+
