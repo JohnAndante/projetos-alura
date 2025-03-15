@@ -299,3 +299,162 @@ Portas comuns:
 - 5432: PostgreSQL
 - 587: SMTP
 - 22: SSH
+
+## DotEnv
+
+DotEnv é uma biblioteca que carrega variáveis de ambiente de um arquivo `.env` para o `process.env`.
+
+Isso é útil para armazenar informações sensíveis, como chaves de API, senhas e tokens de acesso, fora do código-fonte.
+
+### Instalação
+
+Instalamos o DotEnv com o comando:
+
+```bash
+npm install dotenv
+```
+
+### Uso
+
+Para usar o DotEnv, criamos um arquivo `.env` na raiz do projeto com as variáveis de ambiente:
+
+```
+PORT=3000
+```
+
+E então carregamos essas variáveis no código-fonte com:
+
+```javascript
+require('dotenv').config() // Carrega as variáveis de ambiente do arquivo .env com o type: module
+import 'dotenv/config' // Carrega as variáveis de ambiente do arquivo .env com o type: commonjs
+
+const port = process.env.PORT || 3000; // Seta uma variável de ambiente ou um valor padrão
+```
+
+## Express
+
+Express é um framework web para Node.js que simplifica o desenvolvimento de aplicativos web. Ele fornece uma série de recursos para criar APIs RESTful, servir arquivos estáticos, lidar com rotas, middlewares e muito mais.
+
+### Instalação
+
+Instalamos o express com o comando:
+
+```bash
+npm install express
+```
+
+### Servidor
+
+Para criar um servidor com Express, fazemos o seguinte:
+
+```javascript
+const express = require('express')
+
+const app = express()
+
+app.get('/', (req, res) => {
+  res.send('Hello, World!')
+})
+
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000')
+})
+```
+
+Nesse exemplo, criamos um servidor Express que escuta na porta 3000 e responde com "Hello, World!" quando acessamos a raiz do servidor.
+
+### Rotas
+
+Rotas são usadas para mapear URLs para funções que lidam com essas URLs.
+
+Podemos definir rotas em Express da seguinte maneira:
+
+```javascript
+app.get('/users', (req, res) => {
+  res.send('Lista de usuários')
+})
+
+app.post('/users', (req, res) => {
+  res.send('Criar usuário')
+})
+
+app.put('/users/:id', (req, res) => {
+  res.send(`Atualizar usuário com ID ${req.params.id}`)
+})
+
+app.delete('/users/:id', (req, res) => {
+  res.send(`Deletar usuário com ID ${req.params.id}`)
+})
+```
+
+Nesse exemplo, definimos rotas para listar usuários, criar um usuário, atualizar um usuário e deletar um usuário.
+
+## Anatomia de uma requisição HTTP
+
+### Métodos HTTP
+
+Os métodos HTTP são usados para indicar a ação que deve ser realizada em um recurso.
+
+Alguns métodos comuns incluem:
+
+- `GET`: Obter um recurso.
+- `POST`: Criar um recurso.
+- `PUT`: Atualizar um recurso.
+- `DELETE`: Deletar um recurso.
+- `PATCH`: Atualizar parcialmente um recurso.
+- `HEAD`: Obter cabeçalhos de resposta.
+- `OPTIONS`: Obter métodos HTTP permitidos.
+
+Exemplo de uma requisição HTTP:
+
+```http
+GET /users/list HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+Authorization Bearer: token
+```
+
+Nesse exemplo, estamos fazendo uma requisição `GET` para `/users/list` com o cabeçalho `Content-Type` definido como `application/json` e o cabeçalho `Authorization` definido como `Bearer: token`.
+
+### Partes de uma requisição
+
+As partes que podem compor uma requisição são:
+
+- `URL`: O endereço do recurso que está sendo acessado, iniciado por `http://` ou `https://`.
+- `Header`: Chamado também de cabeçalho, inclui informações adicionais sobre a requisição. Inclui dados como:
+  - `host`: O host do servidor - por exemplo, `api.example.com`.
+  - `user-agent`: O navegador ou cliente que está fazendo a requisição - por exemplo, `Mozilla/5.0`.
+  - `content-type`: O tipo de conteúdo da requisição - por exemplo, `application/json`.
+  - `authorization`: Informações de autenticação para acessar um recurso protegido - por exemplo, um token de acesso.
+  - `accept`: O tipo de conteúdo que o cliente aceita - por exemplo, `application/json`.
+- `Body`: O corpo da requisição, que contém os dados que estão sendo enviados para o servidor. Pode ser vazio, ou conter dados como:
+  - `application/json`: Dados em formato JSON.
+  - `application/x-www-form-urlencoded`: Dados em formato de formulário.
+  - `multipart/form-data`: Dados em formato de formulário com arquivos.
+- `Method`: O método HTTP que está sendo usado - por exemplo, `GET`, `POST`, `PUT`, `DELETE`.
+- `Query`: Parâmetros de consulta que são enviados na URL - por exemplo, `?page=1&limit=10`.
+- `Params`: Parâmetros de rota que são enviados na URL - por exemplo, `/users/1`.
+
+### Partes de uma resposta
+
+As partes que podem compor uma resposta são:
+
+- `Status`: O código de status da resposta, que indica se a requisição foi bem-sucedida, falhou ou foi redirecionada. Alguns códigos de status comuns incluem:
+  - `200 OK`: A requisição foi bem-sucedida.
+  - `201 Created`: O recurso foi criado com sucesso.
+  - `400 Bad Request`: A requisição foi malformada.
+  - `401 Unauthorized`: O cliente não está autorizado a acessar o recurso.
+  - `404 Not Found`: O recurso não foi encontrado.
+  - `500 Internal Server Error`: O servidor encontrou um erro ao processar a requisição.
+- `Header`: Chamado também de cabeçalho, inclui informações adicionais sobre a resposta. Inclui alguns dados semelhantes aos da requisição, como:
+  - `content-type`: O tipo de conteúdo da resposta - por exemplo, `application/json`.
+  - `content-length`: O tamanho do conteúdo da resposta.
+  - `cache-control`: Instruções sobre como o conteúdo deve ser armazenado em cache.
+  - `expires`: A data de expiração do conteúdo.
+  - `set-cookie`: Informações sobre cookies que devem ser armazenados no navegador.
+- `Body`: O corpo da resposta, que contém os dados que estão sendo enviados de volta para o cliente. Pode ser vazio, ou conter dados como:
+  - `application/json`: Dados em formato JSON.
+  - `text/html`: Dados em formato HTML.
+  - `image/png`: Dados de uma imagem PNG.
+  - `application/pdf`: Dados de um arquivo PDF.
+
