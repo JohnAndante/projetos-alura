@@ -1,15 +1,11 @@
 import express from "express";
+import livro from "../models/livro.js";
 
 const router = express.Router();
 
-const livros = [
-    { id: 1, nome: "O Senhor dos Anéis" },
-    { id: 2, nome: "Fundação" },
-    { id: 3, nome: "Neuromancer" },
-];
-
-router.get("/", (req, res) => {
-    res.status(200).json({ data: livros, metadata: { total: livros.length } });
+router.get("/", async (req, res) => {
+    const listaLivros = await livro.find();
+    res.status(200).json({ data: listaLivros, metadata: { total: listaLivros.length } });
 });
 
 router.get("/:id", (req, res) => {
