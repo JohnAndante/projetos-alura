@@ -13,4 +13,7 @@ router.put("/:id", LivroController.atualizarLivro);
 
 router.delete("/:id", LivroController.deletarLivro);
 
+router.get("/editora", LivroController.listarLivrosPorEditora);
+
+
 export default router;

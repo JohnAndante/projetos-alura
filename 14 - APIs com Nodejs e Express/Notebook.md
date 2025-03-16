@@ -701,3 +701,50 @@ module.exports = mongoose.model('User', userSchema);
 
 Essa é apenas uma estrutura de exemplo, e não engloba critérios de organização de código, como DRY, SOLID, etc.
 
+## Query Params e Route Params
+
+Dentro das requisições HTTP, podemos passar parâmetros para o servidor de duas maneiras: via Query Params e via Route Params.
+
+
+Elas são usadas para passar informações adicionais para o servidor, como filtros, ordenações, paginações, etc. Além de serem usadas para passar informações específicas para uma rota, como um ID de usuário.
+
+### Query Params
+
+Os query params são definidos na URL após o caractere `?` e são separados por `&`.
+
+São compostos por uma chave e um valor, como `?page=1&limit=10` - onde `page` é a chave e `1` é o valor, e `limit` é a chave e `10` é o valor.
+
+Podemos acessar os query params em Express com `req.query`.
+
+```javascript
+// GET /users?page=1&limit=10
+router.get('/users', (req, res) => {
+  const page = req.query.page || 1;
+  const limit = req.query.limit || 10;
+
+  res.json({ page, limit });
+});
+```
+
+Nesse exemplo, estamos acessando os query params `page` e `limit` e definindo valores padrão caso eles não sejam fornecidos.
+
+### Route Params
+
+Os route params são definidos na URL e são usados para passar informações específicas para uma rota.
+
+Eles são definidos com `:` e são acessados em Express com `req.params`.
+
+Eles também são compostos por uma chave e um valor, porém são definidos diretamente na URL, como por exemplo:
+
+```javascript
+// GET /users/1
+router.get('/users/:id', (req, res) => {
+  const id = req.params.id;
+
+  res.json({ id });
+});
+```
+
+Nesse exemplo, estamos acessando o route param `id` e retornando o valor dele.
+
+> Os route params são usados para passar informações específicas para uma rota, como um ID de usuário, enquanto os query params são usados para passar informações adicionais, como filtros, ordenações, paginações, etc.

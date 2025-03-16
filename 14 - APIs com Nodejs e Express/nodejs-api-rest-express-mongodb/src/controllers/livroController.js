@@ -1,4 +1,5 @@
-import livroModel from '../models/livro.js'
+import livroModel from '../models/Livro.js'
+import { autor as autorModel } from '../models/Autor.js';
 
 class LivroController {
     static async listarLivros(req, res) {
@@ -32,15 +33,38 @@ class LivroController {
         }
     }
 
+    static async listarLivrosPorEditora(req, res) {
+        try {
+            const editora = req.query.editora;
+
+            const listaLivros = await livroModel.find({ editora });
+
+            res.status(200).json({
+                data: listaLivros,
+                metadata: {
+                    total: listaLivros.length,
+                },
+            });
+        } catch (error) {
+            console.error('Erro ao listar livros por editora', error);
+            res.status(500).json({ error: 'Erro ao listar livros por editora' });
+        }
+    }
+
     static async criarLivro(req, res) {
         try {
-            const { titulo, editora, valor, paginas } = req.body;
+            const { titulo, editora, valor, paginas, autorId } = req.body;
+
+            const autor = await autorModel.findById(autorId);
+
+            if (!autor) return res.status(404).json({ error: 'Autor informado não encontrado' });
 
             const novoLivro = new livroModel({
                 titulo,
                 editora,
                 valor,
                 paginas,
+                autor: { ...autor._doc },
             });
 
             await novoLivro.save();
@@ -55,13 +79,22 @@ class LivroController {
     static async atualizarLivro(req, res) {
         try {
             const { id } = req.params;
-            const { titulo, editora, valor, paginas } = req.body;
+            const { titulo, editora, valor, paginas, autorId } = req.body;
+
+            let autor = null;
+
+            if (autorId) {
+                autor = await autorModel.findById(autorId);
+
+                if (!autor) return res.status(404).json({ error: 'Autor informado não encontrado' });
+            }
 
             await livroModel.findByIdAndUpdate(id, {
                 titulo,
                 editora,
                 valor,
                 paginas,
+                autor: autor ? { ...autor._doc } : null,
             });
 
             res.status(200).json({ message: 'Livro atualizado com sucesso' });
