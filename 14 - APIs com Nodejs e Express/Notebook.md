@@ -458,3 +458,246 @@ As partes que podem compor uma resposta são:
   - `image/png`: Dados de uma imagem PNG.
   - `application/pdf`: Dados de um arquivo PDF.
 
+## Models, Routes, Controllers e Services
+
+### Models
+
+Os modelos são usados para representar os dados de um aplicativo.
+Em um sistema de banco de dados relacional, um modelo geralmente corresponde a uma tabela no banco de dados.
+
+Por exemplo, em um sistema onde tenho usuários, eu teria um modelo de usuário que representaria a tabela de usuários no banco de dados.
+
+```javascript
+// User.js
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  password: String,
+});
+
+module.exports = mongoose.model('User', userSchema);
+```
+
+Nesse exemplo, temos um modelo de usuário que tem um nome, email e senha.
+
+### Routes
+
+Rotas são usadas para mapear URLs para funções que lidam com essas URLs.
+
+Em um aplicativo Express, as rotas são usadas para definir o comportamento do aplicativo em diferentes URLs.
+
+```javascript
+// userRoutes.js
+const express = require('express');
+
+const router = express.Router();
+
+router.get('/users', (req, res) => {
+  res.send('Lista de usuários');
+});
+
+router.post('/users', (req, res) => {
+  res.send('Criar usuário');
+});
+
+router.put('/users/:id', (req, res) => {
+  res.send(`Atualizar usuário com ID ${req.params.id}`);
+});
+
+router.delete('/users/:id', (req, res) => {
+  res.send(`Deletar usuário com ID ${req.params.id}`);
+});
+
+module.exports = router;
+```
+
+Nesse exemplo, temos rotas para listar usuários, criar um usuário, atualizar um usuário e deletar um usuário.
+
+### Controllers
+
+Controladores são usados para lidar com a lógica de negócios de um aplicativo.
+
+Eles são responsáveis por receber as requisições do cliente, chamar os serviços necessários para processar essas requisições e retornar uma resposta ao cliente.
+
+Geralmente, os controladores são usados para manter a lógica de negócios fora das rotas e manter as rotas limpas e organizadas.
+
+É costume também criar uma classe para cada controlador, para manter a organização do código - mas isso não é uma regra.
+
+```javascript
+// userController.js
+const User = require('./User');
+
+class UserController {
+  async listUsers(req, res) {
+    const users = await User.find();
+    res.json(users);
+  }
+
+  async createUser(req, res) {
+    const user = new User(req.body);
+    await user.save();
+    res.json(user);
+  }
+
+  async updateUser(req, res) {
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(user);
+  }
+
+  async deleteUser(req, res) {
+    await User.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Usuário deletado com sucesso' });
+  }
+}
+```
+
+Nesse exemplo, temos um controlador de usuário que tem métodos para listar usuários, criar um usuário, atualizar um usuário e deletar um usuário.
+
+### Services
+
+Por sua vez, os serviços são usados para encapsular a lógica de negócios de um aplicativo.
+
+Eles são responsáveis por executar operações específicas, como criar um usuário, atualizar um usuário, deletar um usuário, etc.
+
+Verificações, validações e outras operações de negócios são feitas nos serviços, e não nos controladores.
+
+```javascript
+// userService.js
+
+export async const createUser(data) {
+  // Validações
+  // Criptografia de senha
+  // Criação de usuário
+}
+
+export async const updateUser(id, data) {
+  // Validações
+  // Atualização de usuário
+}
+
+export async const deleteUser(id) {
+  // Validações
+  // Deleção de usuário
+}
+
+export async const listUsers() {
+  // Listagem de usuários
+}
+```
+
+Nesse exemplo, temos um serviço de usuário que tem métodos para criar um usuário, atualizar um usuário e deletar um usuário.
+
+### Organização
+
+Por fim, a organização de um projeto pode ser feita da seguinte maneira:
+
+```
+src/
+  controllers/
+    userController.js
+  models/
+    User.js
+  routes/
+    userRoutes.js
+  services/
+    userService.js
+```
+
+E seguindo a seguinte estrutura:
+
+```javascript
+// userRoutes.js
+const express = require('express');
+
+const router = express.Router();
+
+const UserController = require('../controllers/userController');
+const userController = new UserController();
+
+router.get('/users', userController.listUsers);
+router.post('/users', userController.createUser);
+router.put('/users/:id', userController.updateUser);
+router.delete('/users/:id', userController.deleteUser);
+
+module.exports = router;
+```
+
+```javascript
+// userController.js
+import {
+  createUser,
+  updateUser,
+  deleteUser,
+  listUsers,
+} from '../services/userService';
+
+class UserController {
+  async listUsers(req, res) {
+    const users = await listUsers();
+    res.json(users);
+  }
+
+  async createUser(req, res) {
+    const user = await createUser(req.body);
+    res.json(user);
+  }
+
+  async updateUser(req, res) {
+    const user = await updateUser(req.params.id, req.body);
+    res.json(user);
+  }
+
+  async deleteUser(req, res) {
+    await deleteUser(req.params.id);
+    res.json({ message: 'Usuário deletado com sucesso' });
+  }
+}
+
+module.exports = UserController;
+```
+
+```javascript
+// userService.js
+
+import UserModel from '../models/User';
+
+export async const createUser(data) {
+  // Validações
+  // Criptografia de senha
+  // Criação de usuário
+}
+
+export async const updateUser(id, data) {
+  // Validações
+  // Atualização de usuário
+}
+
+export async const deleteUser(id) {
+  // Validações
+  // Deleção de usuário
+}
+
+export async const listUsers() {
+  // Listagem de usuários
+}
+
+```
+
+```javascript
+// User.js
+
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  password: String,
+});
+
+module.exports = mongoose.model('User', userSchema);
+```
+
+Essa é apenas uma estrutura de exemplo, e não engloba critérios de organização de código, como DRY, SOLID, etc.
+
