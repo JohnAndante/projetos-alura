@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { autor as autorModel } from '../models/Autor.js';
 
 class AutorController {
@@ -21,14 +22,20 @@ class AutorController {
         try {
             const { id } = req.params;
 
+            if (!id.match(/^[0-9a-fA-F]{24}$/)) return res.status(400).json({ message: 'ID inválido' });
+
             const autor = await autorModel.findById(id);
 
-            if (!autor) return res.status(404).json({ error: 'Autor não encontrado' });
+            if (!autor) return res.status(404).json({ message: 'Autor não encontrado' });
 
             res.status(200).json({ data: autor });
         } catch (error) {
+            if (error instanceof mongoose.Error.CastError) {
+                return res.status(400).json({ message: "Um ou mais parâmetros inválidos" });
+            }
+
             console.error('Erro ao buscar autor', error);
-            res.status(500).json({ error: 'Erro ao buscar autor' });
+            return res.status(500).json({ error: 'Erro ao buscar autor' });
         }
     }
 
