@@ -8,16 +8,16 @@ export default [
         languageOptions: {
             sourceType: "module",
             ...globals.node,
-            ...globals.es2021
         },
         rules: {
             indent: ["error", 4],
             quotes: ["error", "double"],
             "no-console": "off",
-            "no-unused-vars": ["warn"],
+            "no-unused-vars": ["error"],
             "max-len": ["error", { "code": 100 }],
             "object-curly-spacing": ["error", "always"],
-            "array-bracket-spacing": ["error", "never"]
+            "array-bracket-spacing": ["error", "never"],
+            "import/extensions": ["error", "always"],
         },
     },
     pluginJs.configs.recommended,

@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
 import { autor as autorModel } from '../models/Autor.js';
+import ValidationError from '../errors/ValidationError.js';
 
 class AutorController {
-    static async listarAutores(req, res) {
+    static async listarAutores(req, res, next) {
         try {
             const listaAutores = await autorModel.find({});
 
@@ -13,33 +13,27 @@ class AutorController {
                 },
             });
         } catch (error) {
-            console.error('Erro ao listar autores', error);
-            res.status(500).json({ error: 'Erro ao listar autores' });
+            next(error);
         }
     }
 
-    static async buscarAutor(req, res) {
+    static async buscarAutor(req, res, next) {
         try {
             const { id } = req.params;
 
-            if (!id.match(/^[0-9a-fA-F]{24}$/)) return res.status(400).json({ message: 'ID inválido' });
+            if (!id.match(/^[0-9a-fA-F]{24}$/)) return new ValidationError('ID inválido', 400).sendResponse(res);
 
             const autor = await autorModel.findById(id);
 
-            if (!autor) return res.status(404).json({ message: 'Autor não encontrado' });
+            if (!autor) return new NotFoundError('Autor não encontrado').sendResponse(res);
 
             res.status(200).json({ data: autor });
         } catch (error) {
-            if (error instanceof mongoose.Error.CastError) {
-                return res.status(400).json({ message: "Um ou mais parâmetros inválidos" });
-            }
-
-            console.error('Erro ao buscar autor', error);
-            return res.status(500).json({ error: 'Erro ao buscar autor' });
+            next(error);
         }
     }
 
-    static async criarAutor(req, res) {
+    static async criarAutor(req, res, next) {
         try {
             const { nome, nacionalidade } = req.body;
 
@@ -52,38 +46,44 @@ class AutorController {
 
             res.status(201).json({ message: 'Autor criado com sucesso', data: novoAutor });
         } catch (error) {
-            console.error('Erro ao criar autor', error);
-            res.status(500).json({ error: 'Erro ao criar autor' });
+            next(error);
         }
     }
 
-    static async atualizarAutor(req, res) {
+    static async atualizarAutor(req, res, error) {
         try {
             const { id } = req.params;
+
+            if (!id.match(/^[0-9a-fA-F]{24}$/)) return new ValidationError('ID inválido', 400).sendResponse(res);
+
             const { nome, nacionalidade } = req.body;
 
-            await autorModel.findByIdAndUpdate(id, {
+            const autor = await autorModel.findByIdAndUpdate(id, {
                 nome,
                 nacionalidade,
             });
 
+            if (!autor) return new NotFoundError('Autor não encontrado').sendResponse(res);
+
             res.status(200).json({ message: 'Autor atualizado com sucesso' });
         } catch (error) {
-            console.error('Erro ao atualizar autor', error);
-            res.status(500).json({ error: 'Erro ao atualizar autor' });
+            next(error);
         }
     }
 
-    static async deletarAutor(req, res) {
+    static async deletarAutor(req, res, next) {
         try {
             const { id } = req.params;
 
-            await autorModel.findByIdAndDelete(id);
+            if (!id.match(/^[0-9a-fA-F]{24}$/)) return new ValidationError('ID inválido', 400).sendResponse(res);
+
+            const autor = await autorModel.findByIdAndDelete(id);
+
+            if (!autor) return new NotFoundError('Autor não encontrado').sendResponse(res);
 
             res.status(200).json({ message: 'Autor deletado com sucesso' });
         } catch (error) {
-            console.error('Erro ao deletar autor', error);
-            res.status(500).json({ error: 'Erro ao deletar autor' });
+            next(error);
         }
     }
 }

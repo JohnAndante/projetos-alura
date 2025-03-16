@@ -1,6 +1,7 @@
 import express from "express";
 import router from "./routes/routes.js";
 import dbConnect from "./config/dbConnect.js";
+import errorMiddleware from "./middlewares/error.js";
 
 const conexao = await dbConnect();
 
@@ -17,5 +18,7 @@ const app = express();
 app.use(express.json());
 
 app.use(router);
+
+app.use(errorMiddleware);
 
 export default app;
