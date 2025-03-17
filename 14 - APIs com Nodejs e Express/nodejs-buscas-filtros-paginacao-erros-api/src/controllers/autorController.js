@@ -1,10 +1,10 @@
-import { autor as autorModel } from '../models/Autor.js';
+import { AutorModel } from '../models/index.js';
 import ValidationError from '../errors/ValidationError.js';
 
 class AutorController {
     static async listarAutores(req, res, next) {
         try {
-            const listaAutores = await autorModel.find({});
+            const listaAutores = await AutorModel.find({});
 
             res.status(200).json({
                 data: listaAutores,
@@ -23,7 +23,7 @@ class AutorController {
 
             if (!id.match(/^[0-9a-fA-F]{24}$/)) return new ValidationError('ID inválido', 400).sendResponse(res);
 
-            const autor = await autorModel.findById(id);
+            const autor = await AutorModel.findById(id);
 
             if (!autor) return new NotFoundError('Autor não encontrado').sendResponse(res);
 
@@ -37,7 +37,7 @@ class AutorController {
         try {
             const { nome, nacionalidade } = req.body;
 
-            const novoAutor = new autorModel({
+            const novoAutor = new AutorModel({
                 nome,
                 nacionalidade,
             });
@@ -58,7 +58,7 @@ class AutorController {
 
             const { nome, nacionalidade } = req.body;
 
-            const autor = await autorModel.findByIdAndUpdate(id, {
+            const autor = await AutorModel.findByIdAndUpdate(id, {
                 nome,
                 nacionalidade,
             });
@@ -77,7 +77,7 @@ class AutorController {
 
             if (!id.match(/^[0-9a-fA-F]{24}$/)) return new ValidationError('ID inválido', 400).sendResponse(res);
 
-            const autor = await autorModel.findByIdAndDelete(id);
+            const autor = await AutorModel.findByIdAndDelete(id);
 
             if (!autor) return new NotFoundError('Autor não encontrado').sendResponse(res);
 

@@ -1,12 +1,11 @@
-import livroModel from '../models/Livro.js'
-import { autor as autorModel } from '../models/Autor.js';
+import { AutorModel, LivroModel } from '../models/index.js';
 import ValidationError from '../errors/ValidationError.js';
 import NotFoundError from '../errors/NotFoundError.js';
 
 class LivroController {
     static async listarLivros(req, res, next) {
         try {
-            const listaLivros = await livroModel.find({});
+            const listaLivros = await LivroModel.find({});
 
             res.status(200).json({
                 data: listaLivros,
@@ -25,7 +24,7 @@ class LivroController {
 
             if (!id.match(/^[0-9a-fA-F]{24}$/)) return new ValidationError('ID inválido', 400).sendResponse(res);
 
-            const livro = await livroModel.findById(id);
+            const livro = await LivroModel.findById(id);
 
             if (!livro) return new NotFoundError('Livro não encontrado').sendResponse(res);
 
@@ -39,7 +38,7 @@ class LivroController {
         try {
             const editora = req.query.editora;
 
-            const listaLivros = await livroModel.find({ editora });
+            const listaLivros = await LivroModel.find({ editora });
 
             res.status(200).json({
                 data: listaLivros,
@@ -60,11 +59,11 @@ class LivroController {
 
             if (!autorId.match(/^[0-9a-fA-F]{24}$/)) return new ValidationError('ID do autor inválido', 400).sendResponse(res);
 
-            const autor = await autorModel.findById(autorId);
+            const autor = await AutorModel.findById(autorId);
 
             if (!autor) return new NotFoundError('Autor informado não encontrado').sendResponse(res);
 
-            const novoLivro = new livroModel({
+            const novoLivro = new LivroModel({
                 titulo,
                 editora,
                 valor,
@@ -93,12 +92,12 @@ class LivroController {
             let autor = null;
 
             if (autorId) {
-                autor = await autorModel.findById(autorId);
+                autor = await AutorModel.findById(autorId);
 
                 if (!autor) return new NotFoundError('Autor informado não encontrado').sendResponse(res);
             }
 
-            await livroModel.findByIdAndUpdate(id, {
+            await LivroModel.findByIdAndUpdate(id, {
                 titulo,
                 editora,
                 valor,
@@ -118,7 +117,7 @@ class LivroController {
 
             if (!id.match(/^[0-9a-fA-F]{24}$/)) return new ValidationError('ID inválido', 400).sendResponse(res);
 
-            const livro = await livroModel.findByIdAndDelete(id);
+            const livro = await LivroModel.findByIdAndDelete(id);
 
             if (!livro) return new NotFoundError('Livro não encontrado').sendResponse(res);
 
