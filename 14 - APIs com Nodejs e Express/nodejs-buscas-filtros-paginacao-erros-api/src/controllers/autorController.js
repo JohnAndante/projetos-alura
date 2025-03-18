@@ -4,7 +4,14 @@ import ValidationError from '../errors/ValidationError.js';
 class AutorController {
     static async listarAutores(req, res, next) {
         try {
-            const listaAutores = await AutorModel.find({});
+            const { skip, limit } = req.paginacao;
+            const ordenacao = req.ordenacao;
+
+            const listaAutores = await AutorModel.find({})
+                .skip(skip)
+                .limit(limit)
+                .sort(ordenacao)
+                .exec();
 
             res.status(200).json({
                 data: listaAutores,

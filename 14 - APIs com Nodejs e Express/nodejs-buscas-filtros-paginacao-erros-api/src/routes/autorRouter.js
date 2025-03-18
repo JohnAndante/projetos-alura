@@ -1,9 +1,11 @@
 import express from "express";
 import AutorController from "../controllers/autorController.js";
+import paginacao from "../middlewares/paginacao.js";
+import ordenacao from "../middlewares/ordenacao.js";
 
 const router = express.Router();
 
-router.get("/", AutorController.listarAutores);
+router.get("/", paginacao, ordenacao, AutorController.listarAutores);
 
 router.get("/:id", AutorController.buscarAutor);
 

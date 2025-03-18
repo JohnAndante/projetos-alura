@@ -3,14 +3,25 @@ import ValidationError from '../errors/ValidationError.js';
 import NotFoundError from '../errors/NotFoundError.js';
 
 class LivroController {
+
     static async listarLivros(req, res, next) {
         try {
-            const listaLivros = await LivroModel.find({});
+            const { skip, limit } = req.paginacao;
+            const ordenacao = req.ordenacao;
+
+            const listaLivros = await LivroModel.find({})
+                .skip(skip)
+                .limit(limit)
+                .populate('autor')
+                .sort(ordenacao)
+                .exec();
 
             res.status(200).json({
                 data: listaLivros,
                 metadata: {
                     total: listaLivros.length,
+                    pagina: skip / limit + 1,
+                    limite,
                 },
             });
         } catch (error) {
@@ -36,14 +47,23 @@ class LivroController {
 
     static async listarLivrosPorFiltro(req, res, next) {
         try {
+            const { skip, limit } = req.paginacao;
+            const ordenacao = req.ordenacao;
             const filtro = processaFiltro(req.query);
 
-            const listaLivros = await LivroModel.find(filtro);
+            const listaLivros = await LivroModel.find(filtro)
+                .skip(skip)
+                .limit(limit)
+                .populate('autor')
+                .sort(ordenacao)
+                .exec();
 
             res.status(200).json({
                 data: listaLivros,
                 metadata: {
                     total: listaLivros.length,
+                    pagina: skip / limit + 1,
+                    limite,
                 },
             });
         } catch (error) {
