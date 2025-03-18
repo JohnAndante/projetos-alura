@@ -34,11 +34,11 @@ class LivroController {
         }
     }
 
-    static async listarLivrosPorEditora(req, res, next) {
+    static async listarLivrosPorFiltro(req, res, next) {
         try {
-            const editora = req.query.editora;
+            const filtro = processaFiltro(req.query);
 
-            const listaLivros = await LivroModel.find({ editora });
+            const listaLivros = await LivroModel.find(filtro);
 
             res.status(200).json({
                 data: listaLivros,
@@ -49,6 +49,28 @@ class LivroController {
         } catch (error) {
             next(error);
         }
+    }
+
+    async processaFiltro(filtro) {
+        const filtroProcessado = {};
+
+        const { editora, titulo, minPaginas, maxPaginas, nomeAutor } = filtro;
+
+        if (editora) filtroProcessado.editora = { $regex: editora, $options: 'i' };
+        if (titulo) filtroProcessado.titulo = { $regex: titulo, $options: 'i' };
+        if (minPaginas || maxPaginas) {
+            filtroProcessado.paginas = {};
+
+            if (minPaginas) filtroProcessado.paginas.$gte = minPaginas;
+            if (maxPaginas) filtroProcessado.paginas.$lte = maxPaginas;
+        }
+        if (nomeAutor) {
+            const autor = await AutorModel.findOne({ nome: { $regex: nomeAutor, $options: 'i' } });
+
+            if (autor) filtroProcessado.autor = autor._id;
+        }
+
+        return filtroProcessado
     }
 
     static async criarLivro(req, res, next) {
