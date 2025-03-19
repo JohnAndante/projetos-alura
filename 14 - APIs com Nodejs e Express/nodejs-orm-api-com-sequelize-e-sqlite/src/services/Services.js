@@ -33,9 +33,7 @@ class Services {
         try {
             const updatedData = database[this.model].update(data, { where: { id: Number(id) } });
 
-            if (updatedData[0] === 0) {
-                return false;
-            }
+            if (updatedData[0] === 0) return false;
 
             return true;
         } catch (error) {
@@ -47,9 +45,7 @@ class Services {
         try {
             const deletedData = database[this.model].destroy({ where: { id: Number(id) } });
 
-            if (!deletedData) {
-                return false;
-            }
+            if (!deletedData) return false;
 
             return true;
         } catch (error) {
