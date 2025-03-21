@@ -8,7 +8,7 @@ class Controller {
             const dataList = await this.entidadeService.getAll();
             return res.status(200).json({ data: dataList, metadata: { total: dataList.length } });
         } catch (error) {
-            return res.status(500).json(error.message);
+            return res.status(500).json({ error: error.message });
         }
     }
 
@@ -23,7 +23,7 @@ class Controller {
 
             return res.status(200).json({ data: data });
         } catch (error) {
-            return res.status(500).json(error.message);
+            return res.status(500).json({ error: error.message });
         }
     }
 
@@ -34,7 +34,7 @@ class Controller {
 
             return res.status(201).json({ data: newData });
         } catch (error) {
-            return res.status(500).json(error.message);
+            return res.status(500).json({ error: error.message });
         }
     }
 
@@ -51,7 +51,7 @@ class Controller {
 
             return res.status(200).json({ message: `Register with id ${id} updated successfully.` });
         } catch (error) {
-            return res.status(500).json(error.message);
+            return res.status(500).json({ error: error.message });
         }
     }
 
@@ -66,7 +66,7 @@ class Controller {
 
             return res.status(200).json({ message: `Register with id ${id} deleted successfully.` });
         } catch (error) {
-            return res.status(500).json(error.message);
+            return res.status(500).json({ error: error.message });
         }
     }
 }

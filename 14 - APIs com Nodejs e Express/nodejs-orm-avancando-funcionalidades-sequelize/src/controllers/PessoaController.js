@@ -15,7 +15,7 @@ class PessoaController extends Controller {
 
             return res.status(200).json({ data: registrationsList, metadata: { total: registrationsList.length } });
         } catch (error) {
-            return res.status(500).json({ message: error.message });
+            return res.status(500).json({ error: error.message });
         }
     }
 }
