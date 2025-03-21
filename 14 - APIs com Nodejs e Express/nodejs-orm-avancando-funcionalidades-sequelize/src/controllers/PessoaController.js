@@ -18,6 +18,16 @@ class PessoaController extends Controller {
             return res.status(500).json({ error: error.message });
         }
     }
+
+    async getAllPessoas(req, res) {
+        try {
+            const pessoas = await pessoaServices.getAllPessoas();
+
+            return res.status(200).json({ data: pessoas, metadata: { total: pessoas.length } });
+        } catch (error) {
+            return res.status(500).json({ error: error.message });
+        }
+    }
 }
 
 module.exports = PessoaController;

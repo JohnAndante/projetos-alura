@@ -6,51 +6,35 @@ class Services {
     }
 
     async getAll() {
-        try {
-            return database[this.model].findAll();
-        } catch (error) {
-            return error;
-        }
+        return database[this.model].findAll();
+    }
+
+    async getByScope(scope) {
+        return database[this.model].scope(scope).findAll();
     }
 
     async getById(id) {
-        try {
-            return database[this.model].findOne({ where: { id: Number(id) } });
-        } catch (error) {
-            return error;
-        }
+        return database[this.model].findOne({ where: { id: Number(id) } });
     }
 
     async create(data) {
-        try {
-            return database[this.model].create(data);
-        } catch (error) {
-            return error;
-        }
+        return database[this.model].create(data);
     }
 
     async update(data, id) {
-        try {
-            const updatedData = database[this.model].update(data, { where: { id: Number(id) } });
+        const updatedData = database[this.model].update(data, { where: { id: Number(id) } });
 
-            if (updatedData[0] === 0) return false;
+        if (updatedData[0] === 0) return false;
 
-            return true;
-        } catch (error) {
-            return error;
-        }
+        return true;
     }
 
     async delete(id) {
-        try {
-            const deletedData = database[this.model].destroy({ where: { id: Number(id) } });
+        const deletedData = database[this.model].destroy({ where: { id: Number(id) } });
 
-            if (!deletedData) return false;
+        if (!deletedData) return false;
 
-            return true;
-        } catch (error) {
-            return error;
-        }
+        return true;
     }
 }
 

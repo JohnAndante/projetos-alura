@@ -11,6 +11,10 @@ class PessoaServices extends Services {
 
         return registrationsList;
     }
+
+    async getAllPessoas() {
+        return super.getByScope('todos');
+    }
 }
 
 module.exports = PessoaServices;

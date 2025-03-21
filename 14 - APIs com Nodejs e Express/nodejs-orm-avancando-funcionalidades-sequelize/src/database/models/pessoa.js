@@ -1,5 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
+const isValidCpf = require('../../utils/cpfValidatorHelper');
 
 module.exports = (sequelize, DataTypes) => {
     class Pessoa extends Model {
@@ -10,23 +11,68 @@ module.exports = (sequelize, DataTypes) => {
             Pessoa.hasMany(models.Matricula, {
                 foreignKey: 'estudante_id',
                 scope: {
-                    status: 'matriculado'
+                    status: 'matriculado',
                 },
                 as: 'aulasMatriculadas',
             });
         }
     }
     Pessoa.init({
-        nome: DataTypes.STRING,
-        email: DataTypes.STRING,
-        cpf: DataTypes.STRING,
+        nome: {
+            type: DataTypes.STRING,
+            validate: {
+                len: {
+                    args: [3, 255],
+                    msg: 'Campo nome deve ter entre 3 e 255 caracteres',
+                },
+            },
+        },
+        email: {
+            type: DataTypes.STRING,
+            validate: {
+                isEmail: {
+                    args: true,
+                    msg: 'Email inválido',
+                },
+            },
+        },
+        cpf: {
+            type: DataTypes.STRING,
+            validate: {
+                isCpf: (value) => {
+                    if (!isValidCpf(value)) {
+                        throw new Error('CPF inválido');
+                    }
+                },
+            },
+        },
         ativo: DataTypes.BOOLEAN,
-        role: DataTypes.STRING
+        role: DataTypes.STRING,
     }, {
         sequelize,
         modelName: 'Pessoa',
         tableName: 'pessoas',
         paranoid: true,
+        defaultScope: {
+            where: {
+                ativo: true,
+            },
+        },
+        scopes: {
+            todos: {
+                where: {}
+            },
+            docentes: {
+                where: {
+                    role: 'docente',
+                },
+            },
+            estudantes: {
+                where: {
+                    role: 'estudante',
+                },
+            },
+        },
     });
     return Pessoa;
 };
