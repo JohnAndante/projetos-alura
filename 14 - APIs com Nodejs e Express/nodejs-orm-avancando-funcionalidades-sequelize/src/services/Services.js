@@ -5,8 +5,8 @@ class Services {
         this.model = model;
     }
 
-    async getAll() {
-        return database[this.model].findAll();
+    async getAll(where = {}) {
+        return database[this.model].findAll({ where: { ...where } });
     }
 
     async getByScope(scope) {
@@ -19,6 +19,10 @@ class Services {
 
     async getOne(where) {
         return database[this.model].findOne({ where: { ...where } });
+    }
+
+    async getAndCountAll(options) {
+        return database[this.model].findAndCountAll({ ...options });
     }
 
     async create(data) {
