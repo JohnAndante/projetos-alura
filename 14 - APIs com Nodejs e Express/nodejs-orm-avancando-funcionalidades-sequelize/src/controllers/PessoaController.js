@@ -8,10 +8,10 @@ class PessoaController extends Controller {
         super(pessoaServices);
     }
 
-    async getRegistrations(req, res) {
+    async getAllRegistrations(req, res) {
         try {
-            const { estudanteId } = req.params;
-            const registrationsList = await pessoaServices.getRegistrations(Number(estudanteId));
+            const { estudante_id } = req.params;
+            const registrationsList = await pessoaServices.getAllRegistrations(Number(estudante_id), false);
 
             return res.status(200).json({ data: registrationsList, metadata: { total: registrationsList.length } });
         } catch (error) {
@@ -19,7 +19,18 @@ class PessoaController extends Controller {
         }
     }
 
-    async getAllPessoas(req, res) {
+    async getActiveRegistrations(req, res) {
+        try {
+            const { estudante_id } = req.params;
+            const registrationsList = await pessoaServices.getActiveRegistrations(Number(estudante_id));
+
+            return res.status(200).json({ data: registrationsList, metadata: { total: registrationsList.length } });
+        } catch (error) {
+            return res.status(500).json({ error: error.message });
+        }
+    }
+
+    async getAllUsers(req, res) {
         try {
             const pessoas = await pessoaServices.getAllPessoas();
 

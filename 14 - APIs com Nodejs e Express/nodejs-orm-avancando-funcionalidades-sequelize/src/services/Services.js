@@ -14,23 +14,27 @@ class Services {
     }
 
     async getById(id) {
-        return database[this.model].findOne({ where: { id: Number(id) } });
+        return database[this.model].findByPk(id);
+    }
+
+    async getOne(where) {
+        return database[this.model].findOne({ where: { ...where } });
     }
 
     async create(data) {
         return database[this.model].create(data);
     }
 
-    async update(data, id) {
-        const updatedData = database[this.model].update(data, { where: { id: Number(id) } });
+    async update(data, where) {
+        const updatedData = database[this.model].update(data, { where: { ...where } });
 
         if (updatedData[0] === 0) return false;
 
         return true;
     }
 
-    async delete(id) {
-        const deletedData = database[this.model].destroy({ where: { id: Number(id) } });
+    async delete(where) {
+        const deletedData = database[this.model].destroy({ where: { ...where } });
 
         if (!deletedData) return false;
 
