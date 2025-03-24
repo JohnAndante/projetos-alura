@@ -29,8 +29,8 @@ class Services {
         return database[this.model].create(data);
     }
 
-    async update(data, where) {
-        const updatedData = database[this.model].update(data, { where: { ...where } });
+    async update(data, where, transaction = {}) {
+        const updatedData = database[this.model].update(data, { where: { ...where }, transaction });
 
         if (updatedData[0] === 0) return false;
 

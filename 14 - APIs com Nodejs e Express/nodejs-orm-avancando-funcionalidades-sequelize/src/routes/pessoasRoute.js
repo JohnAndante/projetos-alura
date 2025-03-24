@@ -15,6 +15,7 @@ router.post('/pessoas', pessoaController.create);
 router.put('/pessoas/:id', pessoaController.update);
 router.delete('/pessoas/:id', pessoaController.delete);
 
+router.put('/pessoas/:estudante_id/cancela', pessoaController.cancelStudentRegistration);
 router.get('/pessoas/matriculas/lotadas', matriculaController.getFullCourses);
 
 router.get('/pessoas/:estudante_id/matriculas', pessoaController.getActiveRegistrations);
