@@ -1,13 +1,19 @@
-import { atualizarTexto } from "./scripts.js";
+import { updateText } from "./scripts.js";
 
 const socket = io();
 
-function enviarTexto(texto) {
-    socket.emit('texto_alterado', texto);
+function selectDocument(document) {
+    socket.emit("selecionar_documento", document, (text) => {
+        updateText(text);
+    });
 }
 
-socket.on('atualizar_texto', (texto) => {
-    atualizarTexto(texto);
+function sendText({ text, document }) {
+    socket.emit('texto_alterado', { text, document });
+}
+
+socket.on('atualizar_texto', text => {
+    updateText(text);
 })
 
-export { enviarTexto };
+export { sendText, selectDocument };
