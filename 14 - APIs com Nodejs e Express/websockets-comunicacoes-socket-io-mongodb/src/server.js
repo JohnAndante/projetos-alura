@@ -8,26 +8,18 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const currentPath = url.fileURLToPath(import.meta.url);
-const currentDir = path.dirname(currentPath);
+const publicDir = path.join(currentPath, "../..", "public");
+
+app.use(express.static(publicDir));
 
 const httpServer = http.createServer(app);
 
-app.use(express.static(path.join(currentDir, "../public")));
-
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
 const io = new Server(httpServer);
 
-io.on("connection", (socket) => {
-    console.log("A user connected");
+export default io;
 
-    socket.on("disconnect", () => {
-        console.log("A user disconnected");
-    });
 
-    socket.on("chat message", (msg) => {
-        io.emit("chat message", msg);
-    });
-});
