@@ -1,19 +1,5 @@
 import io from "./server.js";
-
-const documents = [
-    {
-        name: "JavaScript",
-        text: "JavaScript text..."
-    },
-    {
-        name: "Node",
-        text: "Node text..."
-    },
-    {
-        name: "Socket.io",
-        text: "Socket.io text..."
-    }
-];
+import { findDocument, updateDocument } from "./documentsDb.js";
 
 io.on("connection", (socket) => {
     console.log("A user connected", socket.id);
@@ -23,19 +9,15 @@ io.on("connection", (socket) => {
     });
 
     socket.on("texto_alterado", ({ text, document }) => {
-        const doc = findDocument(document);
-
-        if (doc) {
-            doc.text = text;
-        }
+        updateDocument(document, text)
 
         socket.to(document).emit("atualizar_texto", text);
     });
 
-    socket.on("selecionar_documento", (documentName, callback) => {
+    socket.on("selecionar_documento", async (documentName, callback) => {
         socket.join(documentName);
 
-        const doc = findDocument(documentName);
+        const doc = await findDocument(documentName);
 
         if (doc) {
             callback(doc.text);
@@ -43,7 +25,3 @@ io.on("connection", (socket) => {
     });
 });
 
-function findDocument(document) {
-    const doc = documents.find(doc => doc.name === document);
-    return doc;
-}
