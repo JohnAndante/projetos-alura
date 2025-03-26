@@ -1,5 +1,5 @@
 import io from "./server.js";
-import { findDocument, updateDocument } from "./documentsDb.js";
+import { addDocument, deleteDocument, findDocument, getDocuments, updateDocument } from "./documentsDb.js";
 
 io.on("connection", (socket) => {
     console.log("A user connected", socket.id);
@@ -21,6 +21,35 @@ io.on("connection", (socket) => {
 
         if (doc) {
             callback(doc.text);
+        }
+    });
+
+    socket.on("obter_documentos", async returnDocuments => {
+        const documents = await getDocuments();
+
+        returnDocuments(documents);
+    });
+
+    socket.on("adicionar_documento", async documentName => {
+        const documentExists = await findDocument(documentName);
+
+        if (documentExists) {
+            socket.emit("documento_existente", documentName);
+            return;
+        }
+
+        const document = await addDocument(documentName);
+
+        if (document.acknowledged) {
+            socket.emit("documento_adicionado", documentName);
+        }
+    });
+
+    socket.on("excluir_documento", async documentName => {
+        const result = await deleteDocument(documentName);
+
+        if (result.deletedCount) {
+            io.emit("documento_excluido", documentName);
         }
     });
 });
