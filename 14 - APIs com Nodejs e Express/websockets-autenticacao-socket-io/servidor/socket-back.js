@@ -2,6 +2,7 @@ import io from "./servidor.js";
 import documentEventRegister from "./eventRegister/document-event-register.js";
 import startEventRegister from "./eventRegister/start-event-register.js";
 import submitEventRegister from "./eventRegister/submit-event-register.js";
+import loginEventRegister from "./eventRegister/login-event-register.js";
 
 io.on("connection", socket => {
     console.log("🔗 Novo cliente conectado! > ID:", socket.id);
@@ -13,4 +14,5 @@ io.on("connection", socket => {
     startEventRegister(socket, io);
     documentEventRegister(socket, io);
     submitEventRegister(socket, io);
+    loginEventRegister(socket, io);
 });
