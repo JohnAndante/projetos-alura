@@ -1,21 +1,20 @@
 import globals from "globals";
 import pluginJs from "@eslint/js";
 
-
-/** @type {import('eslint').Linter.Config[]} */
 export default [
     {
         languageOptions: {
             globals: {
                 ...globals.browser,
-                ...globals.node
+                ...globals.node,
             },
+        },
+        rules: {
+            indent: ["error", 4],
+            "linebreak-style": ["error", "unix"],
+            quotes: ["error", "double"],
+            semi: ["error", "always"],
         },
     },
     pluginJs.configs.recommended,
-    {
-        rules: {
-            indent: ["error", 4],
-        },
-    },
 ];

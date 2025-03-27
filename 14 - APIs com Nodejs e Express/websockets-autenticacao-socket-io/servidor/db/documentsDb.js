@@ -5,31 +5,31 @@ function obterDocumentos() {
     return documentos;
 }
 
-function adicionarDocumento(nome) {
+function adicionarDocumento(name) {
     const resultado = documentosColecao.insertOne({
-        nome,
-        texto: "",
+        name,
+        text: "",
     });
 
     return resultado;
 }
 
-function encontrarDocumento(nome) {
+function encontrarDocumento(name) {
     const documento = documentosColecao.findOne({
-        nome,
+        name,
     });
 
     return documento;
 }
 
-function atualizaDocumento(nome, texto) {
+function atualizaDocumento(name, text) {
     const atualizacao = documentosColecao.updateOne(
         {
-            nome,
+            name,
         },
         {
             $set: {
-                texto,
+                text,
             },
         }
     );
@@ -37,9 +37,9 @@ function atualizaDocumento(nome, texto) {
     return atualizacao;
 }
 
-function excluirDocumento(nome) {
+function excluirDocumento(name) {
     const resultado = documentosColecao.deleteOne({
-        nome,
+        name,
     });
 
     return resultado;
