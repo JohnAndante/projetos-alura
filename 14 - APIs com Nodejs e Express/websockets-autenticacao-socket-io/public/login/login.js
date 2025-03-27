@@ -1,6 +1,6 @@
-import { emitirAutenticarUsuario } from "./socket-front-login";
+import { emitirAutenticarUsuario } from "./socket-front-login.js";
 
-const form = document.querySelector('form-login');
+const form = document.getElementById('form-login');
 
 form.addEventListener('submit', event => {
     event.preventDefault();

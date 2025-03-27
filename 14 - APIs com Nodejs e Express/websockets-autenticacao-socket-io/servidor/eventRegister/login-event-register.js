@@ -4,7 +4,7 @@ import { gerarTokenJwt } from "../utils/jwt.js";
 
 function loginEventRegister(socket, io) {
     socket.on("autenticar_usuario", async ({ nome, senha }) => {
-        const usuario = await encontrarUsuario(dados.nome);
+        const usuario = await encontrarUsuario(nome);
 
         if (!usuario) {
             socket.emit("usuario_nao_encontrado");

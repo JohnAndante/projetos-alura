@@ -1,6 +1,15 @@
 import { alertarERedirecionar, atualizaTextoEditor } from "./documento.js";
 
-const socket = io();
+const socket = io("/usuarios", {
+    auth: {
+        token: obterCookie("token")
+    }
+});
+
+socket.on("connect_error", erro => {
+    alert(erro);
+    window.location.href = "/login/index.html";
+})
 
 function selecionarDocumento(nome) {
     socket.emit("selecionar_documento", nome, (texto) => {
