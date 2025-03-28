@@ -3,9 +3,9 @@ function definirCookie(chave, valor) {
 }
 
 function obterCookie(chave) {
-    const cookies = document.cookie.split(';');
+    const cookies = document.cookie.split(";");
     const cookie = cookies.find(cookie => cookie.includes(chave));
-    return cookie ? cookie.split('=')[1] : null;
+    return cookie ? cookie.split("=")[1] : null;
 }
 
 function removerCookie(chave) {
