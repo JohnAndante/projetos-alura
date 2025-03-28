@@ -1,37 +1,57 @@
 import { encontrarDocumento, atualizaDocumento, excluirDocumento } from "../db/documentsDb.js";
-import { adicionarConexaoDocumento, obterUsuariosNoDocumento } from "../utils/documentConnetions.js";
+import { adicionarConexaoDocumento, encontrarConexaoDocumento, obterUsuariosNoDocumento, removerConexaoDocumento } from "../utils/documentConnetions.js";
 
 function documentEventRegister(socket, io) {
     socket.on("selecionar_documento", async ({ nomeDocumento, nomeUsuario }, devolverTexto) => {
         const documento = await encontrarDocumento(nomeDocumento);
 
         if (documento) {
-            socket.join(nomeDocumento);
+            const conexaoEncontrada = encontrarConexaoDocumento({ nomeDocumento, nomeUsuario });
 
-            adicionarConexaoDocumento({ nomeDocumento, nomeUsuario });
+            if (!conexaoEncontrada) {
+                socket.join(nomeDocumento);
 
-            const usuariosNoDocumento = obterUsuariosNoDocumento(nomeDocumento);
+                adicionarConexaoDocumento({ nomeDocumento, nomeUsuario });
 
-            io.to(nomeDocumento).emit("usuarios_no_documento", usuariosNoDocumento);
+                socket.data = {
+                    usuarioEntrou: true,
+                };
 
-            devolverTexto(documento.texto);
+                const usuariosNoDocumento = obterUsuariosNoDocumento(nomeDocumento);
+
+                io.to(nomeDocumento).emit("usuarios_no_documento", usuariosNoDocumento);
+
+                devolverTexto(documento.texto);
+            } else {
+                socket.emit("usuario_ja_no_documento");
+            }
         }
-    });
 
-    socket.on("texto_editor", async ({ texto, nomeDocumento }) => {
-        const atualizacao = await atualizaDocumento(nomeDocumento, texto);
+        socket.on("texto_editor", async ({ texto, nomeDocumento }) => {
+            const atualizacao = await atualizaDocumento(nomeDocumento, texto);
 
-        if (atualizacao.modifiedCount) {
-            socket.to(nomeDocumento).emit("texto_editor_clientes", texto);
-        }
-    });
+            if (atualizacao.modifiedCount) {
+                socket.to(nomeDocumento).emit("texto_editor_clientes", texto);
+            }
+        });
 
-    socket.on("excluir_documento", async (nome) => {
-        const resultado = await excluirDocumento(nome);
+        socket.on("excluir_documento", async (nome) => {
+            const resultado = await excluirDocumento(nome);
 
-        if (resultado.deletedCount) {
-            io.emit("excluir_documento_sucesso", nome);
-        }
+            if (resultado.deletedCount) {
+                io.emit("excluir_documento_sucesso", nome);
+            }
+        });
+
+        socket.on("disconnect", () => {
+            if (socket.data?.usuarioEntrou) {
+                removerConexaoDocumento({ nomeDocumento, nomeUsuario });
+
+                const usuariosNoDocumento = obterUsuariosNoDocumento(nomeDocumento);
+
+                io.to(nomeDocumento).emit("usuarios_no_documento", usuariosNoDocumento);
+            }
+        });
     });
 }
 
