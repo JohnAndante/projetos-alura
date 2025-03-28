@@ -84,6 +84,12 @@ Trilhas de estudo oferecidas e organizadas pela própria instituição de ensino
 - ✅ Concluído em 13 de Março de 2025
 - 📜 Link para o certificado [aqui](https://cursos.alura.com.br/certificate/b859a9b5-8aac-4652-be9a-4afa18d355cb?lang=pt_BR)
 
+### ✅ [14 - APIs com Node.js e Express](https://cursos.alura.com.br/formacao-node-js-express)
+
+- ➡️ Iniciado em 15 de Março de 2025
+- ✅ Concluído em 27 de Março de 2025
+- 📜 Link para o certificado [aqui](https://cursos.alura.com.br/degree/certificate/70510b68-8cb0-426f-b9de-1d2dde92d857?lang=pt_BR)
+
 ---
 
 ## Planos de Estudo
