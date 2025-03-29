@@ -185,7 +185,188 @@ describe('Testes E2E com Cypress', () => {
 No exemplo acima, temos testes E2E que verificam se o componente é renderizado corretamente e se as funções `soma` e `MyService` são chamadas quando os botões correspondentes são clicados. O Cypress fornece uma maneira fácil de interceptar requisições e verificar se elas foram feitas corretamente.
 
 
+## Prettier
 
+O prettier é uma extensão/pacote/biblioteca que ajuda a reforçar um padrão de código dentro de um projeto, corrigindo e formatando o código conforme o desenvolvimento.
+
+Para instalar deve ser feito o seguinte comando:
+
+```bash
+npm install --save-dev prettier
+```
+
+E então criar um arquivo `.prettierrc` na raiz do projeto com as configurações desejadas. Um exemplo de configuração é:
+
+```json
+{
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "printWidth": 80
+}
+```
+
+## Eslint
+
+O eslint é uma ferramenta para "lintar" (analisar e corrigir) o código, ajudando a encontrar e corrigir erros de sintaxe, estilo e boas práticas.
+
+Tem a versão antiga, que aceita o .eslintrc, e a nova, que aceita o .eslintrc.json.
+
+Nesse curso foi instalado o antigo, com esse passo a passo:
+
+1. Instalar o eslint:
+
+```bash
+npm install --save-dev eslint
+```
+
+2. Instalar a extensão do prettier no eslint
+
+```bash
+npm install --save-dev eslint-config-prettier
+```
+
+3. Criar o arquivo de configuração do eslint, o `.eslintrc`:
+
+```json
+{
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+  }
+}
+```
+
+4. Depois foram instalados mais extensões para o eslint
+
+```bash
+npm i -D eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
+```
+
+5. E então foram adicionadas as extensões no arquivo de configuração do eslint:
+
+```json
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:import/errors",
+        "plugin:react/recommended",
+        "plugin:jsx-a11y/recommended",
+        "plugin:react-hooks/recommended",
+        "prettier"
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "rules": {
+        "react/prop-types": "off",
+        "react/jsx-uses-react": "off",
+        "react/react-in-jsx-scope": "off",
+        "import/no-unresolved": "error",
+        "react/self-closing-comp": "warn",
+        "no-unused-vars": [
+            "warn",
+            {
+                "argsIgnorePattern": "^_",
+                "varsIgnorePattern": "^_"
+            }
+        ]
+    },
+    "plugins": [
+        "react",
+        "import",
+        "jsx-a11y"
+    ],
+    "env": {
+        "es6": true,
+        "browser": true,
+        "jest": true,
+        "node": true
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}
+
+```
+
+Essa configuração não funciona para o arquivo `.eslintrc`, então criei o `.eslint.config.js` com o seguinte conteúdo:
+
+```javascript
+import eslint from '@eslint/js';
+import reactPlugin from 'eslint-plugin-react';
+import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import importPlugin from 'eslint-plugin-import';
+import prettier from 'eslint-config-prettier';
+
+export default [
+  eslint.configs.recommended,
+  {
+    plugins: {
+      react: reactPlugin,
+      'jsx-a11y': jsxA11yPlugin,
+      'react-hooks': reactHooksPlugin,
+      import: importPlugin,
+    },
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        browser: true,
+        node: true,
+        es6: true,
+        jest: true,
+      },
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+    rules: {
+      'react/prop-types': 'off',
+      'react/jsx-uses-react': 'off',
+      'react/react-in-jsx-scope': 'off',
+      'import/no-unresolved': 'error',
+      'react/self-closing-comp': 'warn',
+      'no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
+    },
+  },
+  prettier,
+];
+```
 
 
 
