@@ -368,5 +368,15 @@ export default [
 ];
 ```
 
+## Escrevendo testes
 
+Podemos escrever testes de várias formas, a abordada no curso foi utilizando o **Jest** e o **React Testing Library**.
 
+Criamos um arquivo na pasta do componente com o middle-text de testes, por exemplo `MyComponent.test.js`, e escrevemos os testes dentro desse arquivo.
+
+Dentro desse arquivo podemos realizar diversos testes diferentes envolvendo o componente e sua lógica, como por exemplo:
+
+- Verificar se o componente renderiza corretamente
+- Verificar se o componente renderiza corretamente com props
+- Verificar se o componente valida as props, quando necessário
+- Verificar se o componente renderiza corretamente com estados
