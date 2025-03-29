@@ -519,3 +519,60 @@ Primeiro definimos lá no componente o `data-testid`, e depois utilizamos o `get
 É uma abordagem de desenvolvimento onde primeiro escrevemos o teste, depois o código. Serve tanto para o front-end quanto para o back-end.
 A ideia é que primeiro escrevemos o teste, depois escrevemos o código para passar no teste e por último refatoramos o código.
 
+#### Testes em pull requests
+
+É uma ótima prática aplicar os testes em pull requests, para garantir que o código esteja funcionando corretamente antes de ser enviado para produção.
+
+Isso pode ser feito criando uma pasta `.github` na raiz do projeto e dentro dela criar uma pasta `workflows`, e dentro dessa pasta criar um arquivo `test.yml` com o seguinte conteúdo:
+
+```yaml
+name: Testes
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Configurar Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Instalar dependências
+        run: npm install
+      - name: Executar testes
+        run: npm test -- --watchAll=false --ci
+```
+
+Nesse exemplo, estamos configurando o GitHub Actions para executar os testes sempre que houver um push ou pull request na branch `main`. O workflow irá instalar as dependências e executar os testes.
+Os testes ali no caso estão rodando em modo CI, ou seja, ele não fica escutando as alterações no código e executa os testes apenas uma vez.
+
+#### Garantindo o funcionamento em produção
+
+Caso a plataforma de produção permita alterar o script inicial do projeto (geralmente permite) é uma boa prática aplicar o teste justo nesse script, para garantir que os testes sejam executados antes de subir o projeto para produção.
+
+```
+react-scripts test && react-scripts build && react-scripts start
+```
+
+Esse comando executa os testes, e caso eles passem, ele executa o build e sobe o projeto. Caso os testes falhem, o build não é executado e o projeto não sobe.
+
+#### Boas práticas
+
+- **Escrever testes pequenos e focados em uma única funcionalidade.**
+  Não é bom escrever vários testes e verificações em um único testes, é bom dividir os testes em partes menores e mais específicas.
+- **Nomear os testes de forma clara e descritiva.**
+  Seja claro e descritivo ao nomear os testes, para que fique fácil entender o que está sendo testado.
+- **Utilizar mocks e spies para isolar o código.**
+  Utilize mocks e spies para isolar o código e evitar dependências externas, como APIs ou serviços. Isso ajuda a garantir que os testes sejam rápidos e confiáveis.
+- **Utilizar snapshots para verificar a renderização de componentes.**
+  Utilize snapshots para verificar a renderização de componentes e garantir que eles não mudem inesperadamente. Isso ajuda a detectar alterações indesejadas na renderização do componente.
+- **Garantir o funcionamento dos testes em 100% dos casos.**
+  Verificar se os casos são suficientes e se todos os casos estão sendo testados. Isso ajuda a garantir que o código esteja funcionando corretamente e que não haja erros ocultos, surpresas ou bugs.
+

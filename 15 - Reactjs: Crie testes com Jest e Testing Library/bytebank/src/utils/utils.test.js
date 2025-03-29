@@ -1,8 +1,8 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, test, expect, it } from '@jest/globals';
 import { calculaNovoSaldo } from '.';
 
 describe('Testando funções utilitárias', () => {
-  test('Deve retornar o valor do saldo atualizado com o rendimento', () => {
+  it('Deve retornar o valor do saldo atualizado com o rendimento', () => {
     const calculaRendimento = jest.fn((saldo) => saldo + saldo * 0.005);
 
     const saldo = 100;
