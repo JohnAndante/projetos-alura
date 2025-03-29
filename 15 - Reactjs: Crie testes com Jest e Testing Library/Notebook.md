@@ -476,4 +476,46 @@ Boa parte dos comandos também está disponível ao executar o comando normalmen
 > Assim podemos executar os testes de forma mais simples, sem precisar digitar o `--watch` toda vez.
 >
 
+#### testId
+
+Podemos definir um id para o elemento que queremos testar, e então utilizar o `getByTestId` para pegar o elemento.
+
+```javascript
+// Componente
+const MyComponent = () => {
+  return (
+    <div>
+      <h1 data-testid="heading">Meu Componente</h1>
+      <button data-testid="button">Clique aqui</button>
+    </div>
+  );
+};
+
+// Teste
+import { render, screen } from '@testing-library/react';
+import { MyComponent } from './MyComponent';
+
+describe('MyComponent', () => {
+  test('deve renderizar o componente corretamente', () => {
+    render(<MyComponent />);
+    const heading = screen.getByTestId('heading');
+    expect(heading).toBeInTheDocument();
+  });
+
+  test('deve chamar a função soma quando o botão for clicado', () => {
+    const somaMock = jest.spyOn({ soma }, 'soma');
+    render(<MyComponent />);
+    const button = screen.getByTestId('button');
+    userEvent.click(button);
+    expect(somaMock).toHaveBeenCalled();
+  });
+});
+```
+
+Primeiro definimos lá no componente o `data-testid`, e depois utilizamos o `getByTestId` para pegar o elemento e realizar os testes.
+
+#### Test driven development (TDD)
+
+É uma abordagem de desenvolvimento onde primeiro escrevemos o teste, depois o código. Serve tanto para o front-end quanto para o back-end.
+A ideia é que primeiro escrevemos o teste, depois escrevemos o código para passar no teste e por último refatoramos o código.
 

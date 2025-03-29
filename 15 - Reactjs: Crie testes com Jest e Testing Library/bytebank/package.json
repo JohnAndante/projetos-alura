@@ -18,6 +18,7 @@
     "build": "react-scripts build",
     "test:once": "react-scripts test --watchAll=false",
     "test:watch": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,html}\"",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
     "eject": "react-scripts eject"
