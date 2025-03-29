@@ -41,6 +41,8 @@ export default [
       'import/no-unresolved': 'off',
       'react/self-closing-comp': 'warn',
       'no-unused-vars': 'off',
+      'single-quote': 'on',
+      'jsx-quotes': ['error', 'prefer-single'],
     },
   },
   prettier,

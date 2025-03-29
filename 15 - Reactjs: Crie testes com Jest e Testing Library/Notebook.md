@@ -380,3 +380,100 @@ Dentro desse arquivo podemos realizar diversos testes diferentes envolvendo o co
 - Verificar se o componente renderiza corretamente com props
 - Verificar se o componente valida as props, quando necessário
 - Verificar se o componente renderiza corretamente com estados
+
+### Sintaxe de testes
+
+A sintaxe de testes é bem simples, e podemos utilizar os métodos `describe`, `test` e `it` para criar os testes.
+
+Esses métodos são do `@jest/globals`, que é o Jest, e podemos utilizá-los para criar os testes de forma simples e rápida.
+
+```javascript
+import { describe, test, it, expect } from '@jest/globals';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { MyComponent } from './MyComponent';
+
+describe('MyComponent', () => {
+  test('deve renderizar o componente corretamente', () => {
+    render(<MyComponent />);
+    const heading = screen.getByRole('heading', { name: /meu componente/i });
+    expect(heading).toBeInTheDocument();
+  });
+
+  test('deve chamar a função soma quando o botão for clicado', () => {
+    const somaMock = jest.spyOn({ soma }, 'soma');
+    render(<MyComponent />);
+    const button = screen.getByRole('button', { name: /somar/i });
+    userEvent.click(button);
+    expect(somaMock).toHaveBeenCalled();
+  });
+});
+```
+
+No exemplo acima, temos um teste que verifica se o componente `MyComponent` é renderizado corretamente e outro teste que verifica se a função `soma` é chamada quando o botão "somar" é clicado. O Jest fornece funções como `jest.spyOn` para criar espiões (spies) e verificar se uma função foi chamada.
+
+### Anotações diversas
+
+#### Rerender
+
+Podemos atualizar um componente guardando o render dele em uma variável e chamando o método `rerender` do `render` do `@testing-library/react`, passando o novo componente como parâmetro.
+
+```javascript
+  const { rerender } = render(<MyComponent prop1="valor antigo"/>);
+  expect(screen.getByText('valor antigo')).toBeInTheDocument();
+
+  rerender(<MyComponent prop1="novo valor" />);
+  expect(screen.getByText('novo valor')).toBeInTheDocument();
+```
+
+#### Instalando o React Testing Library
+
+Por padrão ele tem que vir instalado, mas se não vier, podemos instalar com o seguinte comando:
+
+```bash
+npm install --save-dev @testing-library/user-event @testing-library/dom @testing-library/react
+```
+
+#### userEvent (@testing-library/user-event)
+
+O userEvent faz parte do testing-library e é uma biblioteca que simula eventos de usuário.
+
+- `userEvent.click(element)`: Simula um clique em um elemento.
+- `userEvent.type(element, text)`: Simula a digitação de texto em um elemento.
+- `userEvent.selectOptions(element, value)`: Simula a seleção de uma opção em um elemento `<select>`.
+- `userEvent.hover(element)`: Simula o movimento do mouse sobre um elemento.
+- `userEvent.dblClick(element)`: Simula um duplo clique em um elemento.
+- `userEvent.tab()`: Simula a tecla Tab, movendo o foco para o próximo elemento interativo.
+- `userEvent.keyboard(text)`: Simula a digitação de texto, incluindo teclas especiais como Shift, Ctrl, etc.
+- `userEvent.paste(text)`: Simula a colagem de texto em um elemento.
+- `userEvent.clear(element)`: Simula a limpeza do conteúdo de um elemento, como um campo de entrada.
+
+Ele possui vários comandos, mas os mais utilizados são os de clique, digitação e seleção de opções.
+Para mais informações, consulte a [documentação oficial](https://testing-library.com/docs/user-event/intro/).
+
+#### Linhas de comando do react-scripts test
+
+Podemos definir algumas linhas especiais de comando ao executar os testes, como por exemplo:
+
+- `npm test -- --watch`: Executa os testes em modo de observação, ou seja, ele fica escutando as alterações no código e executa os testes novamente quando há alguma alteração.
+- `npm test -- --watchAll`: Executa todos os testes, mesmo aqueles que não foram alterados.
+- `npm test -- --coverage`: Executa os testes e gera um relatório de cobertura de código, mostrando quais partes do código foram testadas e quais não foram.
+- `npm test -- --updateSnapshot`: Atualiza os snapshots dos testes, caso eles tenham mudado.
+- `npm test -- --ci`: Executa os testes em modo CI, ou seja, ele não fica escutando as alterações no código e executa os testes apenas uma vez.
+- `npm test -- --findRelatedTests`: Executa os testes relacionados a um arquivo específico, ou seja, ele executa apenas os testes que estão relacionados ao arquivo que foi alterado.
+
+Boa parte dos comandos também está disponível ao executar o comando normalmente e apertando `p` para ver as opções disponíveis.
+
+>[!NOTE]
+> **Sugestão**: Bom criar um script desse jeitin aqui:
+> ```json
+> "scripts": {
+>   "test": "react-scripts test --watch",
+>   "test:all": "react-scripts test --watchAll",
+>   "test:coverage": "react-scripts test --coverage",
+> }
+> ```
+> Assim podemos executar os testes de forma mais simples, sem precisar digitar o `--watch` toda vez.
+>
+
+
