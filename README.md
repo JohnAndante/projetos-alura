@@ -90,6 +90,13 @@ Trilhas de estudo oferecidas e organizadas pela própria instituição de ensino
 - ✅ Concluído em 27 de Março de 2025
 - 📜 Link para o certificado [aqui](https://cursos.alura.com.br/degree/certificate/70510b68-8cb0-426f-b9de-1d2dde92d857?lang=pt_BR)
 
+### ✅ [15 - React JS: crie testes com Jest e Testing Library](https://cursos.alura.com.br/course/react-js-testes-automatizados-front-end)
+
+- ➡️ Iniciado em 28 de Março de 2025
+- ✅ Concluído em 29 de Março de 2025
+- 📜 Link para o certificado [aqui](https://cursos.alura.com.br/certificate/850504c3-c380-483e-8941-24868d19533f?lang=pt_BR)
+
+
 ---
 
 ## Planos de Estudo
